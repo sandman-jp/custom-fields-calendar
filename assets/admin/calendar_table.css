@@ -1,0 +1,240 @@
+.calendar_wrap {
+  width: 100%;
+  padding: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch; }
+
+.calendar_list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  .calendar_list table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 0 1px 0;
+    background: #fff; }
+  .calendar_list caption {
+    padding: 3px 0;
+    font-weight: bold;
+    font-size: 1rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-top: 2px solid #333;
+    margin: 0 0 3px 0; }
+  .calendar_list thead {
+    background: rgba(0, 0, 0, 0.02);
+    /*color: #aaa;*/ }
+  .calendar_list th {
+    border: 1px solid #ddd;
+    padding: 5px;
+    font-size: .8rem;
+    text-align: center; }
+  .calendar_list th:nth-of-type(6) {
+    background: #ddf; }
+  .calendar_list th:nth-of-type(7) {
+    background: #fdd; }
+  .calendar_list td {
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #ddd;
+    padding: 0;
+    width: calc(100% / 7); }
+    .calendar_list td span.out_of_term {
+      display: block;
+      height: 100%;
+      min-height: 45px;
+      width: 100%; }
+    .calendar_list td.today a {
+      font-weight: bold; }
+    .calendar_list td.have_data a {
+      border-color: #ffe99a; }
+    .calendar_list td a {
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      display: block;
+      height: 100%;
+      min-height: 45px;
+      width: 100%;
+      padding: 8px;
+      border: 3px solid #fff; }
+      .calendar_list td a:hover, .calendar_list td a.selected {
+        border-color: rgba(34, 112, 176, 0.05);
+        background: rgba(34, 112, 176, 0.05); }
+      .calendar_list td a:focus, .calendar_list td a.active {
+        outline: 0;
+        border-color: #2271b1;
+        background: rgba(34, 112, 176, 0.05); }
+      .calendar_list td a time {
+        display: block;
+        text-align: center; }
+    .calendar_list td.active a {
+      outline: 0;
+      border-color: #2271b1;
+      background: rgba(34, 112, 176, 0.05); }
+    .calendar_list td .fieldset {
+      display: none; }
+  .calendar_list .tooltip-content {
+    display: none; }
+
+#field-panel {
+  width: 100%;
+  padding: 0 0 0 15px;
+  /*
+  	
+  	input[type="text"],
+  	input[type="email"],
+  	input[type="tel"],
+  	input[type="url"],
+  	input[type="number"],
+  	textarea {
+  		width: 100%;
+  	}
+  */ }
+  #field-panel div.fieldset {
+    margin-bottom: 3px;
+    border-left: 1px solid #ddd;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 45px; }
+  #field-panel .fieldset_list {
+    height: 100%;
+    position: relative; }
+  #field-panel h3 {
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 5px 5px 1rem;
+    margin: 0;
+    background: #2271b1;
+    color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    #field-panel h3 span {
+      width: 100%;
+      display: block;
+      text-align: left; }
+  #field-panel .handle-actions {
+    background: none; }
+    #field-panel .handle-actions button {
+      margin: 0;
+      width: 48px;
+      height: 28px;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-family: dashicons;
+      font-size: 18px;
+      font-style: normal;
+      background: none; }
+    #field-panel .handle-actions .close-inputs {
+      display: none; }
+      #field-panel .handle-actions .close-inputs.active {
+        color: #fff;
+        display: block; }
+      #field-panel .handle-actions .close-inputs::before {
+        content: "\f14f"; }
+    #field-panel .handle-actions .stick-inputs.active {
+      background: #eee;
+      color: #2271b1; }
+    #field-panel .handle-actions .stick-inputs::before {
+      content: "\f537"; }
+  #field-panel .__input-field-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background: #fff;
+    border-bottom: 1px solid #ddd; }
+    #field-panel .__input-field-wrap .__input-field_label {
+      width: 35%;
+      padding: 8px 15px;
+      background: rgba(0, 0, 0, 0.02);
+      border-right: 1px solid #ddd;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      font-weight: bold;
+      color: #666; }
+    #field-panel .__input-field-wrap .__input-field {
+      width: 65%;
+      padding: 15px;
+      display: block; }
+
+.ui-tooltip, .arrow:after {
+  background: #333;
+  border: 2px solid #333; }
+
+.ui-tooltip {
+  width: auto;
+  max-width: 380px;
+  padding: 0;
+  color: #fff;
+  border-radius: 8px;
+  text-transform: uppercase;
+  position: absolute; }
+
+.single-value {
+  width: auto;
+  border-top: 1px solid #ddd;
+  padding: 3px 15px;
+  width: auto;
+  position: relative; }
+
+.single-value:first-child {
+  border: none; }
+
+.arrow {
+  width: 70px;
+  height: 16px;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  margin-left: -35px;
+  bottom: -16px; }
+
+.arrow.top {
+  top: -16px;
+  bottom: auto; }
+
+.arrow.left {
+  left: 20%; }
+
+.arrow:after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: -20px;
+  width: 25px;
+  height: 25px;
+  -webkit-box-shadow: 6px 5px 9px -9px black;
+          box-shadow: 6px 5px 9px -9px black;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg); }
+
+.arrow.top:after {
+  bottom: -20px;
+  top: auto; }
+
+/*# sourceMappingURL=calendar_table.css.map */

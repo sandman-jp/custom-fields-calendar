@@ -1,0 +1,175 @@
+@charset "UTF-8";
+#cf-calendar .cfc-panel {
+  display: none; }
+  #cf-calendar .cfc-panel.active {
+    display: block; }
+
+#custom-fields-setting {
+  /*
+  
+  	.__list_head {
+  		width: 100%;
+  		padding: 0;
+  		display: flex;
+  		align-content: center;
+  		justify-content: center;
+  		
+  		li {
+  			padding: 5px 8px;
+  			border: 1px solid #ccc;
+  			text-align: center;
+  			width: 100%;
+  		}
+  		
+  		li:nth-child(n+2){
+  			border-left: none;
+  		}
+  		
+  		.__list_action {
+  			* {
+  				display: none;
+  			}
+  			
+  		}
+  	}
+  */ }
+  #custom-fields-setting #cfc-custom-field-list {
+    /*
+    		&:before {
+    			content: 'アイテムがありません';
+    			position: absolute;
+    			z-index: 0;
+    		}
+    */ }
+  #custom-fields-setting .__item {
+    margin-top: 1px;
+    border-top: 2px solid #333;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    position: relative;
+    z-index: 1; }
+    #custom-fields-setting .__item:first-child .remove-item button {
+      display: none !important; }
+  #custom-fields-setting .__item_field_wrap {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+  #custom-fields-setting .__item_field_wrap_top {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+    #custom-fields-setting .__item_field_wrap_top .__item_field {
+      width: calc((100% - 100px) / 4 + 1px);
+      border: 1px solid #ddd;
+      margin-left: -1px; }
+    #custom-fields-setting .__item_field_wrap_top .__item_field.field-type.no-choice {
+      width: calc(((100% - 100px) / 4 + 1px) * 2); }
+  #custom-fields-setting .__item_field_wrap_bottom {
+    border-left: 5px solid #2271b1;
+    width: 100%; }
+  #custom-fields-setting .__item_field {
+    width: 100%;
+    border: 1px solid #ddd;
+    margin-left: -1px; }
+  #custom-fields-setting .__item_field.field-choices.disabled {
+    display: none; }
+  #custom-fields-setting .__list_order, #custom-fields-setting .__list_action {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: center;
+        align-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  #custom-fields-setting .__list_order {
+    background: #2271b1;
+    color: #fff;
+    font-weight: bold;
+    width: 55px !important;
+    min-width: 55px !important; }
+    #custom-fields-setting .__list_order span {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      width: 24px;
+      height: 24px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      line-height: 24px;
+      font-size: 16px; }
+  #custom-fields-setting .__list_action {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: end;
+    border: 1px solid #ddd;
+    border-left: none; }
+    #custom-fields-setting .__list_action button {
+      margin: 0 3px;
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 50%;
+      background: none;
+      color: #2271b1;
+      cursor: pointer;
+      font-family: dashicons;
+      font-size: 18px;
+      font-style: normal; }
+    #custom-fields-setting .__list_action .btn-wrap {
+      margin: 5px; }
+    #custom-fields-setting .__list_action .btn-wrap.remove-item button:before {
+      content: "\f14f"; }
+    #custom-fields-setting .__list_action .btn-wrap.toggle-details button:before {
+      content: "\f347"; }
+    #custom-fields-setting .__list_action .btn-wrap.toggle-details button.active:before {
+      content: "\f343"; }
+  #custom-fields-setting .btn-wrap.add-condition {
+    margin: 15px;
+    text-align: center; }
+  #custom-fields-setting .btn-wrap.add-field {
+    margin: 15px;
+    text-align: right; }
+  #custom-fields-setting .__item_field_wrap_bottom {
+    display: none; }
+
+/*# sourceMappingURL=custom_fields.css.map */
