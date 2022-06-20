@@ -1,17 +1,18 @@
 <?php
 
-class ACFC_activate{
+class CFC_activate{
 	
 	function __construct(){
 		add_action('admin_notices', array($this, 'admin_notices'));
 	}
 	
 	function admin_notices(){
-		
+		/*
 		if (!self::is_acf_active()) {
-      add_settings_error('ACFC_no_ACF', esc_attr( 'no-acf' ), __('ACF Calendar needs Advanced Custom Field.', ACFC_TEXTDOMAIN));
-      settings_errors('ACFC_no_ACF');
+      add_settings_error('CFC_no_ACF', esc_attr( 'no-acf' ), __('ACF Calendar needs Advanced Custom Field.', CFC_TEXTDOMAIN));
+      settings_errors('CFC_no_ACF');
     }
+    */
 	}
 	
 	static function is_acf_active(){
@@ -19,4 +20,4 @@ class ACFC_activate{
 	}
 }
 
-new ACFC_activate();
+new CFC_activate();
