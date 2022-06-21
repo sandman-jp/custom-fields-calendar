@@ -60,9 +60,17 @@ function cfc_get_start_week($time, $start=0){
 }
 
 /* system */
-function cfc_get_template_part($path, $args=array()){
+function cfc_get_template_part($path, $sub=null, $args=array()){
 	
-	$fullpath = CFC_DIR_INCLUDES.$path.'.php';
+	if(!is_null($sub) ){
+		if(is_array($sub)){
+			$args = $sub;
+		}else{
+			$path .= '-'.$path;
+		}
+	}
+	
+	$fullpath = CFC_DIR_TEMPLATES.$path.'.php';
 	
 	if(file_exists($fullpath)){
 		

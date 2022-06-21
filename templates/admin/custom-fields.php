@@ -19,7 +19,7 @@
 				<div class="field_input" data-type="textfield"><input id="field-name_%id%" name="custom-fields-setting[%id%][field-name]" value="" type="text" required></div>
 			</div>
 			
-			<div class="__item_field field-type no-choice">
+			<div class="__item_field field-type">
 				<label class="field_label" for="field-type_%id%"><?php _e('Field Type', CFC_TEXTDOMAIN); ?></label>
 				<div class="field_input" data-type="select">
 					<select id="field-type_%id%" name="custom-fields-setting[%id%][field-type]">
@@ -36,12 +36,7 @@
 				</div>
 			</div>
 			
-			<div class="__item_field field-choices disabled">
-				<label class="field_label" for="field-choices_%id%"><?php _e('Choices', CFC_TEXTDOMAIN); ?> <span class="required">*</span></label>
-				<div class="field_input" data-type="textarea">
-					<textarea id="field-option_%id%" name="custom-fields-setting[%id%][field-choices]" required disabled></textarea>
-				</div>
-			</div>
+			
 			
 			<div class="__list_action">
 				<div class="btn-wrap remove-item"><button class="" title="このフィールドを削除" data-action="remove-item" data-target="field_%id%"><i></i></button></div>
@@ -54,9 +49,11 @@
 			<!-- 下段 -->
 			<div class="field-col support-props">
 				
-				<?php cfc_get_template_part('/admin/view/templates/custom-fields/supports/required'); ?>
-				<?php cfc_get_template_part('/admin/view/templates/custom-fields/supports/default-value'); ?>
-				<?php cfc_get_template_part('/admin/view/templates/custom-fields/supports/place-holder'); ?>
+				<?php cfc_get_template_part('/admin/custom-fields/supports/choices'); ?>
+				
+				<?php cfc_get_template_part('/admin/custom-fields/supports/required'); ?>
+				<?php cfc_get_template_part('/admin/custom-fields/supports/default-value'); ?>
+				<?php cfc_get_template_part('/admin/custom-fields/supports/place-holder'); ?>
 				
 			<!-- .col -->
 			</div>

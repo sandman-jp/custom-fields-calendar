@@ -6,7 +6,8 @@
 if ( ! defined('ABSPATH') ) {
 	exit; // Exit if accessed directly
 }
-$custom_field_setting_data = $settings->get('custom-fields-setting');
+
+$custom_field_setting_data = $this->settings->get('custom-fields-setting');
 ?>
 <div id="cf-calendar">
 	
@@ -45,12 +46,12 @@ $custom_field_setting_data = $settings->get('custom-fields-setting');
 	
   <div id="custom-fields-setting" class="setting-panel">
 	  <h3><?php _e( 'Custom Fields', CFC_TEXTDOMAIN ) ?></h3>
-	  <?php cfc_get_template_part('/admin/view/settings/custom-fields'); ?>
+	  <?php include CFC_DIR_INCLUDES.'/admin/view/settings/custom-fields.php'; ?>
 	</div>
 	
   <div id="holidays-setting" class="setting-panel">
 	  <h3><?php _e( 'Holidays', CFC_TEXTDOMAIN ) ?></h3>
-	  <?php cfc_get_template_part('/admin/view/settings/holidays'); ?>
+	  <?php include CFC_DIR_INCLUDES.'/admin/view/settings/holidays.php'; ?>
 	</div>
   <div id="general-setting" class="setting-panel"><?php _e( 'General', CFC_TEXTDOMAIN ) ?></div>
   <div id="templates-setting" class="setting-panel"><?php _e( 'Template', CFC_TEXTDOMAIN ) ?></div>
@@ -62,5 +63,5 @@ $custom_field_setting_data = $settings->get('custom-fields-setting');
 </div>
 
 <script>
-var fields_settings = <?php echo json_encode($settings->get_all()); ?>
+var fields_settings = <?php echo json_encode($this->settings->get_all()); ?>
 </script>

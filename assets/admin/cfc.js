@@ -30,8 +30,13 @@ jQuery(function($){
 	$('#cfc-settings').tabs();
 	
 	
+	/*
+	 * 保存
+	 */
 	//記事内容が送信される前各セルの内容をまとめて、送信するinput数を減らす
 	$('[type="submit"][name="save"],[type="submit"][name="publish"]').click(function(e){
+		
+		
 		let $form = $('form#post');
 		
 		//データのある項目のみ
@@ -43,12 +48,12 @@ jQuery(function($){
 		
 		cfc_data = cfc_data.serialize();
 		
-		let $submit_data = $('<input type="hidden" id="cfc-data" name="content">');
-		$submit_data.val(cfc_data);
+		let $submit_data = $('<input type="hidden" id="cfc-data" name="content" value="'+cfc_data+'">');
 		
 		$form.append($submit_data);
 		
-		$('.cfc-data').prop('disabled');
+		$('.cfc-data').prop('disabled', true);
+		
 		
 	});
 	
@@ -238,8 +243,7 @@ jQuery(function($){
 
 //custom field setting
 jQuery(function($){
-	
-	let have_data = false;
+
 	
 	if(typeof(fields_settings['custom-fields-setting']) != 'undefined'){
 		
@@ -248,14 +252,27 @@ jQuery(function($){
 		//initialize
 		if(cf_data.length){
 			
-			have_data = true;
-			
 			for(i=0; i<cf_data.length; i++){
 				let data = cf_data[i];
 				
-					
+				
 				add_field();
+				
 				let $item = $('#cfc-custom-field-list .__item:last');
+				
+				let fld_type = data['field-type'];
+				
+				switch(fld_type){
+				case 'radio':
+					//radio
+				case 'checkbox':
+					//checkbox or true/false	
+				case 'select':
+					switch_choice_field($item);
+					break;
+				default:
+					
+				}
 				
 				for(let key in data){
 					
@@ -264,27 +281,21 @@ jQuery(function($){
 					let $fld = $('#'+key+'_'+index, $item);
 					let i_name = $fld.attr('name');
 					
-					if($fld.attr('type') == 'radio'){
-						//radio
-						
-						$('[name="'+i_name+'"][value="'+data[key]+'"]').prop('checked', true);
-						
-					}else if($fld.attr('type') == 'checkbox'){
-						
-						$('[name="'+i_name+'"][value="'+data[key]+'"]').prop('checked', true);
-						
-					}else{
-						$fld.val(data[key]);
-					}
+					console.log(i_name);
+					console.log(data[key]);
+					
+					$('[name="'+i_name+'"]').val(data[key]);
 					
 				}
+				
 			}
 				
 		}
 		
+	
 	}
 	
-	if(!have_data){
+	if(!cf_data || !cf_data.length){
 		add_field();
 	}
 	
@@ -302,7 +313,17 @@ jQuery(function($){
 		
 	});
 	
-	
+	function switch_choice_field($elm){
+		
+		$('.field-choices', $elm).toggleClass('disabled');
+		$('.field-place-holder', $elm).toggleClass('disabled');
+			
+		let bool = $('[name$="[field-choices]"]', $elm).prop('disabled');
+		
+		$('[name$="[field-choices]"]', $elm).prop('disabled', !bool);
+		$('[name$="[place-holder]"]', $elm).prop('disabled', bool);
+				
+	}
 	
 	function get_fields_count(){
 		return $('#cfc-custom-field-list .__item').length;
@@ -364,7 +385,8 @@ jQuery(function($){
 			
 			if($('option:selected', this).data('choices') == 1){
 				
-				$('.field-type').removeClass('no-choice');
+				$('.field-type', $html).removeClass('no-choice');
+				
 				$choice_field.removeClass('disabled');
 				$('[disabled]', $wrap).prop('disabled', false);
 				
@@ -374,8 +396,11 @@ jQuery(function($){
 				$choice_field.addClass('disabled');
 				$('.__input-field', $wrap).children().prop('disabled', false);
 			}
+			
 		});
 		
+		console.log('//////')
+		console.log($('.field-type select', $html).val());
 		
 		return $html;
 		

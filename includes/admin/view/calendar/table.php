@@ -68,55 +68,20 @@ while($time_id <= $last_day):
 	if(!empty($values)){
 		$td_classes[] = 'have_data';
 	}
-  ob_start(); //for td
-?>
-<td <?php if($is_in_term): ?>id="cell_<?php echo $time_id; ?>"<?php endif; ?> class="<?php echo implode(' ', $td_classes); ?>" data-time="<?php echo $time_id; ?>" title="acd">
 	
-<?php if($is_in_term): ?>
+	//start table cell including
+  ob_start(); //for td
 
-  <!-- Custom Field area -->
-  <a href="javascript:void(0)">
-	  <time><?php echo wp_date('n/j', $time_id); ?></time>
-	  
-	  <div class="fieldset" id="fieldset_<?php echo $time_id; ?>" data-id="<?php echo $time_id; ?>">
-		  <h3 class="sortable-handle">
-			  <span><?php echo wp_date('n/j', $time_id); ?> (<?php echo $wp_locale->get_weekday_abbrev($wp_locale->get_weekday($day_index)); ?>)</span>
-			  <div class="handle-actions">
-				  <button class="close-inputs" title="このフィールドを閉じる" data-action="close-inputs"><i></i></button>
-				  <button class="stick-inputs" title="このフィールドをピンどめ" data-action="stick-inputs"><i></i></button>
-			  </div>
-		  </h3>
-		  <div class="fieldlist">
-	  	<?php cfc_rendar_custom_fields($time_id); ?>
-		  </div>
-	  </div>
-	  
-  </a>
-  
-	  <span class="tooltip-content"><?php 
-		 if(!empty($values)){
-			 $arr = array();
-			 foreach($values as $k=>$v){
-				 
-				 $vv = mb_substr((string)$v, 0, 20);
-				 
-				 if($vv != $v){
-					 $vv .= '...';
-				 }
-				 
-				 $arr[] = '<b>'.$k.' : </b>'.$vv;
-			 }
-			 echo !empty($arr) ? implode(',', $arr) : '';
-		 }
-		?></span>
-<?php else: ?>
-  <span class="out_of_term"></span>
-<?php endif; ?>
-  
-</td>
-
-<?php
+	cfc_get_template_part('/admin/table-cell', array(
+		'is_in_term' => $is_in_term,
+		'time_id' => $time_id,
+		'td_classes' => $td_classes,
+		'day_index' => $day_index,
+		'values' => $values,
+	));
+	
 	$cells[$dw] = ob_get_clean();
+	//finished table cell including
 	
 	
 	//1日進める
@@ -128,7 +93,7 @@ while($time_id <= $last_day):
 		
 		$month_cells[] = implode('', $cells);
 		
-		echo cfc_get_template_part('/admin/view/templates/table', array(
+		echo cfc_get_template_part('/admin/table', array(
 			'th' => $tableheader,
 			'td' => '<tr>'.implode('</tr><tr>', $month_cells).'</tr>',
 			'monthname' => $current_month,

@@ -138,25 +138,7 @@ class fields{
 	
 	private function _load(){
 		
-		/*
-		$this->_settings_data = array();
 		
-		$meta_data = get_post_meta($this->post_id, 'cfc_settings', true);
-		
-		
-		if(!empty($meta_data['custom-fields-setting'])){
-			
-			foreach($meta_data['custom-fields-setting'] as $k=>$v){
-				
-				$this->_settings_data['custom-fields-setting'][(int)$k] = $v;
-			}
-			
-		}
-		
-		$this->settings = new CFC\field_settings($this->post_id);
-		CFC()->register_instance($settings);
-		
-		*/
 	}
 	
 	private function _make_template($key, $value){

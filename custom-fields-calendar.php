@@ -23,6 +23,7 @@ define('CFC_VIRSION', '1.0.0');
 define('CFC_DIR', dirname(__FILE__));
 define('CFC_DIR_INCLUDES', CFC_DIR.'/includes');
 define('CFC_DIR_ASSETS', CFC_DIR.'/assets');
+define('CFC_DIR_TEMPLATES', CFC_DIR.'/templates');
 define('CFC_TEXTDOMAIN', 'CFC');
 
 //post type

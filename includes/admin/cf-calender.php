@@ -118,7 +118,7 @@ class cf_calendar{
 			return ;
 		}
 		
-		cfc_get_template_part('/admin/view/cfc-calender', array('settings'=>$this->settings,'fields'=>$this->fields, 'table'=>$this->table));
+		include CFC_DIR_INCLUDES.'/admin/view/cfc-calender.php';
 		
 	}
 	

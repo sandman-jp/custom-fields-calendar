@@ -80,13 +80,15 @@
         align-content: center;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
-            justify-content: center; }
+            justify-content: center;
+    /*
+    		.__item_field.field-type.no-choice {
+    			width: calc(((100% - 100px) / 4 + 1px) * 2);
+    		}
+    */ }
     #custom-fields-setting .__item_field_wrap_top .__item_field {
-      width: calc((100% - 100px) / 4 + 1px);
       border: 1px solid #ddd;
       margin-left: -1px; }
-    #custom-fields-setting .__item_field_wrap_top .__item_field.field-type.no-choice {
-      width: calc(((100% - 100px) / 4 + 1px) * 2); }
   #custom-fields-setting .__item_field_wrap_bottom {
     border-left: 5px solid #2271b1;
     width: 100%; }
@@ -94,7 +96,7 @@
     width: 100%;
     border: 1px solid #ddd;
     margin-left: -1px; }
-  #custom-fields-setting .__item_field.field-choices.disabled {
+  #custom-fields-setting .__item_field.disabled {
     display: none; }
   #custom-fields-setting .__list_order, #custom-fields-setting .__list_action {
     display: -webkit-box;

@@ -18,7 +18,7 @@ if ( ! defined('ABSPATH') ) {
 
 
 <script type="text/html" id="field-template">
-	<?php cfc_get_template_part('/admin/view/templates/custom-fields'); ?>
+	<?php cfc_get_template_part('/admin/custom-fields'); ?>
 </script>
 
 <script>

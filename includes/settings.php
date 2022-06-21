@@ -65,7 +65,6 @@ class settings{
 	
 	function get_all(){
 		
-		
 		return $this->_settings_data;
 		
 	}

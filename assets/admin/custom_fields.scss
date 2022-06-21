@@ -93,14 +93,15 @@
 		
 	
 		.__item_field {
-			width:  calc((100% - 100px) / 4 + 1px);
+			//width:  calc((100% - 100px) / 4 + 1px);
 			border: 1px solid #ddd;
 			margin-left: -1px;
 		}
-		
+/*
 		.__item_field.field-type.no-choice {
 			width: calc(((100% - 100px) / 4 + 1px) * 2);
 		}
+*/
 	}
 	
 	.__item_field_wrap_bottom {
@@ -117,7 +118,7 @@
 		margin-left: -1px;
 	}
 	
-	.__item_field.field-choices.disabled{
+	.__item_field.disabled{
 		display: none;
 	}
 	

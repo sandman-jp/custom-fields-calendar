@@ -30,7 +30,7 @@ class admin{
 		add_action('admin_menu', array($this, 'admin_menu'), 11);
 		add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'), 11);
 		
-		add_action('add_meta_boxes', array($this, 'adding_custom_meta_boxes'));
+		//add_action('add_meta_boxes', array($this, 'adding_custom_meta_boxes'));
 		
 		
 	}
@@ -74,7 +74,7 @@ class admin{
 		);
 		
 	}
-	
+	/*
 	function render_my_meta_box(){
 		echo 'わたしのメタボックス';
 	}
@@ -89,6 +89,7 @@ class admin{
 	        'default'
 	    );
 	}
+	*/
 	function option_page(){
 		//do_action('CFC/load/field_groups');
 	}
