@@ -1,0 +1,262 @@
+//calendar table panel
+
+.p-table_wrap {
+	
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		margin: 0 0 1px 0;
+		background: #fff;
+	}
+	
+	
+	caption {
+		padding: 3px 0;
+		font-weight: bold;
+		font-size: 1rem;
+		background: #fff;
+		border: 1px solid $bo-gray;
+		border-top: 2px solid #333;
+		margin: 0 0 3px 0;
+	}
+	
+	thead {
+		background: $bg-lite-gray;
+	}
+	th {
+		border: 1px solid $bo-gray;
+		padding: 5px;
+		font-size: .8rem;
+		text-align: center;
+	}
+	
+	th:nth-of-type(6) {
+		background: $bg-lite-blue;
+	}
+	
+	th:nth-of-type(7) {
+		background: $bg-lite-red;
+	}
+	
+	
+	td {
+		text-align: left;
+		vertical-align: top;
+		border: 1px solid $bo-gray;
+		padding: 0;
+		width: calc(100% / 7);
+		
+		span.disabled {
+			display: block;
+			height: 100%;
+			min-height: 45px;
+			width: 100%;
+		}
+		
+		
+		
+		
+		.u-anc {
+			cursor: pointer;
+			color: #333;
+			text-decoration: none;
+			font-size: 14px;
+			display: block;
+			height: 100%;
+			min-height: 45px;
+			width: 100%;
+			padding: 8px;
+			border: 3px solid #fff;
+			
+			&:hover, &.is-selected {
+				border-color: $lite-blue;
+				background: $lite-blue;
+			}
+			
+			&:focus, &.is-active {
+				outline: 0;
+				border-color: $blue;
+				background: $lite-blue;
+				
+			}
+			
+			time {
+				display: block;
+				text-align: center;
+			}
+		}
+		
+		&.is-active a {
+			outline: 0;
+			border-color: $blue;
+			background: $lite-blue;
+			
+		}
+		
+		&.have-data {
+			time {
+				display: block;
+				position: relative;
+				
+				&:after {
+					content: '';
+					display: block;
+					width: 8px;
+					height: 8px;
+					background:  rgba(204, 0, 0, 0.8);
+					border-radius: 4px;
+					position: absolute;
+					top: 5px;
+					right: 5px;
+					z-index: 10;
+				}
+			
+				//background: $lite-yellow;
+			}
+		}
+		
+	}
+	
+	
+	.tooltip-content {
+		display: none;
+	}
+}
+
+.p-table--inside_wrap {
+	width: 100%;
+	
+	input[type="text"],
+	input[type="email"],
+	input[type="url"],
+	textarea,
+	select {
+		width: 100%;
+	}
+	
+	.c-fieldset {
+		border: none;
+		
+		h3 {
+			display: none;
+		}
+		
+		.c-field {
+			flex-direction: column;
+			border: none;
+			margin-bottom: 8px;
+		}
+		
+		.c-field_label {
+			width: 100%;
+			font-size: .8rem;
+			padding: 3px 2px;
+			border: none;
+			border-bottom: 1px solid $bo-gray;
+			background: #fff;
+		}
+		
+		.c-field_input {
+			width: 100%;
+			font-size: .8rem;
+			padding: 3px 2px;
+			border: none;
+		}
+	}
+	td {
+		position: relative;
+		
+		.u-anc {
+			padding: 2px;
+			
+			time {
+				display: block;
+				padding: 3px 0;
+			}
+		}
+			
+		&.today {
+			.u-anc {
+				font-weight: bold;
+			}
+		}
+		
+	}
+}
+
+.p-table--outside_wrap {
+	
+	.c-fieldset {
+		display: none;
+	}
+	
+	td {
+			
+		&.today {
+			.u-anc {
+				font-weight: bold;
+		 	
+			}
+		}
+		
+		&.have-data {
+			time {
+				
+				&:after {
+					top: -5px;
+					right: -5px;
+					z-index: 10;
+				}
+			
+				//background: $lite-yellow;
+			}
+		}
+	}
+}
+
+.p-field_wrap{
+		margin-left: 20px;
+		width: 100%;
+	
+	
+	.c-fieldset {
+		margin-bottom: 15px;
+		
+		
+		.close-fieldset {
+			display: none;
+			
+			&.is-active {
+				color: #fff;
+				display: block;
+				cursor: pointer;
+			}
+			&::before {
+				content: "\f14f";
+				}
+		}
+		.stick-fieldset {
+			background: $blue;
+			
+			&.is-active {
+				background: $bg-gray;
+				color: $blue;
+			}
+				
+			&::before {
+				content: "\f537";
+			}
+			
+		}
+		
+	}
+}
+
+#fields-panel {
+	position: sticky;
+	top: 40px;
+}
+
+.btn-add-field {
+	text-align: right;
+}

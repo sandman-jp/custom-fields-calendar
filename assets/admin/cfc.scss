@@ -1,0 +1,20 @@
+$blue: #2271b1;
+$lite-blue: rgba(34, 112, 176, 0.05);
+$lite-yellow: rgb(255, 233, 154);
+
+$bo-gray: #ccc;
+
+$bg-gray: #eee;
+$bg-lite-gray: rgb(250, 250, 250);
+$bg-lite-blue: #ddf;
+$bg-lite-red: #fdd;
+
+
+@import 'foundation';
+#cf-calendar {
+	@import 'layout';
+	@import 'component';
+	@import 'utility';
+	@import 'project/table';
+	@import 'project/settings';
+}

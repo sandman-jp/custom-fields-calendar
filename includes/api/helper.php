@@ -4,67 +4,142 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-function acfcalender_get_field_types( $args = array() ) {
-
-	// default
-	$args = wp_parse_args(
-		$args,
-		array(
-			'public' => true,    // true, false
-		)
-	);
-
-	// get field types
-	$field_types = acf()->fields->get_field_types();
-
-	// filter
-	return wp_filter_object_list( $field_types, $args );
+/* settings */
+function cfc_get_options(){
+	
+	$cfc_options = CFC()->get_instance('CFC\tools\options');
+	
+	if(!$cfc_options){
+		$cfc_options = CFC()->register_instance('CFC\tools\options');
+	}
+	
+	return $cfc_options;
 }
 
-function ACFC_get_grouped_field_types(){
+function cfc_get_option($key){
 	
-	$fields = array('text', 'textarea', 'number', 'email', 'url', 'image', 'filed', 'wysiwyg', 'oembed', 'select', 'checkbox', 'radio', 'button_group', 'true_false', 'link', 'post_object', 'page_link', 'time_picker', 'color_picker', 'message', 'group');
+	return cfc_get_options()->get_option($key);
 	
-	$field_types = array();
+}
+
+function cfc_update_option($key, $val){
 	
-	// get field types
-	foreach($fields as $key){
-		$field_types[] = acf()->fields->get_field_type($key);
+	$this->front[$key] = $val;
+	
+	return cfc_get_options()->update_option($key);
+	
+}
+
+function cfc_get_admin_option($key){
+	
+	return cfc_get_options()->get_admin_option($key);
+	
+}
+
+function cfc_update_admin_option($key, $val){
+	
+	return cfc_get_options()->update_admin_option($key);
+	
+}
+
+function cfc_get_instance($classname){
+	
+	return CFC()->get_instance($classname);
+	
+}
+
+
+/* calendar */	
+function cfc_get_start_week($time, $start=0){
+  $w = wp_date('w', $time) - $start;
+  
+  if($w < 0){
+    $w = 7 + $w;
+  }
+  
+  return $w;
+}
+
+/* system */
+function cfc_get_template_part($path, $sub=null, $args=array()){
+	
+	if(!is_null($sub) ){
+		if(is_array($sub)){
+			$args = $sub;
+			$sub = '';
+		}else{
+			$path .= '-'.$sub;
+		}
 	}
 	
-	// filter
-	$types = wp_filter_object_list($field_types, wp_parse_args(
-		array(),
-		array(
-			'public' => true,    // true, false
-		)
-	));
+	$fullpath = CFC_DIR_TEMPLATES.$path.'.php';
 	
-	$groups = array();
-	$l10n   = array(
-		'basic'      => __( 'Basic', 'acf' ),
-		'content'    => __( 'Content', 'acf' ),
-		'choice'     => __( 'Choice', 'acf' ),
-		'relational' => __( 'Relational', 'acf' ),
-		'jquery'     => __( 'jQuery', 'acf' ),
-		'layout'     => __( 'Layout', 'acf' ),
-	);
+	if(file_exists($fullpath)){
+		
+		if(!empty($args)){
+			extract($args);
+		}
+		
+		include $fullpath;
+	}
+}
 
-	// loop
-	foreach ( $types as $type ) {
 
-		// translate
-		$cat = $type->category;
-		$cat = isset( $l10n[ $cat ] ) ? $l10n[ $cat ] : $cat;
-
-		// append
-		$groups[ $cat ][ $type->name ] = $type->label;
+/* form */
+//フィールド入力欄HTMLを返す
+function cfc_rendar_custom_fields($key){
+	
+	$fields = CFC()->get_instance('CFC\fields');
+	
+	if(empty($fields)){
+		return ;
 	}
 	
-	// filter
-	$groups = apply_filters( 'acf/get_field_types', $groups );
+	echo $fields->render($key);
+}
+
+//入力された値一覧を返す
+function cfc_get_values($key){
 	
-	// return
-	return $groups;
+	$fields = CFC()->get_instance('CFC\fields');
 	
+	
+	if(empty($fields)){
+		return ;
+	}
+	
+	$values = $fields->values($key);
+	
+	if($values) {
+		return $values;
+	}
+	
+	return array();
+	
+}
+
+function cfc_get_customs($key){
+	
+	$fields = CFC()->get_instance('CFC\fields');
+	
+	
+	if(empty($fields)){
+		return ;
+	}
+	
+	$values = $fields->customs($key);
+	
+	if($values) {
+		return $values;
+	}
+	
+	return array();
+	
+}
+
+
+function cfc_get_regex($pattern){
+	$validation = CFC()->get_instance('CFC\validatoin');
+	
+	return isset($validation[$pattern]) ? $validation[$pattern] : false;
 }
