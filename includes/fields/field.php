@@ -1,25 +1,31 @@
 <?php
 	
-namespace CFC;
+namespace CFC\fields;
 
 use CFC;
-use CFC\field;
+use CFC\fields;
+use CFC\fields\field;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+require_once CFC_DIR_INCLUDES.'/tools/validations.php';
 
-class field{
+class field {
 	
 	private $_field_data;
 	var $type;
 	var $post_id;
 	
+	var $field_class = array();
+	var $validation = array();
 	var $supports = array();
 	
 	function __construct(){
+		$this->field_class = array('cfc-data');
 		$this->supports = array('required', 'default-value', 'place-holder');
+		$this->validation = CFC()->get_instance('CFC\tools\validations');
 	}
 	
 	function init(){
@@ -43,23 +49,35 @@ class field{
 	//テンプレートを返すよ
 	function rendar($key){
 		
-		$required = !empty($this->get('field-required'));
-		
 		$value = $this->get('field-value');
 		$value = empty($value) ? $this->get('field-default-value') : $value;
+		
+		$validation = $this->validation->get($this->type);
+		
+		$required = $this->is_required();
+		
+		$additional_class = $required ? array('is-required') : array();
 		
 		ob_start();
 		
 		?>
-		<div class="__input-field-wrap">
+		<div class="c-field">
 			
-			<span class="__input-field_label">
+			<span class="c-field_label">
 				<span><?php echo $this->get('field-label'); ?> <?php if($required): ?><span class="required">*</span><?php endif; ?></span>
 				<small><?php echo $this->get('field-description'); ?></small>
 			</span>
 			
-			<span class="__input-field">
-				<input type="<?php echo $this->type; ?>" name="<?php echo $this->get_field_name(); ?>" value="%<?php echo $this->get('field-name'); ?>_value%" placeholder="<?php echo $this->get('field-place-holder'); ?>" <?php if($required): ?>required<?php endif; ?> class="<?php echo $this->get_field_class(); ?>">
+			<span class="c-field_input">
+				<input 
+					type="<?php echo $this->type; ?>" 
+					name="<?php echo esc_html($this->get_field_name()); ?>" 
+					value="%%<?php echo urlencode($this->get('field-name')); ?>_value%%" 
+					placeholder="<?php echo $this->get('field-place-holder'); ?>" 
+					<?php if($required): ?>required<?php endif; ?> 
+					class="<?php echo $this->get_field_class($additional_class); ?>"
+					<?php if(!empty($validation)): ?>pattern="<?php echo $validation ?>"<?php endif; ?>
+					>
 			</span>
 			
 		</div>
@@ -74,6 +92,9 @@ class field{
 		return $field_tags;
 	}
 	
+	function is_required(){
+		return !empty($this->get('field-required'));
+	}
 	//
 	
 	function get_supports(){
@@ -84,11 +105,13 @@ class field{
 		return 'calendar[%key%]['.$this->get('field-name').']';
 	}
 	
-	function get_field_class(){
-		$class = array('cfc-data');
+	function get_field_class($additional=array()){
 		
-		return implode(' ', $class);
+		$field_class = array_merge($this->field_class, $additional);
+		
+		return implode(' ', $field_class);
 	}
+	
 	
 	private function _update() {
 		

@@ -7,21 +7,19 @@ jQuery(function($){
 	const original_form = $('#post').serialize();
 	
 	//未設定でも空でもない、つまりデータがあるかどうか
-	let have_data = (typeof(fields_settings['custom-fields-setting']) != 'undefined') && fields_settings['custom-fields-setting'].length;
-	
+	let have_data = (typeof(fields_settings['custom-fields-setting']['fields']) != 'undefined') && fields_settings['custom-fields-setting']['fields'].length;
+	//console.log(have_data)
 	//カレンダーと設定画面の切り替えボタン
 	let $header = $('#cf-calendar .postbox-header');
 	
-	//$('.handle-actions', $header).remove();
-	
 	if(have_data){
-		$('.cfc-actions .show-table, #cfc-table').addClass('active');
+		$('#show-table, #cfc-table').addClass('is-active');
 		
 	}else{
-		$('.cfc-actions .show-settings, #cfc-settings').addClass('active');
+		$('#show-settings, #cfc-settings').addClass('is-active');
 	}
 	
-	//$header.append('<div class="handle-actions cfc-actions"><button class="button dashicons dashicons-calendar-alt '+(have_data ? 'active' : '')+'" data-action="show-table" title="設定を保存してカレンダーを表示">Show Calendar</button><button class="button dashicons dashicons-admin-generic '+(have_data ? '' : 'active')+'" data-action="show-settings" title="各種設定画面を表示">Show Settings</button></div>');
+	//$header.append('<div class="handle-actions cfc-actions"><button class="button dashicons dashicons-calendar-alt '+(have_data ? 'is-active' : '')+'" data-action="show-table" title="設定を保存してカレンダーを表示">Show Calendar</button><button class="button dashicons dashicons-admin-generic '+(have_data ? '' : 'is-active')+'" data-action="show-settings" title="各種設定画面を表示">Show Settings</button></div>');
 	//
 	//h2をクリックしても閉じないように
 	$('h2.hndle').removeClass('hndle');
@@ -29,24 +27,30 @@ jQuery(function($){
 	//設定画面のタブ
 	$('#cfc-settings').tabs();
 	
-	
 	/*
 	 * 保存
 	 */
 	//記事内容が送信される前各セルの内容をまとめて、送信するinput数を減らす
 	$('[type="submit"][name="save"],[type="submit"][name="publish"]').click(function(e){
 		
+		if(!$('#post').get(0).checkValidity()){
+			//e.preventDefault();
+			return ;
+		}
 		
 		let $form = $('form#post');
 		
 		//データのある項目のみ
+		/*
 		let cfc_data = $('.cfc-data').map(function(i){
 			if($(this).val() != ''){
 				return this;
 			}
 		});
+		*/
 		
-		cfc_data = cfc_data.serialize();
+		
+		cfc_data = $('.cfc-data').serialize();
 		
 		let $submit_data = $('<input type="hidden" id="cfc-data" name="content" value="'+cfc_data+'">');
 		
@@ -60,17 +64,22 @@ jQuery(function($){
 	
 });
 	
-	
+
 	
 //panel switch
 jQuery(function($){
 	
 	$('.postbox-header .handle-actions button').click(function(e){
 		
+		if(!$('#post').get(0).checkValidity()){
+			//e.preventDefault();
+			return ;
+		}
+		
 		switch($(this).data('action')){
 		case 'show-table':
 			if($('#cfc-table:visible').length){
-				return;
+				return false;
 			}
 			
 			//変更があれば
@@ -82,7 +91,7 @@ jQuery(function($){
 			
 			e.preventDefault();
 			
-			$('.postbox-header .handle-actions button, .cfc-panel').toggleClass('active');
+			$('.postbox-header .handle-actions button, .l-panel').toggleClass('is-active');
 			
 			
 			break;
@@ -90,10 +99,10 @@ jQuery(function($){
 			e.preventDefault();
 			
 			if($('#cfc-settings:visible').length){
-				return;
+				return false;
 			}
 			
-			$('.postbox-header .handle-actions button, .cfc-panel').toggleClass('active');
+			$('.postbox-header .handle-actions button, .l-panel').toggleClass('is-active');
 			
 			original_form = $('#post').serialize();
 			
@@ -113,7 +122,7 @@ jQuery(function($){
 jQuery(function($){
 	
 	
-	$('#field-panel .fieldset_list').sortable({
+	$('#fields-panel').sortable({
 		update: function( event, ui ) {
 			//reorder_items();
 		}
@@ -122,59 +131,65 @@ jQuery(function($){
 	
 	var cell = $('.cfc-cell', '#cf-calendar');
 	
-	//テーブルをクリックすると、右にフォームが出てくる
-	cell.click(function(e){
-		//e.preventDefault();
-		let $anc = $('a', this);
-		
-		if(!$anc.length || $(this).hasClass('active')){
-			return;
-		}
-		
-		$('.cfc-cell', '#cf-calendar').removeClass('active');
-		$(this).addClass('active');
-		
-		let $prechild = $('#field-panel .fieldset_list .fieldset:not(.sticked)');
-		
-		if($prechild.length){
-			back_to_calendar($prechild);
-		}
-		
-		let $fieldset = $('.fieldset', this);
-		let fieldset_id = $fieldset.attr('name');
-		
-		if($('[name="'+fieldset_id+'"]', '#field-panel .fieldset_list').length){
-			return;
-		}
-		
-		$('.close-inputs', $fieldset).click(function(e){
-			e.preventDefault();
-			back_to_calendar($fieldset);
-		});
-		
-		//フォームのピンどめ
-		$('.stick-inputs', $fieldset).click(function(e){
-			e.preventDefault();
-			$(this).parents('.fieldset').toggleClass('sticked');
+	if(typeof(fields_settings['custom-fields-setting']['fields-position']) != 'undefined' 
+			&& fields_settings['custom-fields-setting']['fields-position'] == 'outside'){
 			
-			$(this).toggleClass('active');
-			$(this).siblings('.close-inputs').toggleClass('active');
+		//テーブルをクリックすると、右にフォームが出てくる
+		cell.click(function(e){
+			//e.preventDefault();
+			let $anc = $('.u-anc', this);
+			
+			
+			if(!$anc.length || $(this).hasClass('is-active') || !$('.c-fieldset', this).length){
+				return;
+			}
+			
+			$('.cfc-cell', '#cf-calendar').removeClass('is-active');
+			$(this).addClass('is-active');
+			
+			let $prechild = $('#fields-panel .c-fieldset:not(.is-sticked)');
+			
+			if($prechild.length){
+				back_to_calendar($prechild);
+			}
+			
+			let $fieldset = $('.c-fieldset', this);
+			
+			let fieldset_id = $fieldset.attr('name');
+			
+			if($('[name="'+fieldset_id+'"]', '#fields-panel').length){
+				return;
+			}
+			
+			$('.close-fieldset', $fieldset).click(function(e){
+				e.preventDefault();
+				back_to_calendar($fieldset);
+			});
+			
+			//フォームのピンどめ
+			$('.stick-fieldset', $fieldset).click(function(e){
+				e.preventDefault();
+				$(this).parents('.c-fieldset').toggleClass('is-sticked');
+				
+				$(this).toggleClass('is-active');
+				$(this).siblings('.close-fieldset').toggleClass('is-active');
+			});
+			
+			let $fieldlist = $('.p-fields', $fieldset.filter(':not(.is-sticked)'));
+			$fieldlist.hide();
+			
+			$anc.addClass('is-selected');
+			$('#fields-panel').append($fieldset);
+			
+			$fieldlist.slideDown('fast');
+			
+			
 		});
-		
-		let $fieldlist = $('.fieldlist', $fieldset.filter(':not(.sticked)'));
-		$fieldlist.hide();
-		
-		$anc.addClass('selected');
-		$('#field-panel .fieldset_list').append($fieldset);
-		$fieldlist.slideDown('fast');
-		
-		
-	});
-	
+	}
 	
 	$('.cfc-data').bind('change blur', function(e){
 		
-		let $parent = $(this).parents('.fieldset');
+		let $parent = $(this).parents('.c-fieldset');
 		let have_data = false;
 		let values = $('.cfc-data', $parent).each(function(i){
 			
@@ -186,14 +201,14 @@ jQuery(function($){
 		let parent_id = $parent.data('id');
 	
 		if(have_data){
-			$('#cell_'+parent_id).addClass('have_data');
+			$('#cell_'+parent_id).addClass('have-data');
 		}else{
-			$('#cell_'+parent_id).removeClass('have_data');
+			$('#cell_'+parent_id).removeClass('have-data');
 		}		
 	});
 	
 	//テーブルのデータ簡易表示用
-	$('a', cell).tooltip({
+	$('.u-anc', cell).tooltip({
 		position: {
       my: "center bottom-20",
       at: "center top",
@@ -210,7 +225,7 @@ jQuery(function($){
 			let content = $('.tooltip-content', this).html();
 			
 			if(content != '') {
-				return '<div class="single-value">'+content.split(',').join('</div><div class="single-value">')+'</div>';
+				return '<div class="single-value">'+content.split(' ; ').join('</div><div class="single-value">')+'</div>';
 			}
 			return '<div class="single-value" style="text-align:center">no data</div>';
 			
@@ -223,18 +238,18 @@ jQuery(function($){
 		
 		let $cell = $('#cell_'+id);
 		
-		$('a', $cell).removeClass('selected');
+		$('.u-anc', $cell).removeClass('is-selected');
 		
 		//$elm.fadeOut(500, function(){
-			$('a', $cell).append($elm);
+			$('.u-anc', $cell).append($elm);
 		//});
 		
 	}
 	
 	
 	//最初の一つを開けておく
-	if($('#cfc-table').hasClass('active')){
-		$('#cfc-table .cfc-cell a:first').click();
+	if($('#cfc-table').hasClass('is-active')){
+		$('#cfc-table .cfc-cell .u-anc:first').click();
 	}
 	
 	
@@ -244,10 +259,11 @@ jQuery(function($){
 //custom field setting
 jQuery(function($){
 
+	//init
 	
-	if(typeof(fields_settings['custom-fields-setting']) != 'undefined'){
+	if(typeof(fields_settings['custom-fields-setting']['fields']) != 'undefined'){
 		
-		var cf_data = fields_settings['custom-fields-setting'];
+		var cf_data = fields_settings['custom-fields-setting']['fields'];
 		
 		//initialize
 		if(cf_data.length){
@@ -258,21 +274,11 @@ jQuery(function($){
 				
 				add_field();
 				
-				let $item = $('#cfc-custom-field-list .__item:last');
+				let $item = $('#fields-list .c-fieldset:last');
 				
 				let fld_type = data['field-type'];
 				
-				switch(fld_type){
-				case 'radio':
-					//radio
-				case 'checkbox':
-					//checkbox or true/false	
-				case 'select':
-					switch_choice_field($item);
-					break;
-				default:
-					
-				}
+				change_field_view(fld_type, $item);
 				
 				for(let key in data){
 					
@@ -280,11 +286,8 @@ jQuery(function($){
 					
 					let $fld = $('#'+key+'_'+index, $item);
 					let i_name = $fld.attr('name');
-					
-					console.log(i_name);
-					console.log(data[key]);
-					
-					$('[name="'+i_name+'"]').val(data[key]);
+					let dd = typeof(data[key]) != 'string' ? data[key].join(',') : data[key];
+					$('[name="'+i_name+'"]').val(dd);
 					
 				}
 				
@@ -299,7 +302,11 @@ jQuery(function($){
 		add_field();
 	}
 	
-	$('#cfc-custom-field-list').sortable({
+	$('#fields-list .c-fieldset').each(function(){
+		$(this).trigger('choices_changed');
+	});
+	
+	$('#fields-list').sortable({
 		update: function( event, ui ) {
 			reorder_items();
 		}
@@ -313,25 +320,69 @@ jQuery(function($){
 		
 	});
 	
-	function switch_choice_field($elm){
+	function change_field_view(fld_type, $elm){
 		
-		$('.field-choices', $elm).toggleClass('disabled');
-		$('.field-place-holder', $elm).toggleClass('disabled');
+		
+		$('.field-place-holder', $elm).addClass('u-disabled');
+		$('[name$="[place-holder]"]', $elm).prop('disabled', true);
+		
+		$('.field-choices', $elm).addClass('u-disabled');
+		$('[name$="[field-choices]"]', $elm).prop('disabled', true);
+		
+		$('.field-validation', $elm).addClass('u-disabled');
+		$('[name$="[validation]"]', $elm).prop('disabled', true);
+		
+		
+		switch(fld_type){
+		case 'radio':
+			//radio
+			choice_field_fields($elm);
+			break;
+		case 'checkbox':
+			//checkbox	
+			choice_field_fields($elm);
+			break;
+		case 'select':
+			choice_field_fields($elm);
+			break;
+		case 'truefalse':
+			simple_field_fields($elm);
+			break;
+		case 'textfield':
+			$('.field-validation', $elm).removeClass('u-disabled');
+			$('[name$="[validation]"]', $elm).prop('disabled', false);
 			
-		let bool = $('[name$="[field-choices]"]', $elm).prop('disabled');
+		default:
+			text_field_fields($elm);
+		}
+	}
+	
+	function simple_field_fields($elm){
+		//$('.field-place-holder', $elm).css('visibility', 'hidden');
+	}
+	
+	function choice_field_fields($elm){
 		
-		$('[name$="[field-choices]"]', $elm).prop('disabled', !bool);
-		$('[name$="[place-holder]"]', $elm).prop('disabled', bool);
+		$('.field-choices', $elm).removeClass('u-disabled');
+		$('[name$="[field-choices]"]', $elm).prop('disabled', false);
 				
+		$('.o-wrap_details', $elm).slideDown('fast');
+	}
+	
+	function text_field_fields($elm){
+		
+		$('.field-place-holder', $elm).removeClass('u-disabled');
+		$('[name$="[place-holder]"]', $elm).prop('disabled', false);
+		
 	}
 	
 	function get_fields_count(){
-		return $('#cfc-custom-field-list .__item').length;
+		return $('#fields-list .c-fieldset').length;
 	}
 	
 	function add_field(){
 		
-		let count = parseInt($('#cfc-custom-field-list .__item').length);
+		let count = parseInt($('#fields-list .c-fieldset').length);
 		
 		let html = $('#field-template').text();
 		
@@ -342,13 +393,13 @@ jQuery(function($){
 		
 		$html = init_field($html);
 		
-		$('#cfc-custom-field-list').append($html);
-		
+		$('#fields-list').append($html);
+				
 	}
 	
 	function init_field($html){
 		
-		$('.__list_action button', $html).click(function(e){
+		$('.c-field_action button', $html).click(function(e){
 			e.preventDefault();
 			
 			let target = '#'+$(this).data('target');
@@ -361,14 +412,14 @@ jQuery(function($){
 				break;
 			case 'toggle-details':
 				
-				let $details = $('.__item_field_wrap_bottom', $(target));
+				let $details = $('.o-wrap_details', $(target));
 				
 				if($details.filter(':visible').length){
-					$(this).removeClass('active')
+					$(this).removeClass('is-active')
 				}else{
-					$(this).addClass('active')
+					$(this).addClass('is-active')
 				}
-				$('.__item_field_wrap_bottom', $(target)).slideToggle();
+				$('.o-wrap_details', $(target)).slideToggle();
 				
 				break;
 			}
@@ -379,10 +430,15 @@ jQuery(function($){
 		//Show Field option
 		$('.field-type select', $html).change(function(e){
 			e.preventDefault();
-			let $wrap = $(this).parents('.__item');
+			let $wrap = $(this).parents('.c-fieldset');
 			
 			let $choice_field = $('.field-choices', $wrap);
 			
+			$('textarea', $choice_field).val('').trigger('choices_changed');
+			
+			change_field_view($(this).val(), $wrap);
+			
+			/*
 			if($('option:selected', this).data('choices') == 1){
 				
 				$('.field-type', $html).removeClass('no-choice');
@@ -396,14 +452,123 @@ jQuery(function($){
 				$choice_field.addClass('disabled');
 				$('.__input-field', $wrap).children().prop('disabled', false);
 			}
-			
+			*/
 		});
 		
-		console.log('//////')
-		console.log($('.field-type select', $html).val());
+		//for option fields
+		$('.field-choices textarea', $html).bind('change keyup', function(e){
+			//let $parent = $html.parents('.c-fieldset');
+			$html.trigger('choices_changed');
+		});
 		
-		return $html;
+		$html.bind('choices_changed', function(e){
+			let type = $('.field-type select', this).val();
+			//console.log(type);
+			
+			let $default = $('.field-default-value [name]', this);
+			
+			
+			let input_val, input_name, input_id;
+			
+			if(!$default.length){
+				$default = $('.field-choices [name]', this);
+			}
+			input_val = '';
+			
+			//チェックボックス用を汎用に
+			input_name = $default.attr('name').replace('[]', '');
+			//choicesであろうとなかろうと置き換え
+			input_name = input_name.replace('choices', 'default-value');
+			
+			if($(this).data('id') != ''){
+				//choicesであろうとなかろうと置き換え
+				input_id = $default.attr('id').replace('choices', 'default-value');
+				$(this).data('id', input_id);
+			}else{
+				input_id = $(this).data('id');
+			}
+			
+			let choices = '';
+			let field_html = '';
+			
+			switch(type){
+			case 'checkbox':
+				//checkboxのみ
+				input_name = input_name+'[]';
+			case 'radio':
+				//checkboxとradioは選択肢を設定
+				choices = $('.field-choices textarea', this).val();
+				
+			case 'truefalse':
+				input_val = input_val.split(',');
+				
+				//真偽は1かどうかだけ
+				if(type == 'truefalse'){
+					choices = '1 : ';
+					type = 'checkbox';
+				}
+				
+				if(choices != ''){
+					choices = choices.split(/\r\n|\n/);
+					
+					for(let i=0; i<choices.length; i++){
+						let choice = choices[i].split(' : ');
+						let key = choice[0];
+						let val = choice[0];
+						
+						let checked = $.inArray(val, input_val) > -1 ? 'checked' : '';
+						
+						if(key != ''){
+							if(choice.length > 1){
+								val = choice[1];
+							}
+							
+							field_html += '<label><input id="'+input_id+'_'+key+'" type="'+type+'" name="'+input_name+'" value="'+key+'" '+checked+'>'+val+'</label>';
+						}
+					}
+				}
+				
+				break;
+				case 'select':
+					field_html = '<select id="'+input_id+'" name="'+input_name+'">';
+					
+					choices = $('.field-choices textarea', this).val();
+					if(choices != ''){
+						choices = choices.split(/\r\n|\n/);
+						
+						for(let i=0; i<choices.length; i++){
+							let choice = choices[i].split(' : ');
+							
+							let key = choice[0];
+							let val = choice[0];
+							
+							let selected = (val == input_val) ? 'selected' : '';
+							if(key != ''){
+								if(choice.length > 1){
+									val = choice[1];
+								}
+								
+								field_html += '<option value="'+key+'" '+selected+'>'+val+'</option>';
+							}
+						}
+					}
+					field_html += '</select>';
+					
+					break;
+			case 'textarea':
+				field_html = '<textarea id="'+input_id+'" name="'+input_name+'">'+input_val+'</textarea>';
+				break;
+			default:
+				field_html = '<input id="'+input_id+'" type="text" name="'+input_name+'" value="'+input_val+'">';
+			}
+			
+			$('.field-default-value .c-field_input', this).html(field_html);
+		});
+		//console.log('//////')
+		//console.log($('.field-type select', $html).val());
 		
+		
+		return $html;	
 	}
 	
 	function remove_field(target=null){
@@ -419,20 +584,20 @@ jQuery(function($){
 	}
 	
 	function reorder_items(){
-		$('#cfc-custom-field-list .__item').each(function(i){
+		$('#fields-list .c-fieldset').each(function(i){
 			
 			$('input, textarea, select', this).each(function(n){
 				this.name = $(this).attr('name').replace(/\[(\d+?)\]/, '['+i+']');
 				this.id = $(this).attr('id').replace(/_(\d+)$/, '_'+String(i));
 			});
 			
-			$('.field_label[for]', this).each(function(n){
+			$('.c-field_label[for]', this).each(function(n){
 				let val = $(this).attr('for').replace(/_(\d+)$/, '_'+String(i));
 				$(this).attr('for', val);
 			});
 			
 				
-			$('.__list_order span', this).text(i + 1);
+			$('.c-field_order span', this).text(i + 1);
 			
 		});
 	}

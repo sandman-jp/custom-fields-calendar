@@ -1,6 +1,12 @@
 <?php
 
-class CFC_activate{
+namespace CFC\tools;
+
+use CFC;
+use CFC\tools;
+use CFC\tools\activation;
+
+class activation{
 	
 	function __construct(){
 		add_action('admin_notices', array($this, 'admin_notices'));
@@ -20,4 +26,4 @@ class CFC_activate{
 	}
 }
 
-new CFC_activate();
+new CFC\tools\activation();

@@ -3,7 +3,7 @@
 Plugin Name: Custom Fields Calendar
 Plugin URI: 
 Description: Calendar with custom fields.
-Version: 1.0.0
+Version: 0.2.0
 Author: 地空 Chhkuw Design
 Author URI: 
 Text Domain: cfc
@@ -52,7 +52,10 @@ class CustomFieldsCalendar {
 		require_once CFC_DIR_INCLUDES.'/tools/options.php';
 		require_once CFC_DIR_INCLUDES.'/api/helper.php';
 		require_once CFC_DIR_INCLUDES.'/cf-calendar.php';
-		require_once CFC_DIR_INCLUDES.'/admin/admin.php';
+		
+		if(is_admin()){
+			require_once CFC_DIR_INCLUDES.'/admin/admin.php';
+		}
 			
 		//}
 		
@@ -67,6 +70,7 @@ class CustomFieldsCalendar {
 		  
 		  return $class;
 	  }
+		
 		
 		$this->{$class} = new $class;
 	  

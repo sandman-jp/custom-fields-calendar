@@ -3,8 +3,6 @@
 namespace CFC;
 
 use CFC;
-use CFC\fields;
-use CFC\settings;
 
 if ( ! defined('ABSPATH') ) {
 	exit; // Exit if accessed directly
@@ -12,6 +10,7 @@ if ( ! defined('ABSPATH') ) {
 
 
 require_once CFC_DIR_INCLUDES.'/fields/field.php';
+
 
 class fields{
 	
@@ -46,9 +45,11 @@ class fields{
 		
 		if(!empty($old_meta)){
 			//一回全消ししてから再登録
+			/*
 			foreach($old_meta as $meta){
 				delete_post_meta( $meta->post_id, $meta->meta_key);
 			}
+			*/
 		}
 		
 		foreach($_data as $k => $v){
@@ -72,8 +73,13 @@ class fields{
 		
 		$default_value = array();
 		
-		foreach($cf_setting as $k=>$d){
-			$default_value[$d['field-name']] = '';
+		foreach($cf_setting['fields'] as $k=>$d){
+			// var_dump($k);
+			// var_dump($d);
+			if(isset($d['field-default-value'])){
+				$default_value[$d['field-name']] = $d['field-default-value'];
+			}
+			
 		}
 		
 		$value = get_post_meta(get_the_ID(), 'cfc_field_'.$key, true);
@@ -91,13 +97,16 @@ class fields{
 		//各セルのCFのレンダリング
 		//$fields = $this->_settings_data['custom-fields-setting'];
 		
-		foreach($cf_setting as $field){
+		foreach($cf_setting['fields'] as $field){
 			
 			$type = $field['field-type'];
 			
+			if(empty($type)){
+				return;
+			}
 			require_once CFC_DIR_INCLUDES.'/fields/'.$type.'.php';
 			
-			$classname = 'CFC\\field\\'.$type;
+			$classname = 'CFC\\fields\\'.$type;
 			
 			$fieldclass = new $classname;
 			
@@ -141,19 +150,31 @@ class fields{
 		
 	}
 	
-	private function _make_template($key, $value){
+	private function _make_template($key, $value, $template=null){
 		
-		$template = $this->_field_inputs_template;
+		if(empty($template)){
+			$template = $this->_field_inputs_template;
+		}
 		
 		//key
 		$template = str_replace('%key%', $key, $template);
-		//
+		//var_dump($template);
+		
 		foreach($value as $k=>$v){
-			$template = str_replace('%'.$k.'_value%', $v, $template);
-			
-			//
-			$template = str_replace('%selected:'.$v.'%', 'selected', $template);
-			$template = str_replace('%checked:'.$v.'%', 'checked', $template);
+			$k = urlencode($k);
+			//checkbox対策
+			$v = is_array($v) ? $v : array($v);
+				
+			foreach($v as $vv){
+				$template = str_replace('%%'.$k.'_value%%', $vv, $template);
+				//
+				$template = str_replace('%%selected:'.$k.'_'.$vv.'%%', 'selected="selected"', $template);
+				$template = str_replace('%%checked:'.$k.'_'.$vv.'%%', 'checked="checked"', $template);
+				
+				//preg_match("/\%\%(selected|checked)\:".$k."_(.+?)\%\%/", $template, $match);
+				//var_dump($match);
+			}
+			$template = preg_replace("/\%\%(selected|checked)\:".$k."_(.+?)\%\%/", '', $template);
 		}
 		
 		

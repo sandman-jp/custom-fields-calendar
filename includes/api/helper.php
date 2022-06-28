@@ -6,10 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /* settings */
 function cfc_get_options(){
-	global $cfc_options;
+	
+	$cfc_options = CFC()->get_instance('CFC\tools\options');
 	
 	if(!$cfc_options){
-		$cfc_options = new CFC_options();
+		$cfc_options = CFC()->register_instance('CFC\tools\options');
 	}
 	
 	return $cfc_options;
@@ -65,8 +66,9 @@ function cfc_get_template_part($path, $sub=null, $args=array()){
 	if(!is_null($sub) ){
 		if(is_array($sub)){
 			$args = $sub;
+			$sub = '';
 		}else{
-			$path .= '-'.$path;
+			$path .= '-'.$sub;
 		}
 	}
 	
@@ -133,4 +135,11 @@ function cfc_get_customs($key){
 	
 	return array();
 	
+}
+
+
+function cfc_get_regex($pattern){
+	$validation = CFC()->get_instance('CFC\validatoin');
+	
+	return isset($validation[$pattern]) ? $validation[$pattern] : false;
 }

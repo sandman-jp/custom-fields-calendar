@@ -1,5 +1,5 @@
 <?php
-
+//table rendar engine
 $titles = array();
 
 $table_num = 0;
@@ -64,15 +64,24 @@ while($time_id <= $last_day):
 	
 	$values = cfc_get_customs($time_id);
 	
-	
 	if(!empty($values)){
-		$td_classes[] = 'have_data';
+		$have_data = false;
+		foreach($values as $k=>$v){
+			//どんなデータでもあれば
+			if(!empty($v)){
+				$have_data = true;
+				break;
+			}
+		}
+		if($have_data){
+			$td_classes[] = 'have-data';
+		}
 	}
 	
 	//start table cell including
   ob_start(); //for td
 
-	cfc_get_template_part('/admin/table-cell', array(
+	cfc_get_template_part('/admin/table', 'cell', array(
 		'is_in_term' => $is_in_term,
 		'time_id' => $time_id,
 		'td_classes' => $td_classes,

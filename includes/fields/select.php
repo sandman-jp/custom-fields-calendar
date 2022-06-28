@@ -4,16 +4,16 @@ namespace CFC\fields;
 
 use CFC;
 use CFC\fields;
-use CFC\fields\truefalse;
+use CFC\fields\select;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
 
-class truefalse extends CFC\fields\field{
+class select extends CFC\fields\field{
 	
-	var $type = 'truefalse';
+	var $type = 'radio';
 	
 	final function rendar($parent_key){
 		
@@ -23,7 +23,7 @@ class truefalse extends CFC\fields\field{
 		$required = $this->is_required();
 		
 		$additional_class = $required ? array('is-required') : array();
-			
+		
 		ob_start();
 		?>
 		<div class="c-field">
@@ -34,14 +34,31 @@ class truefalse extends CFC\fields\field{
 			</span>
 			
 			<span class="c-field_input">
-				<input 
-					type="checkbox" 
-					name="<?php echo $this->get_field_name(); ?>" 
-					value="1" 
+				<select 
+					name="<?php echo esc_html($this->get_field_name()); ?>" 
 					<?php if($required): ?>required<?php endif; ?> 
-					class="<?php echo $this->get_field_class($additional_class); ?>" 
-					%%checked:<?php echo urlencode($this->get('field-name')); ?>_1%%
+					class="<?php echo $this->get_field_class($additional_class); ?>"
 					>
+					<?php
+					$choices = $this->get('field-choices');
+					
+					$choices = str_replace(array("\r\n", "\r", "\n"), "\n", $choices);
+					$choices = explode("\n", $choices);
+					
+					foreach($choices as $choice):
+						$arr = explode(' : ', $choice);
+						$value = $label = $arr[0];
+						if(count($arr) == 2){
+							$label = $arr[1];
+						}
+						?>
+						<option 
+							value="<?php echo $value; ?>"  
+							%%selected:<?php echo urlencode($this->get('field-name')); ?>_<?php echo trim($value); ?>%%
+							> <?php echo $label; ?></option>
+					<?php endforeach; ?>
+				
+				</select>
 			</span>
 			
 		</div>

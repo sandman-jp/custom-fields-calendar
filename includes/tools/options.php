@@ -1,10 +1,12 @@
 <?php
 
-if ( ! defined('ABSPATH') ) {
-	exit; // Exit if accessed directly
-}
+namespace CFC\tools;
 
-class CFC_options {
+use CFC;
+use CFC\tools;
+use CFC\tools\options;
+
+class options {
 	
 	private $front;
 	private $admin;
@@ -49,7 +51,5 @@ class CFC_options {
 	
 }
 
-if(!isset($cfc_options)){
-	$cfc_options = new CFC_options();
-}
+CFC()->register_instance('CFC\tools\options');
 
