@@ -30,7 +30,7 @@ class admin{
 		add_action('admin_menu', array($this, 'admin_menu'), 11);
 		add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'), 11);
 		
-		add_action('add_meta_boxes', array($this, 'adding_custom_meta_boxes'));
+		//add_action('add_meta_boxes', array($this, 'adding_custom_meta_boxes'));
 		
 		
 	}
@@ -51,12 +51,14 @@ class admin{
 		
 		wp_enqueue_script( 'jquery-ui-tabs' );
 		
-		global $post;
+		//global $post;
 		
-		if(get_post_type($post) == CF_CALENDAR){
+		if(get_current_screen()->id == CF_CALENDAR){
 			
 			wp_enqueue_style('cfc-admin', CFC_ASSETS_URL.'/admin/cfc.css', array(), CFC_VIRSION);
 			wp_enqueue_script('cfc-admin', CFC_ASSETS_URL.'/admin/cfc.js', array('jquery', 'jquery-ui-sortable', 'jquery-ui-tooltip'), CFC_VIRSION, true);
+			
+			wp_enqueue_script('jquery-validate', '//cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js',  array('jquery'), CFC_VIRSION, true);
 			
 		}
 	}
@@ -74,7 +76,7 @@ class admin{
 		);
 		
 	}
-	
+	/*
 	function render_my_meta_box(){
 		echo 'わたしのメタボックス';
 	}
@@ -89,6 +91,7 @@ class admin{
 	        'default'
 	    );
 	}
+	*/
 	function option_page(){
 		//do_action('CFC/load/field_groups');
 	}

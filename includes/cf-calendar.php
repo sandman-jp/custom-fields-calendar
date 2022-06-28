@@ -22,6 +22,7 @@ class cf_calendar {
 	function register_post_type() {
 		
 		$cap = cfc_get_admin_option('capabilitiy');
+		//var_dump($cap);
 		
 		register_post_type(
 			CF_CALENDAR,
@@ -46,12 +47,18 @@ class cf_calendar {
 				'_builtin' => false,
 				'capability_type' => 'post',
 				'capabilities' => array(
-					'edit_post' => $cap,
+					
+					'edit_post' => 'edit_posts',
+					'edit_posts' => 'edit_posts',
+					'edit_others_posts' => 'edit_posts',
+					
+					'create_posts' => $cap,
+					'publish_posts' => $cap,
 					'delete_post' => $cap,
-					'edit_posts' => $cap,
 					'delete_posts' => $cap,
 				),
-				'supports' => array('title', 'revisions'),
+				// 'supports' => array('title', 'revisions'),
+				'supports' => array('title'),
 				'rewrite' => false,
 				'query_var' => false,
 			)

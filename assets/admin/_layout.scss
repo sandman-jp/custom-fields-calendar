@@ -1,0 +1,45 @@
+
+.l-col {
+	display: flex;
+	width: 100%;
+}
+
+@keyframes active-in {
+	0% {
+		display: none;
+		opacity: 0;
+	}
+	1% {
+		display: block;
+		opacity: 0;
+	}
+	100% {
+		display: block;
+		opacity: 1;
+	}
+}
+@keyframes inactive-out {
+	0% {
+		display: block;
+		opacity: 1;
+	}
+	99% {
+		display: block;
+		opacity: 0;
+	}
+	100% {
+		display: none;
+		opacity: 0;
+	}
+}
+
+.l-panel {
+	display: none;
+	animation: inactive-out .5s;
+	
+	&.is-active {
+		display: block;
+		animation: active-in .5s;
+	}
+}
+

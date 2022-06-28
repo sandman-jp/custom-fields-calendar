@@ -34,14 +34,22 @@ class settings{
 		
 		$meta_data = get_post_meta($this->post_id, 'cfc_settings', true);
 		
+		if(empty($meta_data['custom-fields-setting'])){
+			return;
+		}
 		
-		if(!empty($meta_data['custom-fields-setting'])){
+		foreach($meta_data['custom-fields-setting'] as $kk => $vv){
 			
-			foreach($meta_data['custom-fields-setting'] as $k=>$v){
+			if($kk == 'fields' && !empty($meta_data['custom-fields-setting']['fields'])){
 				
-				$this->_settings_data['custom-fields-setting'][(int)$k] = $v;
+				foreach($meta_data['custom-fields-setting']['fields'] as $k=>$v){
+					
+					$this->_settings_data['custom-fields-setting']['fields'][(int)$k] = $v;
+				}
+				
+			}else{
+				$this->_settings_data['custom-fields-setting'][$kk] = $vv;
 			}
-			
 		}
 		
 	}
@@ -64,7 +72,6 @@ class settings{
 	}
 	
 	function get_all(){
-		
 		
 		return $this->_settings_data;
 		

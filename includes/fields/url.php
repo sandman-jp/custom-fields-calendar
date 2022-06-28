@@ -1,10 +1,10 @@
 <?php
 
-namespace CFC\field;
+namespace CFC\fields;
 
 use CFC;
-use CFC\field;
-use CFC\field\textfield;
+use CFC\fields;
+use CFC\fields\url;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once CFC_DIR_INCLUDES.'/fields/textfield.php';
 
-class url extends CFC\field\textfield{
+class url extends CFC\fields\field{
 	
 	var $type = 'url';
 	

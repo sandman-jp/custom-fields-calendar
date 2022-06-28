@@ -1,0 +1,143 @@
+
+.c-button_wrap {
+	border-radius: 5px;
+	display: flex;
+	background: $bg-gray;
+	margin: 3px 4px;
+	overflow: hidden;
+	border: 1px solid $bo-gray;
+}
+
+
+.c-button {
+	border: none;
+	border-radius: 0;
+	appearance: none;
+	box-shadow: none;
+	background: #2271b1;
+	color: #fff;
+	cursor: pointer;
+	pointer-events: inherit;
+	font-weight: 400;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	height: 36px;
+	font-family: inherit;
+	cursor: pointer;
+	
+	&:before {
+		font-family: "dashicons";
+		font-size: 18px;
+		margin: 0px 5px;
+	}
+	
+	//activeは選択状態なので、つまり押せない
+	&.is-active {
+		color: $blue;
+		background: $bg-gray;
+	}
+	
+	&.have-text:before {
+		
+		margin-left: 0;
+	}
+}
+
+.postbox-header {
+	.c-button {
+		&.is-active {
+			cursor: inherit;
+		}
+	}
+}
+
+.c-pane {
+	
+}
+
+.c-fieldset {
+	background: #fff;
+	border-left: 1px solid $bo-gray;
+	
+	h3 {
+		width: 100%;
+		font-size: 1rem;
+		font-weight: bold;
+		text-align: center;
+		border-bottom: 1px solid $bo-gray;
+		padding: 5px 5px 5px 1rem;
+		margin: 0;
+		background: $blue;
+		color: #fff;
+		cursor: move;
+		display: flex;
+		align-items: center;
+		
+		span {
+			width: 100%;
+				display: block;
+				text-align: left;
+		}
+	}
+	
+	.c-button_wrap{
+		border-radius: 5px;
+		flex-shrink: 0;
+		display: flex;
+		background: none;
+		margin: 3px 4px;
+		overflow: hidden;
+		border: 1px solid $bo-gray;
+	}
+	
+	.c-button{
+		margin: 0;
+		width: 48px;
+		height: 28px;
+		border: none;
+		color: #fff;
+		cursor: pointer;
+		font-size: 18px;
+		font-style: normal;
+		background: none;
+	}
+}
+
+.c-field {
+	border-right: 1px solid $bo-gray;
+	border-bottom: 1px solid $bo-gray;
+	top: 45px;
+	display: flex;
+	
+	.c-field_label {
+		width: 25%;
+		padding: 8px 15px;
+		background: $bg-lite-gray;
+		border-right: 1px solid $bo-gray;
+		display: flex;
+		align-items: center;
+		font-weight: bold;
+	}
+	
+	.c-field_input {
+		width: 75%;
+		padding: 15px;
+		display: block;
+	}
+}
+
+.c-fieldset_wrap {
+	.c-fieldset {
+		border-left: 3px solid $blue;
+	}
+}
+
+.postbox-header {
+	.c-button {
+		&:before {
+			pointer-events: none;
+		}
+	}
+}

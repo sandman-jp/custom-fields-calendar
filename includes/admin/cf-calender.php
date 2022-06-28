@@ -118,7 +118,7 @@ class cf_calendar{
 			return ;
 		}
 		
-		cfc_get_template_part('/admin/view/cfc-calender', array('settings'=>$this->settings,'fields'=>$this->fields, 'table'=>$this->table));
+		include CFC_DIR_INCLUDES.'/admin/view/edit.php';
 		
 	}
 	
@@ -145,6 +145,7 @@ class cf_calendar{
 		
 		//カスタムフィールドグループ設定の保存
 		$cf_setting = empty($_POST['custom-fields-setting']) ? array() : $_POST['custom-fields-setting'];
+		
 		$this->settings->update('custom-fields-setting', $cf_setting);
 		
 	}
