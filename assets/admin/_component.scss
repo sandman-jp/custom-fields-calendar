@@ -113,18 +113,21 @@
 	
 	.c-field_label {
 		width: 25%;
-		padding: 8px 15px;
+		padding: 25px 15px;
 		background: $bg-lite-gray;
 		border-right: 1px solid $bo-gray;
 		display: flex;
 		align-items: center;
 		font-weight: bold;
 	}
-	
+	.c-field_label:nth-child(n+2){
+		border-left: 1px solid $bo-gray;
+	}
 	.c-field_input {
 		width: 75%;
-		padding: 15px;
-		display: block;
+		padding: 10px 15px;
+		display: flex;
+		align-items: center;
 	}
 }
 

@@ -2,12 +2,16 @@
 //ページ全体
 jQuery(function($){
 	$('#edit-slug-box, #preview-action').remove();
-	
+	/*
+	$('.datepicker').datepicker({
+		buttonText: "Choose"
+	});
+	*/
 	//監視
 	const original_form = $('#post').serialize();
 	
 	//未設定でも空でもない、つまりデータがあるかどうか
-	let have_data = (typeof(fields_settings['custom-fields-setting']['fields']) != 'undefined') && fields_settings['custom-fields-setting']['fields'].length;
+	let have_data = (typeof(fields_settings['custom-fields-settings']['fields']) != 'undefined') && fields_settings['custom-fields-settings']['fields'].length;
 	//console.log(have_data)
 	//カレンダーと設定画面の切り替えボタン
 	let $header = $('#cf-calendar .postbox-header');
@@ -131,8 +135,8 @@ jQuery(function($){
 	
 	var cell = $('.cfc-cell', '#cf-calendar');
 	
-	if(typeof(fields_settings['custom-fields-setting']['fields-position']) != 'undefined' 
-			&& fields_settings['custom-fields-setting']['fields-position'] == 'outside'){
+	if(typeof(fields_settings['custom-fields-settings']['fields-position']) != 'undefined' 
+			&& fields_settings['custom-fields-settings']['fields-position'] == 'outside'){
 			
 		//テーブルをクリックすると、右にフォームが出てくる
 		cell.click(function(e){
@@ -261,9 +265,9 @@ jQuery(function($){
 
 	//init
 	
-	if(typeof(fields_settings['custom-fields-setting']['fields']) != 'undefined'){
+	if(typeof(fields_settings['custom-fields-settings']['fields']) != 'undefined'){
 		
-		var cf_data = fields_settings['custom-fields-setting']['fields'];
+		var cf_data = fields_settings['custom-fields-settings']['fields'];
 		
 		//initialize
 		if(cf_data.length){
@@ -604,4 +608,18 @@ jQuery(function($){
 	
 });
 
+//general settings
+jQuery(function($){
+	
+	$('.btn-calenadr_term-type').click(function(e){
+		let $parent = $(this).parents('dl');
+		let $type = $(this).val();
+		$parent.removeClass('is-absolute');
+		$parent.removeClass('is-relative');
+		
+		$parent.addClass('is-'+$type);
+		
+	})
+	$('.btn-calenadr_term-type:checked').click();
+});
 	

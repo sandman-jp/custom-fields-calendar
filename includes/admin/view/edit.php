@@ -7,7 +7,7 @@ if ( ! defined('ABSPATH') ) {
 	exit; // Exit if accessed directly
 }
 
-$custom_field_setting_data = $this->settings->get('custom-fields-setting');
+$custom_field_setting_data = $this->settings->get('custom-fields-settings');
 $has_cap = current_user_can('manage_options');
 
 ?>
@@ -47,24 +47,27 @@ $has_cap = current_user_can('manage_options');
 	
 	<div id="setting-tabs">
 		<ul>
-    	<li><a href="#custom-fields-setting"><?php _e( 'Custom Fields', CFC_TEXTDOMAIN ) ?></a></li>
-    	<li><a href="#holidays-setting"><?php _e( 'Holidays', CFC_TEXTDOMAIN ) ?></a></li>
-    	<li><a href="#general-setting"><?php _e( 'General', CFC_TEXTDOMAIN ) ?></a></li>
-    	<li><a href="#templates-setting"><?php _e( 'Template', CFC_TEXTDOMAIN ) ?></a></li>
+    	<li><a href="#custom-fields-settings"><?php _e( 'Custom Fields', CFC_TEXTDOMAIN ) ?></a></li>
+    	<li><a href="#holidays-settings"><?php _e( 'Holidays', CFC_TEXTDOMAIN ) ?></a></li>
+    	<li><a href="#general-settings"><?php _e( 'General', CFC_TEXTDOMAIN ) ?></a></li>
+    	<li><a href="#templates-settings"><?php _e( 'Template', CFC_TEXTDOMAIN ) ?></a></li>
   	</ul>
 	</div>
 	
-  <div id="custom-fields-setting" class="c-panel p-custom-fields_tab">
-	  <h3><?php _e( 'Custom Fields', CFC_TEXTDOMAIN ) ?></h3>
+  <div id="custom-fields-settings" class="c-panel p-custom-fields_tab">
+	  <h3><?php _e( 'Custom Fields Settings', CFC_TEXTDOMAIN ) ?></h3>
 	  <?php include CFC_DIR_INCLUDES.'/admin/view/settings/custom-fields.php'; ?>
 	</div>
 	
-  <div id="holidays-setting" class="c-panel  p-holidays_tab">
-	  <h3><?php _e( 'Holidays', CFC_TEXTDOMAIN ) ?></h3>
-	  <?php include CFC_DIR_INCLUDES.'/admin/view/settings/holidays.php'; ?>
+  <div id="holidays-settings" class="c-panel  p-holidays_tab">
+	  <h3><?php _e( 'Holiday Settings', CFC_TEXTDOMAIN ) ?></h3>
+	  <?php //include CFC_DIR_INCLUDES.'/admin/view/settings/holidays.php'; ?>
 	</div>
-  <div id="general-setting" class="c-panel"><?php _e( 'General', CFC_TEXTDOMAIN ) ?></div>
-  <div id="templates-setting" class="c-panel"><?php _e( 'Template', CFC_TEXTDOMAIN ) ?></div>
+  <div id="general-settings" class="c-panel">
+		<h3><?php _e( 'General Settings', CFC_TEXTDOMAIN ) ?></h3>
+		<?php include CFC_DIR_INCLUDES.'/admin/view/settings/general.php'; ?>
+	</div>
+  <div id="templates-settings" class="c-panel"><?php _e( 'Template', CFC_TEXTDOMAIN ) ?></div>
   
 </div>
 <?php endif; ?>

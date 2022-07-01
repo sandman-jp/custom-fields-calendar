@@ -69,7 +69,7 @@ class fields{
 			return '';
 		}
 		
-		$cf_setting = $this->settings->get('custom-fields-setting');
+		$cf_setting = $this->settings->get('custom-fields-settings');
 		
 		$default_value = array();
 		
@@ -177,6 +177,7 @@ class fields{
 			$template = preg_replace("/\%\%(selected|checked)\:".$k."_(.+?)\%\%/", '', $template);
 		}
 		
+		$template = preg_replace("/\%\%(.*?)\%\%/", '', $template);
 		
 		return $template;
 	}

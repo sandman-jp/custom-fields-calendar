@@ -52,7 +52,10 @@ class field {
 		$value = $this->get('field-value');
 		$value = empty($value) ? $this->get('field-default-value') : $value;
 		
-		$validation = $this->validation->get($this->type);
+		$validation = $this->get('field-validation');
+		if(empty($validation)){
+			$validation = $this->validation->get($this->type);
+		}
 		
 		$required = $this->is_required();
 		

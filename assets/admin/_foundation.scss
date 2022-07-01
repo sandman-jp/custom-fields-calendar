@@ -6,6 +6,14 @@ input::placeholder {
 	color: #ddd !important;
 }
 
+dl {
+	padding: 0;
+	margin: 0;
+}
+dd {
+	margin-left: 0;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -102,4 +110,11 @@ label {
 .arrow.top:after {
 	bottom: -20px;
 	top: auto;
+}
+
+.datepicker:after {
+	content: "\f508";
+	font-family: 'Dashicon';
+	position: absolute;
+	right: -10px;
 }
