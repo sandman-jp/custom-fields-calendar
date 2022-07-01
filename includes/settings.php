@@ -9,6 +9,8 @@ if ( ! defined('ABSPATH') ) {
 	exit; // Exit if accessed directly
 }
 
+require_once CFC_DIR_INCLUDES.'/settings/custom-fields.php';
+require_once CFC_DIR_INCLUDES.'/settings/general.php';
 
 class settings{
 	
@@ -24,6 +26,11 @@ class settings{
 		
 		$this->post_id = $post_id;
 		
+		$this->settings = array(
+			'custom-fields-settings' => new CFC\settings\custom_fields(),
+			'general-settings' => new CFC\settings\general(),
+		);
+		
 		$this->_load();
 		
 	}
@@ -34,22 +41,9 @@ class settings{
 		
 		$meta_data = get_post_meta($this->post_id, 'cfc_settings', true);
 		
-		if(empty($meta_data['custom-fields-setting'])){
-			return;
-		}
-		
-		foreach($meta_data['custom-fields-setting'] as $kk => $vv){
-			
-			if($kk == 'fields' && !empty($meta_data['custom-fields-setting']['fields'])){
-				
-				foreach($meta_data['custom-fields-setting']['fields'] as $k=>$v){
-					
-					$this->_settings_data['custom-fields-setting']['fields'][(int)$k] = $v;
-				}
-				
-			}else{
-				$this->_settings_data['custom-fields-setting'][$kk] = $vv;
-			}
+		///
+		foreach($this->settings as $setting){
+			$this->_settings_data = $setting->parse($this->_settings_data, $meta_data);
 		}
 		
 	}
@@ -77,7 +71,7 @@ class settings{
 		
 	}
 	
-	
+	//
 	function update($key, $_data){
 		
 		$this->_settings_data[$key] = $_data;

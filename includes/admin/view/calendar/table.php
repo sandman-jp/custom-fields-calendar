@@ -12,6 +12,7 @@ for($i=0; $i<7; $i++):
 ?>
 	<?php
 	$day_index = ($i + $first_dw) % 7;
+	
 	$weekday = 'day';
   
   if(wp_date('w', $init_id) == 6){
@@ -30,10 +31,7 @@ for($i=0; $i<7; $i++):
 endfor; 
 $tableheader = ob_get_clean();
 
-$time_id = strtotime(wp_date('Y-m-01', $min_d));
-$last_day = strtotime('last day of '.wp_date('Y-m', $max_d_end));
-
-//$last_day = ;
+$time_id = $min_d;
 
 $is_new_month = true;
 $current_month = wp_date('m月', $min_d);
@@ -41,7 +39,8 @@ $current_month = wp_date('m月', $min_d);
 $cells = $this->_get_month_cells();
 $month_cells = array();
 
-while($time_id <= $last_day):
+
+while($time_id <= $max_d_end):
 	
   $dw = cfc_get_start_week($time_id, $first_dw);
   
@@ -53,7 +52,7 @@ while($time_id <= $last_day):
   }else if(wp_date('w', $time_id) == 0){
     $weekday = 'sun';
   }
-  
+	
 	$is_in_term = ($time_id >= $min_d && $time_id <= $max_d);
 	
 	$td_classes = array('cfc-cell', 'week-'.$dw, strtolower(wp_date('D', $time_id)));
@@ -85,8 +84,8 @@ while($time_id <= $last_day):
 		'is_in_term' => $is_in_term,
 		'time_id' => $time_id,
 		'td_classes' => $td_classes,
-		'day_index' => $day_index,
 		'values' => $values,
+		'first_dw' => $first_dw,
 	));
 	
 	$cells[$dw] = ob_get_clean();
