@@ -2,6 +2,13 @@
 	box-sizing: border-box;
 }
 
+.cfc-loading {
+	.button {
+		opacity: .2;
+		pointer-events: none;
+	}
+}
+
 input::placeholder {
 	color: #ddd !important;
 }
@@ -118,3 +125,4 @@ label {
 	position: absolute;
 	right: -10px;
 }
+

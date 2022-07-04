@@ -52,6 +52,7 @@ class CustomFieldsCalendar {
 		require_once CFC_DIR_INCLUDES.'/tools/options.php';
 		require_once CFC_DIR_INCLUDES.'/api/helper.php';
 		require_once CFC_DIR_INCLUDES.'/cf-calendar.php';
+		require_once CFC_DIR_INCLUDES.'/shortcode.php';
 		
 		if(is_admin()){
 			require_once CFC_DIR_INCLUDES.'/admin/admin.php';

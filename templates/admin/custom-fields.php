@@ -1,6 +1,6 @@
 
 <!-- template -->
-<div class="c-fieldset" id="field_%id%">
+<div class="c-fieldset" id="field_%id%"  data-field-id="%id%">
 		
 		
 		<div class="l-col o-headline">
@@ -53,6 +53,7 @@
 				<?php cfc_get_template_part('/admin/custom-fields/supports/required'); ?>
 				<?php cfc_get_template_part('/admin/custom-fields/supports/default-value'); ?>
 				<?php cfc_get_template_part('/admin/custom-fields/supports/place-holder'); ?>
+				<?php cfc_get_template_part('/admin/custom-fields/supports/title'); ?>
 				
 				<?php cfc_get_template_part('/admin/custom-fields/supports/validation'); ?>
 				
