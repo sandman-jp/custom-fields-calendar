@@ -2,11 +2,13 @@
 /*
  * カレンダーの設定画面
  */
-
+?>
+<?php
 if ( ! defined('ABSPATH') ) {
 	exit; // Exit if accessed directly
 }
-
+?>
+<?php
 $custom_field_setting_data = $this->settings->get('custom-fields-settings');
 $has_cap = current_user_can('manage_options');
 
@@ -50,7 +52,7 @@ $has_cap = current_user_can('manage_options');
     	<li><a href="#custom-fields-settings"><?php _e( 'Custom Fields', CFC_TEXTDOMAIN ) ?></a></li>
     	<li><a href="#holidays-settings"><?php _e( 'Holidays', CFC_TEXTDOMAIN ) ?></a></li>
     	<li><a href="#general-settings"><?php _e( 'General', CFC_TEXTDOMAIN ) ?></a></li>
-    	<li><a href="#templates-settings"><?php _e( 'Template', CFC_TEXTDOMAIN ) ?></a></li>
+    	<li><a href="#templates-settings"><?php _e( 'Front View', CFC_TEXTDOMAIN ) ?></a></li>
   	</ul>
 	</div>
 	
@@ -67,7 +69,11 @@ $has_cap = current_user_can('manage_options');
 		<h3><?php _e( 'General Settings', CFC_TEXTDOMAIN ) ?></h3>
 		<?php include CFC_DIR_INCLUDES.'/admin/view/settings/general.php'; ?>
 	</div>
-  <div id="templates-settings" class="c-panel"><?php _e( 'Template', CFC_TEXTDOMAIN ) ?></div>
+	
+  <div id="templates-settings" class="c-panel">
+		<h3><?php _e( 'Front View Settings', CFC_TEXTDOMAIN ) ?></h3>
+		<?php include CFC_DIR_INCLUDES.'/admin/view/settings/templates.php'; ?>
+	</div>
   
 </div>
 <?php endif; ?>

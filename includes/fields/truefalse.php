@@ -41,6 +41,7 @@ class truefalse extends CFC\fields\field{
 					<?php if($required): ?>required<?php endif; ?> 
 					class="<?php echo $this->get_field_class($additional_class); ?>" 
 					%%checked:<?php echo urlencode($this->get('field-name')); ?>_1%%
+					title="<?php echo $this->get('field-title'); ?>"
 					>
 			</span>
 			

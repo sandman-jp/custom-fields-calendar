@@ -9,25 +9,22 @@ $i = 0;
 
 ob_start();
 for($i=0; $i<7; $i++): 
-?>
-	<?php
+
 	$day_index = ($i + $first_dw) % 7;
 	
 	$weekday = 'day';
-  
-  if(wp_date('w', $init_id) == 6){
-    $weekday = 'sat';
-  }else if(wp_date('w', $init_id) == 0){
-    $weekday = 'sun';
-  }
-  
-  ?>
-  
-  <th class="cf-calendar <?php echo $weekday; ?>">
-	<?php echo $wp_locale->get_weekday_abbrev($wp_locale->get_weekday($day_index)); ?>
-	</th>
 	
-<?php 
+	if(wp_date('w', $init_id) == 6){
+		$weekday = 'sat';
+	}else if(wp_date('w', $init_id) == 0){
+		$weekday = 'sun';
+	}
+	
+	cfc_get_template_part('/'.$calendar_type.'/table', 'heder', array(
+		'weekday' => $weekday,
+		'day_index' => $day_index,
+	));
+	
 endfor; 
 $tableheader = ob_get_clean();
 
@@ -42,16 +39,16 @@ $month_cells = array();
 
 while($time_id <= $max_d_end):
 	
-  $dw = cfc_get_start_week($time_id, $first_dw);
-  
-  //曜日クラス
-  $weekday = 'day';
-  
-  if(wp_date('w', $time_id) == 6){
-    $weekday = 'sat';
-  }else if(wp_date('w', $time_id) == 0){
-    $weekday = 'sun';
-  }
+	$dw = cfc_get_start_week($time_id, $first_dw);
+	
+	//曜日クラス
+	$weekday = 'day';
+	
+	if(wp_date('w', $time_id) == 6){
+		$weekday = 'sat';
+	}else if(wp_date('w', $time_id) == 0){
+		$weekday = 'sun';
+	}
 	
 	$is_in_term = ($time_id >= $min_d && $time_id <= $max_d);
 	
@@ -78,9 +75,9 @@ while($time_id <= $max_d_end):
 	}
 	
 	//start table cell including
-  ob_start(); //for td
+	ob_start(); //for td
 
-	cfc_get_template_part('/admin/table', 'cell', array(
+	cfc_get_template_part('/'.$calendar_type.'/table', 'cell', array(
 		'is_in_term' => $is_in_term,
 		'time_id' => $time_id,
 		'td_classes' => $td_classes,
@@ -101,7 +98,7 @@ while($time_id <= $max_d_end):
 		
 		$month_cells[] = implode('', $cells);
 		
-		echo cfc_get_template_part('/admin/table', array(
+		echo cfc_get_template_part('/'.$calendar_type.'/table', array(
 			'th' => $tableheader,
 			'td' => '<tr>'.implode('</tr><tr>', $month_cells).'</tr>',
 			'monthname' => $current_month,
@@ -119,7 +116,7 @@ while($time_id <= $max_d_end):
 		$month_cells[] = implode('', $cells);
 		$cells = $this->_get_month_cells();
 	};
-  
-  $i++;
-  
+	
+	$i++;
+	
 endwhile;
