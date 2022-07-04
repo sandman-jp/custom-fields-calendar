@@ -3,7 +3,7 @@
 Plugin Name: Custom Fields Calendar
 Plugin URI: 
 Description: Calendar with custom fields.
-Version: 1.0.0-alpha
+Version: 1.0.1-alpha
 Author: 地空 Chhkuw Design
 Author URI: 
 Text Domain: CFC
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if (!class_exists('CFC')){
 
 
-define('CFC_VIRSION', '1.0.0-alpha');
+define('CFC_VIRSION', '1.0.1-alpha');
 
 //general settings
 define('CFC_DIR', dirname(__FILE__));
