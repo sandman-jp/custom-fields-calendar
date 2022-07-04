@@ -30,7 +30,7 @@ $day_index = cfc_get_start_week($time_id, $first_dw);
 		 }
 		?>
 <?php else: ?>
-  <span class="nodata">-</span>
+  <span class="nodata"></span>
 <?php endif; ?>
   
 </td>

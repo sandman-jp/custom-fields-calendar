@@ -122,7 +122,7 @@ class cf_calendar {
 		
 		$today = strtotime($y.'/'.$m.'/'.$d.' '.wp_timezone_string());
 		//曜日を月曜日から始めるようにする
-		$first_dw = $general['start-week'] == 'current' ? wp_date('w') : $general['start-week'];//月曜日
+		$first_dw = $general['first-week'] == 'current' ? wp_date('w') : $general['first-week'];//月曜日
 		
 		//最終表日（開始が月曜(1)なら最終は日(0)、水曜(3)なら最終は火(2)）;
 		//$end_dw = $first_dw - 1;
@@ -156,6 +156,7 @@ class cf_calendar {
 		}
 		
 		$have_column_header = !empty($templates['column-header']);
+		$is_seamless_month = $calendar_type == 'weekly' && !empty($templates['seamless-month']);
 		
 		include CFC_DIR_INCLUDES.'/view/calendar.php';
 		
