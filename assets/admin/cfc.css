@@ -3,7 +3,12 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
 
-/* line 5, _foundation.scss */
+/* line 6, _foundation.scss */
+.cfc-loading .button {
+  opacity: .2;
+  pointer-events: none; }
+
+/* line 12, _foundation.scss */
 input::-webkit-input-placeholder {
   color: #ddd !important; }
 input:-ms-input-placeholder {
@@ -13,7 +18,16 @@ input::-ms-input-placeholder {
 input::placeholder {
   color: #ddd !important; }
 
-/* line 9, _foundation.scss */
+/* line 16, _foundation.scss */
+dl {
+  padding: 0;
+  margin: 0; }
+
+/* line 20, _foundation.scss */
+dd {
+  margin-left: 0; }
+
+/* line 24, _foundation.scss */
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -22,28 +36,28 @@ input[type="number"],
 textarea {
   width: 100%; }
 
-/* line 17, _foundation.scss */
+/* line 32, _foundation.scss */
 input[type="radio"],
 input[type="checkbox"] {
   margin-right: 4px; }
 
-/* line 22, _foundation.scss */
+/* line 37, _foundation.scss */
 label {
   margin-right: 5px; }
 
-/* line 26, _foundation.scss */
+/* line 41, _foundation.scss */
 .disabled input[disabled],
 .disabled textarea[disabled],
 .disabled file[disabled],
 .disabled select[disabled] {
   display: none; }
 
-/* line 34, _foundation.scss */
+/* line 49, _foundation.scss */
 .postbox-header {
   border: 1px solid #ccc;
   background: #fff none repeat scroll 0% 0%; }
 
-/* line 39, _foundation.scss */
+/* line 54, _foundation.scss */
 .ui-tabs-tab.ui-tab,
 .ui-tabs-nav.ui-tabs,
 .ui-corner-all {
@@ -51,12 +65,12 @@ label {
   border-radius: 0;
   font-size: inherit; }
 
-/* line 47, _foundation.scss */
+/* line 62, _foundation.scss */
 .ui-tooltip, .arrow:after {
   background: #333;
   border: 2px solid #333; }
 
-/* line 52, _foundation.scss */
+/* line 67, _foundation.scss */
 .ui-tooltip {
   width: auto;
   max-width: 380px;
@@ -68,7 +82,7 @@ label {
   -webkit-box-shadow: none;
           box-shadow: none; }
 
-/* line 62, _foundation.scss */
+/* line 77, _foundation.scss */
 .single-value {
   width: auto;
   border-top: 1px solid #ddd;
@@ -76,11 +90,11 @@ label {
   width: auto;
   position: relative; }
 
-/* line 69, _foundation.scss */
+/* line 84, _foundation.scss */
 .single-value:first-child {
   border: none; }
 
-/* line 72, _foundation.scss */
+/* line 87, _foundation.scss */
 .arrow {
   width: 70px;
   height: 16px;
@@ -90,16 +104,16 @@ label {
   margin-left: -35px;
   bottom: -16px; }
 
-/* line 81, _foundation.scss */
+/* line 96, _foundation.scss */
 .arrow.top {
   top: -16px;
   bottom: auto; }
 
-/* line 85, _foundation.scss */
+/* line 100, _foundation.scss */
 .arrow.left {
   left: 20%; }
 
-/* line 88, _foundation.scss */
+/* line 103, _foundation.scss */
 .arrow:after {
   content: "";
   position: absolute;
@@ -114,10 +128,17 @@ label {
   transform: rotate(45deg);
   */ }
 
-/* line 102, _foundation.scss */
+/* line 117, _foundation.scss */
 .arrow.top:after {
   bottom: -20px;
   top: auto; }
+
+/* line 122, _foundation.scss */
+.datepicker:after {
+  content: "\f508";
+  font-family: 'Dashicon';
+  position: absolute;
+  right: -10px; }
 
 /* line 2, _layout.scss */
 #cf-calendar .l-col {
@@ -288,7 +309,7 @@ label {
   /* line 114, _component.scss */
   #cf-calendar .c-field .c-field_label {
     width: 25%;
-    padding: 8px 15px;
+    padding: 25px 15px;
     background: #fafafa;
     border-right: 1px solid #ccc;
     display: -webkit-box;
@@ -298,15 +319,43 @@ label {
         -ms-flex-align: center;
             align-items: center;
     font-weight: bold; }
-  /* line 124, _component.scss */
+  /* line 123, _component.scss */
+  #cf-calendar .c-field .c-field_label:nth-child(n+2) {
+    border-left: 1px solid #ccc; }
+  /* line 126, _component.scss */
   #cf-calendar .c-field .c-field_input {
     width: 75%;
-    padding: 15px;
-    display: block; }
-/* line 132, _component.scss */
+    padding: 10px 15px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    min-height: 50px; }
+    /* line 133, _component.scss */
+    #cf-calendar .c-field .c-field_input span {
+      white-space: nowrap; }
+    /* line 140, _component.scss */
+    #cf-calendar .c-field .c-field_input .c-field {
+      border: none;
+      width: 100%; }
+      /* line 144, _component.scss */
+      #cf-calendar .c-field .c-field_input .c-field .c-field_label {
+        white-space: nowrap;
+        border: none;
+        padding: 5px 8px;
+        min-height: 50px; }
+      /* line 150, _component.scss */
+      #cf-calendar .c-field .c-field_input .c-field .c-field_input {
+        width: 100%;
+        min-height: 50px;
+        border: none;
+        padding: 5px 8px; }
+/* line 161, _component.scss */
 #cf-calendar .c-fieldset_wrap .c-fieldset {
   border-left: 3px solid #2271b1; }
-/* line 139, _component.scss */
+/* line 168, _component.scss */
 #cf-calendar .postbox-header .c-button:before {
   pointer-events: none; }
 /* line 1, _utility.scss */
@@ -343,13 +392,73 @@ label {
 /* line 15, _utility.scss */
 #cf-calendar .u-disabled {
   color: #ccc; }
+/* line 19, _utility.scss */
+#cf-calendar .u-w50 {
+  width: 50px !important; }
+/* line 20, _utility.scss */
+#cf-calendar .u-w80 {
+  width: 80px !important; }
+/* line 21, _utility.scss */
+#cf-calendar .u-w100 {
+  width: 100px !important; }
+/* line 22, _utility.scss */
+#cf-calendar .u-w150 {
+  width: 150px !important; }
+/* line 23, _utility.scss */
+#cf-calendar .u-w200 {
+  width: 200px !important; }
+/* line 25, _utility.scss */
+#cf-calendar .u-w100per {
+  width: 100% !important; }
+/* line 26, _utility.scss */
+#cf-calendar .u-wauto {
+  width: auto !important; }
+/* line 28, _utility.scss */
+#cf-calendar .u-h100per {
+  height: 100% !important; }
+/* line 29, _utility.scss */
+#cf-calendar .u-hauto {
+  height: 100% !important; }
+/* line 31, _utility.scss */
+#cf-calendar .u-flex_column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+/* line 36, _utility.scss */
+#cf-calendar .u-flex_row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+/* line 42, _utility.scss */
+#cf-calendar .u-bo_l {
+  border-left: 1px solid #ccc !important; }
+/* line 43, _utility.scss */
+#cf-calendar .u-bo_r {
+  border-right: 1px solid #ccc !important; }
+/* line 44, _utility.scss */
+#cf-calendar .u-bo_b {
+  border-bottom: 1px solid #ccc !important; }
 /* line 5, project/_table.scss */
 #cf-calendar .p-table_wrap table {
   border-collapse: collapse;
   width: 100%;
   margin: 0 0 1px 0;
   background: #fff; }
-/* line 13, project/_table.scss */
+  /* line 11, project/_table.scss */
+  #cf-calendar .p-table_wrap table.p-table {
+    margin-bottom: 20px; }
+/* line 17, project/_table.scss */
 #cf-calendar .p-table_wrap caption {
   padding: 3px 0;
   font-weight: bold;
@@ -358,35 +467,35 @@ label {
   border: 1px solid #ccc;
   border-top: 2px solid #333;
   margin: 0 0 3px 0; }
-/* line 23, project/_table.scss */
+/* line 27, project/_table.scss */
 #cf-calendar .p-table_wrap thead {
   background: #fafafa; }
-/* line 26, project/_table.scss */
+/* line 30, project/_table.scss */
 #cf-calendar .p-table_wrap th {
   border: 1px solid #ccc;
   padding: 5px;
   font-size: .8rem;
   text-align: center; }
-/* line 33, project/_table.scss */
+/* line 37, project/_table.scss */
 #cf-calendar .p-table_wrap th:nth-of-type(6) {
   background: #ddf; }
-/* line 37, project/_table.scss */
+/* line 41, project/_table.scss */
 #cf-calendar .p-table_wrap th:nth-of-type(7) {
   background: #fdd; }
-/* line 42, project/_table.scss */
+/* line 46, project/_table.scss */
 #cf-calendar .p-table_wrap td {
   text-align: left;
   vertical-align: top;
   border: 1px solid #ccc;
   padding: 0;
   width: calc(100% / 7); }
-  /* line 49, project/_table.scss */
+  /* line 53, project/_table.scss */
   #cf-calendar .p-table_wrap td span.disabled {
     display: block;
     height: 100%;
     min-height: 45px;
     width: 100%; }
-  /* line 59, project/_table.scss */
+  /* line 63, project/_table.scss */
   #cf-calendar .p-table_wrap td .u-anc {
     cursor: pointer;
     color: #333;
@@ -398,29 +507,29 @@ label {
     width: 100%;
     padding: 8px;
     border: 3px solid #fff; }
-    /* line 71, project/_table.scss */
+    /* line 75, project/_table.scss */
     #cf-calendar .p-table_wrap td .u-anc:hover, #cf-calendar .p-table_wrap td .u-anc.is-selected {
       border-color: rgba(34, 112, 176, 0.05);
       background: rgba(34, 112, 176, 0.05); }
-    /* line 76, project/_table.scss */
+    /* line 80, project/_table.scss */
     #cf-calendar .p-table_wrap td .u-anc:focus, #cf-calendar .p-table_wrap td .u-anc.is-active {
       outline: 0;
       border-color: #2271b1;
       background: rgba(34, 112, 176, 0.05); }
-    /* line 83, project/_table.scss */
+    /* line 87, project/_table.scss */
     #cf-calendar .p-table_wrap td .u-anc time {
       display: block;
       text-align: center; }
-  /* line 89, project/_table.scss */
+  /* line 93, project/_table.scss */
   #cf-calendar .p-table_wrap td.is-active a {
     outline: 0;
     border-color: #2271b1;
     background: rgba(34, 112, 176, 0.05); }
-  /* line 97, project/_table.scss */
+  /* line 101, project/_table.scss */
   #cf-calendar .p-table_wrap td.have-data time {
     display: block;
     position: relative; }
-    /* line 101, project/_table.scss */
+    /* line 105, project/_table.scss */
     #cf-calendar .p-table_wrap td.have-data time:after {
       content: '';
       display: block;
@@ -432,26 +541,26 @@ label {
       top: 5px;
       right: 5px;
       z-index: 10; }
-/* line 121, project/_table.scss */
+/* line 125, project/_table.scss */
 #cf-calendar .p-table_wrap .tooltip-content {
   display: none; }
-/* line 126, project/_table.scss */
+/* line 130, project/_table.scss */
 #cf-calendar .p-table--inside_wrap {
   width: 100%; }
-  /* line 129, project/_table.scss */
+  /* line 133, project/_table.scss */
   #cf-calendar .p-table--inside_wrap input[type="text"],
   #cf-calendar .p-table--inside_wrap input[type="email"],
   #cf-calendar .p-table--inside_wrap input[type="url"],
   #cf-calendar .p-table--inside_wrap textarea,
   #cf-calendar .p-table--inside_wrap select {
     width: 100%; }
-  /* line 137, project/_table.scss */
+  /* line 141, project/_table.scss */
   #cf-calendar .p-table--inside_wrap .c-fieldset {
     border: none; }
-    /* line 140, project/_table.scss */
+    /* line 144, project/_table.scss */
     #cf-calendar .p-table--inside_wrap .c-fieldset h3 {
       display: none; }
-    /* line 144, project/_table.scss */
+    /* line 148, project/_table.scss */
     #cf-calendar .p-table--inside_wrap .c-fieldset .c-field {
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
@@ -459,7 +568,7 @@ label {
               flex-direction: column;
       border: none;
       margin-bottom: 8px; }
-    /* line 150, project/_table.scss */
+    /* line 154, project/_table.scss */
     #cf-calendar .p-table--inside_wrap .c-fieldset .c-field_label {
       width: 100%;
       font-size: .8rem;
@@ -467,70 +576,70 @@ label {
       border: none;
       border-bottom: 1px solid #ccc;
       background: #fff; }
-    /* line 159, project/_table.scss */
+    /* line 163, project/_table.scss */
     #cf-calendar .p-table--inside_wrap .c-fieldset .c-field_input {
       width: 100%;
       font-size: .8rem;
       padding: 3px 2px;
       border: none; }
-  /* line 166, project/_table.scss */
+  /* line 170, project/_table.scss */
   #cf-calendar .p-table--inside_wrap td {
     position: relative; }
-    /* line 169, project/_table.scss */
+    /* line 173, project/_table.scss */
     #cf-calendar .p-table--inside_wrap td .u-anc {
       padding: 2px; }
-      /* line 172, project/_table.scss */
+      /* line 176, project/_table.scss */
       #cf-calendar .p-table--inside_wrap td .u-anc time {
         display: block;
         padding: 3px 0; }
-    /* line 179, project/_table.scss */
+    /* line 183, project/_table.scss */
     #cf-calendar .p-table--inside_wrap td.today .u-anc {
       font-weight: bold; }
-/* line 189, project/_table.scss */
+/* line 193, project/_table.scss */
 #cf-calendar .p-table--outside_wrap .c-fieldset {
   display: none; }
-/* line 196, project/_table.scss */
+/* line 200, project/_table.scss */
 #cf-calendar .p-table--outside_wrap td.today .u-anc {
   font-weight: bold; }
-/* line 205, project/_table.scss */
+/* line 209, project/_table.scss */
 #cf-calendar .p-table--outside_wrap td.have-data time:after {
   top: -5px;
   right: -5px;
   z-index: 10; }
-/* line 217, project/_table.scss */
+/* line 221, project/_table.scss */
 #cf-calendar .p-field_wrap {
   margin-left: 20px;
   width: 100%; }
-  /* line 222, project/_table.scss */
+  /* line 226, project/_table.scss */
   #cf-calendar .p-field_wrap .c-fieldset {
     margin-bottom: 15px; }
-    /* line 226, project/_table.scss */
+    /* line 230, project/_table.scss */
     #cf-calendar .p-field_wrap .c-fieldset .close-fieldset {
       display: none; }
-      /* line 229, project/_table.scss */
+      /* line 233, project/_table.scss */
       #cf-calendar .p-field_wrap .c-fieldset .close-fieldset.is-active {
         color: #fff;
         display: block;
         cursor: pointer; }
-      /* line 234, project/_table.scss */
+      /* line 238, project/_table.scss */
       #cf-calendar .p-field_wrap .c-fieldset .close-fieldset::before {
         content: "\f14f"; }
-    /* line 238, project/_table.scss */
+    /* line 242, project/_table.scss */
     #cf-calendar .p-field_wrap .c-fieldset .stick-fieldset {
       background: #2271b1; }
-      /* line 241, project/_table.scss */
+      /* line 245, project/_table.scss */
       #cf-calendar .p-field_wrap .c-fieldset .stick-fieldset.is-active {
         background: #eee;
         color: #2271b1; }
-      /* line 246, project/_table.scss */
+      /* line 250, project/_table.scss */
       #cf-calendar .p-field_wrap .c-fieldset .stick-fieldset::before {
         content: "\f537"; }
-/* line 255, project/_table.scss */
+/* line 259, project/_table.scss */
 #cf-calendar #fields-panel {
   position: -webkit-sticky;
   position: sticky;
   top: 40px; }
-/* line 260, project/_table.scss */
+/* line 264, project/_table.scss */
 #cf-calendar .btn-add-field {
   text-align: right; }
 /* line 1, project/_settings.scss */
@@ -539,11 +648,16 @@ label {
   border: 1px solid #c3c4c7;
   background: #fff; }
   /* line 6, project/_settings.scss */
+  #cf-calendar #cfc-settings .c-fieldset {
+    border-top: 2px solid #ccc;
+    width: 100%;
+    margin-bottom: 20px; }
+  /* line 12, project/_settings.scss */
   #cf-calendar #cfc-settings #setting-tabs {
     margin: 0 -12px;
     background: #999;
     padding: 0; }
-    /* line 10, project/_settings.scss */
+    /* line 16, project/_settings.scss */
     #cf-calendar #cfc-settings #setting-tabs ul {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -551,7 +665,7 @@ label {
       width: 100%;
       padding: 0;
       overflow: hidden; }
-    /* line 16, project/_settings.scss */
+    /* line 22, project/_settings.scss */
     #cf-calendar #cfc-settings #setting-tabs li {
       padding: 0 5px;
       width: 100%;
@@ -559,10 +673,10 @@ label {
       text-align: center;
       border-left: 1px solid #ddd;
       background: #eee; }
-    /* line 25, project/_settings.scss */
+    /* line 31, project/_settings.scss */
     #cf-calendar #cfc-settings #setting-tabs li:first-child {
       border-left: none; }
-    /* line 29, project/_settings.scss */
+    /* line 35, project/_settings.scss */
     #cf-calendar #cfc-settings #setting-tabs li a {
       text-decoration: none;
       display: block;
@@ -580,36 +694,31 @@ label {
       outline: none;
       -webkit-box-shadow: none;
               box-shadow: none; }
-    /* line 41, project/_settings.scss */
+    /* line 47, project/_settings.scss */
     #cf-calendar #cfc-settings #setting-tabs li.ui-state-active {
       cursor: pointer;
       pointer-events: none;
       background: #fff;
       border-bottom: none; }
-    /* line 48, project/_settings.scss */
+    /* line 54, project/_settings.scss */
     #cf-calendar #cfc-settings #setting-tabs li.ui-state-active a {
       color: #333;
       font-weight: bold; }
-/* line 56, project/_settings.scss */
-#cf-calendar .p-custom-fields_tab .c-fieldset {
-  border-top: 2px solid #ccc;
-  width: 100%;
-  margin-bottom: 20px; }
-/* line 64, project/_settings.scss */
+/* line 65, project/_settings.scss */
 #cf-calendar .p-custom-fields_tab .o-headline .c-field {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%; }
-/* line 70, project/_settings.scss */
+/* line 71, project/_settings.scss */
 #cf-calendar .p-custom-fields_tab .o-headline .c-field_label {
   border-right: none;
   border-bottom: 1px solid #ccc;
   display: block;
   padding: 12px;
   width: 100%; }
-/* line 79, project/_settings.scss */
+/* line 80, project/_settings.scss */
 #cf-calendar .p-custom-fields_tab .c-field_order, #cf-calendar .p-custom-fields_tab .c-field__action {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -622,14 +731,14 @@ label {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center; }
-/* line 86, project/_settings.scss */
+/* line 87, project/_settings.scss */
 #cf-calendar .p-custom-fields_tab .c-field_order {
   background: #2271b1;
   color: #fff;
   font-weight: bold;
   width: 55px !important;
   min-width: 55px !important; }
-  /* line 93, project/_settings.scss */
+  /* line 94, project/_settings.scss */
   #cf-calendar .p-custom-fields_tab .c-field_order span {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -646,7 +755,7 @@ label {
     border-radius: 50%;
     line-height: 24px;
     font-size: 16px; }
-/* line 106, project/_settings.scss */
+/* line 107, project/_settings.scss */
 #cf-calendar .p-custom-fields_tab .c-field_action {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -660,12 +769,14 @@ label {
           justify-content: end;
   border: 1px solid #ddd;
   border-left: none;
-  position: relative; }
-  /* line 114, project/_settings.scss */
+  position: relative;
+  top: 0;
+  min-width: 38px; }
+  /* line 117, project/_settings.scss */
   #cf-calendar .p-custom-fields_tab .c-field_action .remove-item {
     position: absolute;
     top: 8px; }
-  /* line 119, project/_settings.scss */
+  /* line 122, project/_settings.scss */
   #cf-calendar .p-custom-fields_tab .c-field_action button {
     margin: 0 3px;
     width: 28px;
@@ -678,36 +789,79 @@ label {
     font-family: dashicons;
     font-size: 18px;
     font-style: normal; }
-/* line 136, project/_settings.scss */
+/* line 139, project/_settings.scss */
 #cf-calendar .p-custom-fields_tab .remove-item:before {
   content: "\f14f"; }
-/* line 143, project/_settings.scss */
+/* line 146, project/_settings.scss */
 #cf-calendar .p-custom-fields_tab .toggle-details:before {
   content: "\f347"; }
-/* line 147, project/_settings.scss */
+/* line 150, project/_settings.scss */
 #cf-calendar .p-custom-fields_tab .toggle-details.active:before {
   content: "\f343"; }
-/* line 152, project/_settings.scss */
+/* line 155, project/_settings.scss */
 #cf-calendar .p-custom-fields_tab .o-wrap_details {
   display: none; }
-  /* line 154, project/_settings.scss */
+  /* line 157, project/_settings.scss */
   #cf-calendar .p-custom-fields_tab .o-wrap_details .u-disabled {
     display: none; }
-/* line 159, project/_settings.scss */
-#cf-calendar .p-custom-fields_tab .field-conditions {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column; }
-  /* line 162, project/_settings.scss */
-  #cf-calendar .p-custom-fields_tab .field-conditions .c-field_label {
-    width: 100%;
-    text-align: center;
-    border-right: 0;
-    border-bottom: 1px solid #ccc; }
-  /* line 169, project/_settings.scss */
-  #cf-calendar .p-custom-fields_tab .field-conditions .c-field_input {
-    width: 100%;
-    text-align: center; }
+/* line 165, project/_settings.scss */
+#cf-calendar .p-custom-fields_tab .c-field_conditions .c-fieldset {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  border: 0 !important;
+  margin: 0 !important; }
+/* line 171, project/_settings.scss */
+#cf-calendar .p-custom-fields_tab .c-field_conditions .c-field_label {
+  width: 100%;
+  text-align: center;
+  border-right: 0;
+  border-bottom: 1px solid #ccc; }
+/* line 178, project/_settings.scss */
+#cf-calendar .p-custom-fields_tab .c-field_conditions .c-field_input {
+  width: 100%;
+  text-align: center;
+  padding-left: 8px;
+  padding-right: 8px; }
+  /* line 184, project/_settings.scss */
+  #cf-calendar .p-custom-fields_tab .c-field_conditions .c-field_input .c-field_label {
+    padding: 8px;
+    background: none; }
+/* line 190, project/_settings.scss */
+#cf-calendar .p-custom-fields_tab .c-field_conditions .c-field_add_condition {
+  text-align: center;
+  padding-bottom: 20px; }
+/* line 202, project/_settings.scss */
+#cf-calendar .p-calender-term_tab .cfc-calendar-term .cfc-terms-absolute {
+  display: none; }
+/* line 205, project/_settings.scss */
+#cf-calendar .p-calender-term_tab .cfc-calendar-term .cfc-terms-relative {
+  display: block; }
+/* line 210, project/_settings.scss */
+#cf-calendar .p-calender-term_tab .cfc-calendar-term .is-absolute .cfc-terms-absolute {
+  display: block; }
+/* line 213, project/_settings.scss */
+#cf-calendar .p-calender-term_tab .cfc-calendar-term .is-absolute .cfc-terms-relative {
+  display: none; }
+/* line 217, project/_settings.scss */
+#cf-calendar .p-calender-term_tab .cfc-calendar-term dl {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+/* line 222, project/_settings.scss */
+#cf-calendar .p-calender-term_tab .cfc-calendar-term dt {
+  padding-right: 10px;
+  border-right: 1px solid #ccc; }
+/* line 226, project/_settings.scss */
+#cf-calendar .p-calender-term_tab .cfc-calendar-term dd {
+  padding-left: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 0; }
 
 /*# sourceMappingURL=cfc.css.map */

@@ -1,6 +1,6 @@
 
 <!-- template -->
-<div class="c-fieldset" id="field_%id%">
+<div class="c-fieldset" id="field_%id%"  data-field-id="%id%">
 		
 		
 		<div class="l-col o-headline">
@@ -10,18 +10,18 @@
 
 			<div class="c-field">
 				<label class="c-field_label" for="field-label_%id%"><?php _e('Label', CFC_TEXTDOMAIN); ?> <span class="required">*</span></label>
-				<div class="c-field_input" data-type="textfield"><input id="field-label_%id%" name="custom-fields-setting[fields][%id%][field-label]" value="" type="text" required></div>
+				<div class="c-field_input" data-type="textfield"><input id="field-label_%id%" name="custom-fields-settings[fields][%id%][field-label]" value="" type="text" required></div>
 			</div>
 			
 			<div class="c-field">
 				<label class="c-field_label" for="field-name_%id%"><?php _e('Field Name', CFC_TEXTDOMAIN); ?> <span class="required">*</span></label>
-				<div class="c-field_input" data-type="textfield"><input id="field-name_%id%" name="custom-fields-setting[fields][%id%][field-name]" value="" type="text" required></div>
+				<div class="c-field_input" data-type="textfield"><input id="field-name_%id%" name="custom-fields-settings[fields][%id%][field-name]" value="" type="text" required></div>
 			</div>
 			
 			<div class="c-field field-type">
 				<label class="c-field_label" for="field-type_%id%"><?php _e('Field Type', CFC_TEXTDOMAIN); ?></label>
 				<div class="c-field_input" data-type="select">
-					<select id="field-type_%id%" name="custom-fields-setting[fields][%id%][field-type]">
+					<select id="field-type_%id%" name="custom-fields-settings[fields][%id%][field-type]">
 						<option value="textfield">Text</option>
 						<option value="textarea">TextArea</option>
 						<option value="select" data-choices="1">Select</option>
@@ -53,6 +53,7 @@
 				<?php cfc_get_template_part('/admin/custom-fields/supports/required'); ?>
 				<?php cfc_get_template_part('/admin/custom-fields/supports/default-value'); ?>
 				<?php cfc_get_template_part('/admin/custom-fields/supports/place-holder'); ?>
+				<?php cfc_get_template_part('/admin/custom-fields/supports/title'); ?>
 				
 				<?php cfc_get_template_part('/admin/custom-fields/supports/validation'); ?>
 				

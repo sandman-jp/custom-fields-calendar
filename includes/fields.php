@@ -69,7 +69,7 @@ class fields{
 			return '';
 		}
 		
-		$cf_setting = $this->settings->get('custom-fields-setting');
+		$cf_setting = $this->settings->get('custom-fields-settings');
 		
 		$default_value = array();
 		
@@ -82,28 +82,33 @@ class fields{
 			
 		}
 		
-		$value = get_post_meta(get_the_ID(), 'cfc_field_'.$key, true);
+		$value = get_post_meta($this->post_id, 'cfc_field_'.$key, true);
 		
 		$value = wp_parse_args($value, $default_value);
 		
-		
+		/*
 		if(!empty($this->_field_inputs_template)){
 			return $this->_make_template($key, $value);
 		}
-		
+		*/
 		$this->_field_inputs_template = '';
-		
 		
 		//各セルのCFのレンダリング
 		//$fields = $this->_settings_data['custom-fields-setting'];
 		
 		foreach($cf_setting['fields'] as $field){
 			
-			$type = $field['field-type'];
-			
-			if(empty($type)){
+			if(empty($field['field-type'])){
 				return;
 			}
+			
+			$type = $field['field-type'];
+			
+			if(!empty($field['field-conditions']) && !$this->_check_conditions($key, $field['field-conditions'])){
+				continue;
+				//return;
+			}
+			
 			require_once CFC_DIR_INCLUDES.'/fields/'.$type.'.php';
 			
 			$classname = 'CFC\\fields\\'.$type;
@@ -125,7 +130,7 @@ class fields{
 	
 	//値の配列を返す
 	function values($key){
-		$metas = get_post_meta(get_the_ID(), 'cfc_field_'.$key, true);
+		$metas = get_post_meta($this->post_id, 'cfc_field_'.$key, true);
 		
 		if($metas){
 			return array_values($metas);
@@ -135,7 +140,7 @@ class fields{
 	
 	//キー:値の配列を返す
 	function customs($key){
-		$metas = get_post_meta(get_the_ID(), 'cfc_field_'.$key, true);
+		$metas = get_post_meta($this->post_id, 'cfc_field_'.$key, true);
 		
 		if($metas){
 			
@@ -177,9 +182,56 @@ class fields{
 			$template = preg_replace("/\%\%(selected|checked)\:".$k."_(.+?)\%\%/", '', $template);
 		}
 		
+		$template = preg_replace("/\%\%(.*?)\%\%/", '', $template);
 		
 		return $template;
 	}
 	
+	//条件チェック
+	private function _check_conditions($key, $conditions){
+		//$keyは日付（秒）
+		
+		foreach($conditions as $condition){
+			if($this->_verify_condition($key, $condition)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	private function _verify_condition($key, $condition){
+		
+		//$cleard = false;
+		
+		//開始が設定されている場合
+		if(!empty($condition['start']['year']) && $condition['start']['year'] != 'all'){
+			$limit = strtotime($condition['start']['year'].'-'.$condition['start']['month'].'-01 '.wp_timezone_string());
+			
+			if($key <= $limit){
+				return false;
+			}
+		}
+		
+		//終了が設定されている場合
+		if(!empty($condition['end']['year']) && $condition['end']['year'] != 'all'){
+			$limit = strtotime('last day of '.$condition['end']['year'].'-'.$condition['end']['month'].' '.wp_timezone_string());
+			if($key > $limit){
+				return false;
+			}
+		}
+		
+		//週数が正しいかどうか
+		$weec_count = ceil(wp_date('j', $key) / 7);
+		if(!in_array($weec_count, $condition['cond1'])){
+			return false;
+		}
+		
+		//曜日が正しいかどうか
+		if(!in_array(wp_date('w', $key), $condition['cond2'])){
+			return false;
+		}
+		
+		return true;
+	}
 }
 

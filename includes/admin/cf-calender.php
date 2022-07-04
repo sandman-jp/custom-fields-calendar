@@ -143,10 +143,18 @@ class cf_calendar{
 			}
 		}
 		
-		//カスタムフィールドグループ設定の保存
-		$cf_setting = empty($_POST['custom-fields-setting']) ? array() : $_POST['custom-fields-setting'];
+		//設定パネルの保存
 		
-		$this->settings->update('custom-fields-setting', $cf_setting);
+		$panels = $this->settings->get_panels();
+		//$settings = array('custom-fields-settings', 'general-settings');
+		
+		foreach($panels as $setting_name){
+			$postdata = empty($_POST[$setting_name]) ? array() : $_POST[$setting_name];
+			
+			$this->settings->update($setting_name, $postdata);
+		}
+		
+		
 		
 	}
 	/*

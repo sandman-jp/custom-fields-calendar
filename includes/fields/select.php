@@ -55,6 +55,7 @@ class select extends CFC\fields\field{
 						<option 
 							value="<?php echo $value; ?>"  
 							%%selected:<?php echo urlencode($this->get('field-name')); ?>_<?php echo trim($value); ?>%%
+							title="<?php echo $this->get('field-title'); ?>"
 							> <?php echo $label; ?></option>
 					<?php endforeach; ?>
 				

@@ -13,6 +13,7 @@ if ( ! defined('ABSPATH') ) {
 class settings{
 	
 	private $_settings_data;
+	private $_panels = array('custom-fields', 'general', 'templates');
 	
 	function __construct($post_id){
 		
@@ -23,7 +24,20 @@ class settings{
 		}
 		
 		$this->post_id = $post_id;
-		
+		/*
+		$this->settings = array(
+			'custom-fields-settings' => new CFC\settings\custom_fields(),
+			'general-settings' => new CFC\settings\general(),
+			'templates-settings' => new CFC\settings\templates(),
+		);
+		*/
+		foreach($this->_panels as $panelname){
+			require_once CFC_DIR_INCLUDES.'/settings/'.$panelname.'.php';
+			
+			$classkey = 'CFC\settings\\'.str_replace('-', '_', $panelname);
+			
+			$this->settings[$panelname.'-settings'] = new $classkey();
+		}
 		$this->_load();
 		
 	}
@@ -34,22 +48,9 @@ class settings{
 		
 		$meta_data = get_post_meta($this->post_id, 'cfc_settings', true);
 		
-		if(empty($meta_data['custom-fields-setting'])){
-			return;
-		}
-		
-		foreach($meta_data['custom-fields-setting'] as $kk => $vv){
-			
-			if($kk == 'fields' && !empty($meta_data['custom-fields-setting']['fields'])){
-				
-				foreach($meta_data['custom-fields-setting']['fields'] as $k=>$v){
-					
-					$this->_settings_data['custom-fields-setting']['fields'][(int)$k] = $v;
-				}
-				
-			}else{
-				$this->_settings_data['custom-fields-setting'][$kk] = $vv;
-			}
+		///
+		foreach($this->settings as $setting){
+			$this->_settings_data = $setting->parse($this->_settings_data, $meta_data);
 		}
 		
 	}
@@ -77,7 +78,7 @@ class settings{
 		
 	}
 	
-	
+	//
 	function update($key, $_data){
 		
 		$this->_settings_data[$key] = $_data;
@@ -86,5 +87,14 @@ class settings{
 		
 	}
 	
+	function get_panels(){
+		$panels = array();
+		
+		foreach($this->_panels as $panelname){
+			$panels[] = $panelname.'-settings';
+		}
+		
+		return $panels;
+	}
 }
 

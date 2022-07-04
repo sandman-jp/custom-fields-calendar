@@ -1,4 +1,4 @@
-
+jQuery('body').addClass('cfc-loading');
 //ページ全体
 jQuery(function($){
 	$('#edit-slug-box, #preview-action').remove();
@@ -7,7 +7,8 @@ jQuery(function($){
 	const original_form = $('#post').serialize();
 	
 	//未設定でも空でもない、つまりデータがあるかどうか
-	let have_data = (typeof(fields_settings['custom-fields-setting']['fields']) != 'undefined') && fields_settings['custom-fields-setting']['fields'].length;
+	let have_data = (typeof(fields_settings['custom-fields-settings']['fields']) != 'undefined') && fields_settings['custom-fields-settings']['fields'].length;
+	
 	//console.log(have_data)
 	//カレンダーと設定画面の切り替えボタン
 	let $header = $('#cf-calendar .postbox-header');
@@ -19,7 +20,6 @@ jQuery(function($){
 		$('#show-settings, #cfc-settings').addClass('is-active');
 	}
 	
-	//$header.append('<div class="handle-actions cfc-actions"><button class="button dashicons dashicons-calendar-alt '+(have_data ? 'is-active' : '')+'" data-action="show-table" title="設定を保存してカレンダーを表示">Show Calendar</button><button class="button dashicons dashicons-admin-generic '+(have_data ? '' : 'is-active')+'" data-action="show-settings" title="各種設定画面を表示">Show Settings</button></div>');
 	//
 	//h2をクリックしても閉じないように
 	$('h2.hndle').removeClass('hndle');
@@ -70,12 +70,10 @@ jQuery(function($){
 jQuery(function($){
 	
 	$('.postbox-header .handle-actions button').click(function(e){
-		
 		if(!$('#post').get(0).checkValidity()){
 			//e.preventDefault();
 			return ;
 		}
-		
 		switch($(this).data('action')){
 		case 'show-table':
 			if($('#cfc-table:visible').length){
@@ -131,8 +129,8 @@ jQuery(function($){
 	
 	var cell = $('.cfc-cell', '#cf-calendar');
 	
-	if(typeof(fields_settings['custom-fields-setting']['fields-position']) != 'undefined' 
-			&& fields_settings['custom-fields-setting']['fields-position'] == 'outside'){
+	if(typeof(fields_settings['custom-fields-settings']['fields-position']) != 'undefined' 
+			&& fields_settings['custom-fields-settings']['fields-position'] == 'outside'){
 			
 		//テーブルをクリックすると、右にフォームが出てくる
 		cell.click(function(e){
@@ -258,19 +256,19 @@ jQuery(function($){
 
 //custom field setting
 jQuery(function($){
-
-	//init
 	
-	if(typeof(fields_settings['custom-fields-setting']['fields']) != 'undefined'){
+	var cf_data = false;
+	
+	//init
+	if(typeof(fields_settings['custom-fields-settings']['fields']) != 'undefined'){
 		
-		var cf_data = fields_settings['custom-fields-setting']['fields'];
+		cf_data = fields_settings['custom-fields-settings']['fields'];
 		
 		//initialize
 		if(cf_data.length){
 			
 			for(i=0; i<cf_data.length; i++){
 				let data = cf_data[i];
-				
 				
 				add_field();
 				
@@ -286,8 +284,65 @@ jQuery(function($){
 					
 					let $fld = $('#'+key+'_'+index, $item);
 					let i_name = $fld.attr('name');
-					let dd = typeof(data[key]) != 'string' ? data[key].join(',') : data[key];
-					$('[name="'+i_name+'"]').val(dd);
+					if(key == 'field-conditions'){
+						//condition
+						
+						if(data['field-conditions'].length){
+							
+							let conds = data['field-conditions'];
+							
+							for(let h=0; h < conds.length; h++){
+								add_condition_field($item);
+								
+								let posname =  'custom-fields-settings[fields]['+i+'][field-conditions]['+h+']';
+								if(typeof(conds[h]['start']['year']) != 'undefined'){
+									//startがセットされていたら
+									$('[name="'+posname+'[start][year]"]').val(conds[h]['start']['year']);
+								}
+								if(typeof(conds[h]['start']['month']) != 'undefined'){
+									//startがセットされていたら
+									$('[name="'+posname+'[start][month]"]').val(conds[h]['start']['month']).prop('disabled', false);;
+								}
+								if(typeof(conds[h]['end']['year']) != 'undefined'){
+									//endがセットされていたら
+									$('[name="'+posname+'[end][year]"]').val(conds[h]['end']['year']);
+								}
+								if(typeof(conds[h]['end']['month']) != 'undefined'){
+									//endがセットされていたら
+									$('[name="'+posname+'[end][month]"]').val(conds[h]['end']['month']).prop('disabled', false);
+								}
+								
+								let j;
+								if(typeof(conds[h]['cond1']) != 'undefined' && $.isArray(conds[h]['cond1'])){
+									//週番号
+									for(j=0; j < conds[h]['cond1'].length; j++){
+										$('[name="'+posname+'[cond1][]"][value="'+conds[h]['cond1'][j]+'"]').prop('checked', true);
+									}
+								}
+								
+								if(typeof(conds[h]['cond2']) != 'undefined' && $.isArray(conds[h]['cond2'])){
+									//週番号
+									for(j=0; j < conds[h]['cond2'].length; j++){
+										$('[name="'+posname+'[cond2][]"][value="'+conds[h]['cond2'][j]+'"]').prop('checked', true);
+									}
+								}
+								
+							}
+						}
+						
+						
+					}else if(key == 'field-required'){
+						
+						$('[name="'+i_name+'"]').prop('checked', true);
+						
+					}else{
+						
+						let dd = typeof(data[key]) != 'string' ? data[key].join(',') : data[key];
+						
+						$('[name="'+i_name+'"]').val(dd);
+						
+					}
+					
 					
 				}
 				
@@ -319,6 +374,31 @@ jQuery(function($){
 		add_field();
 		
 	});
+	
+	$('#btn_add-condition').click(function(e){
+		e.preventDefault();
+		let $fieldset = $(this).parents('.c-fieldset');
+		
+		add_condition_field($fieldset);
+	});
+	
+	$('[type="checkbox"][required]', '#cfc-table').click(switch_required_checkbox_group);
+	$('[type="checkbox"][required]', '#cfc-table').each(switch_required_checkbox_group);
+
+	//ここから下は関数
+	
+	function switch_required_checkbox_group(e){
+		let group_name = $(this).attr('name');
+		//console.log(group_name)
+		let group = $('[name="'+group_name+'"]', '#cfc-table');
+		//一つでもチェックがあればrequiredははずす
+		if(group.is(':checked')){
+			group.prop('required', false);
+		}else{
+			group.prop('required', true);
+		}
+		
+	}
 	
 	function change_field_view(fld_type, $elm){
 		
@@ -380,9 +460,10 @@ jQuery(function($){
 		return $('#fields-list .c-fieldset').length;
 	}
 	
+	//for custom fields
 	function add_field(){
 		
-		let count = parseInt($('#fields-list .c-fieldset').length);
+		let count = parseInt($('#fields-list > .c-fieldset').length);
 		
 		let html = $('#field-template').text();
 		
@@ -394,37 +475,42 @@ jQuery(function($){
 		$html = init_field($html);
 		
 		$('#fields-list').append($html);
-				
+	}
+	
+	//for conditions fields in custom fields
+	function add_condition_field($elm){
+		
+		let fid = $elm.attr('data-field-id');
+		let count = parseInt($('.field-condition-list > .c-fieldset', $elm).length);
+		
+		let html = $('#field-condition-template').text();
+		
+		html = html.replaceAll('%id%', fid);
+		html = html.replaceAll('%cid%', count);
+		
+		let $html = $(html);
+		
+		$('.cfc-calendar-year', $html).change(function(e){
+			e.preventDefault();
+			console.log($(this));
+			
+			let $month = $(this).next();
+			if(typeof($(this).val()) == 'undefined' || $(this).val() == '' || $(this).val() == 'all'){
+				$('select', $month).prop('disabled', true).val('');
+			}else{
+				$('select', $month).prop('disabled', false).val('');
+			}
+		});
+		
+		$('.c-field_action button', $html).click(remove_repeater_item);
+		
+		$('.field-condition-list', $elm).append($html);
+		
 	}
 	
 	function init_field($html){
 		
-		$('.c-field_action button', $html).click(function(e){
-			e.preventDefault();
-			
-			let target = '#'+$(this).data('target');
-			
-			switch($(this).data('action')){
-			case 'remove-item':
-				
-				remove_field(target);
-				
-				break;
-			case 'toggle-details':
-				
-				let $details = $('.o-wrap_details', $(target));
-				
-				if($details.filter(':visible').length){
-					$(this).removeClass('is-active')
-				}else{
-					$(this).addClass('is-active')
-				}
-				$('.o-wrap_details', $(target)).slideToggle();
-				
-				break;
-			}
-			
-		});
+		$('.c-field_action button', $html).click(remove_repeater_item);
 		
 		
 		//Show Field option
@@ -437,22 +523,33 @@ jQuery(function($){
 			$('textarea', $choice_field).val('').trigger('choices_changed');
 			
 			change_field_view($(this).val(), $wrap);
-			
-			/*
-			if($('option:selected', this).data('choices') == 1){
-				
-				$('.field-type', $html).removeClass('no-choice');
-				
-				$choice_field.removeClass('disabled');
-				$('[disabled]', $wrap).prop('disabled', false);
-				
-			}else{
-				
-				$('.field-type').addClass('no-choice');
-				$choice_field.addClass('disabled');
-				$('.__input-field', $wrap).children().prop('disabled', false);
+		});
+		
+		$('[name$="[field-label]"]', $html).blur(function(e){
+			let $parent = $(this).parents('.c-fieldset');
+			if($('[name$="[field-name]"]', $parent).val() == ''){
+				$('[name$="[field-name]"]', $parent).val($(this).val());
 			}
-			*/
+		});
+		
+		//default value should be nessesary if required checked.
+		$('.field-required input', $html).click(function(e){
+			
+			let required = $(this).is(':checked');
+			let def = $('.field-default-value input', $html)
+			def.prop('required', required);
+			
+			switch(def.attr('type')){
+			case 'radio':
+			case 'checkbox':
+				if(required){
+					$(def[0]).prop('checked', true);	
+				}
+				break;
+			case 'select':
+				
+			}
+			
 		});
 		
 		//for option fields
@@ -467,13 +564,13 @@ jQuery(function($){
 			
 			let $default = $('.field-default-value [name]', this);
 			
-			
 			let input_val, input_name, input_id;
 			
 			if(!$default.length){
 				$default = $('.field-choices [name]', this);
 			}
-			input_val = '';
+			
+			input_val = $default.val();
 			
 			//チェックボックス用を汎用に
 			input_name = $default.attr('name').replace('[]', '');
@@ -556,19 +653,50 @@ jQuery(function($){
 					
 					break;
 			case 'textarea':
+				input_val = $default.val();
 				field_html = '<textarea id="'+input_id+'" name="'+input_name+'">'+input_val+'</textarea>';
 				break;
 			default:
+				input_val = $default.val();
 				field_html = '<input id="'+input_id+'" type="text" name="'+input_name+'" value="'+input_val+'">';
 			}
 			
 			$('.field-default-value .c-field_input', this).html(field_html);
+			
 		});
 		//console.log('//////')
 		//console.log($('.field-type select', $html).val());
 		
 		
+		
 		return $html;	
+	}
+	
+	function remove_repeater_item(e){
+		e.preventDefault();
+		
+		let target = '#'+$(this).data('target');
+		
+		switch($(this).data('action')){
+		case 'remove-item':
+			
+			remove_field(target);
+			
+			break;
+		case 'toggle-details':
+			
+			let $details = $('.o-wrap_details', $(target));
+			
+			if($details.filter(':visible').length){
+				$(this).removeClass('is-active')
+			}else{
+				$(this).addClass('is-active')
+			}
+			$('.o-wrap_details', $(target)).slideToggle();
+			
+			break;
+		}
+	
 	}
 	
 	function remove_field(target=null){
@@ -584,11 +712,20 @@ jQuery(function($){
 	}
 	
 	function reorder_items(){
-		$('#fields-list .c-fieldset').each(function(i){
+		$('#fields-list > .c-fieldset').each(function(i){
+			this.id = $(this).attr('id').replace(/_(\d+)$/, '_'+String(i));
+			$(this).attr('data-field-id', i);
+			
+			//アクションボタン
+			$('[data-target]', this).attr('data-target', 'field_'+i);
 			
 			$('input, textarea, select', this).each(function(n){
-				this.name = $(this).attr('name').replace(/\[(\d+?)\]/, '['+i+']');
-				this.id = $(this).attr('id').replace(/_(\d+)$/, '_'+String(i));
+				this.name = $(this).attr('name').replace(/\[fields\]\[(\d+?)\]/, '[fields]['+i+']');
+				
+				if(typeof($(this).attr('id')) != 'undefined'){
+					this.id = $(this).attr('id').replace(/_(\d+)$/, '_'+String(i));
+				}
+				
 			});
 			
 			$('.c-field_label[for]', this).each(function(n){
@@ -604,4 +741,21 @@ jQuery(function($){
 	
 });
 
+//general settings
+jQuery(function($){
 	
+	$('.btn-calenadr_term-type').click(function(e){
+		let $parent = $(this).parents('dl');
+		let $type = $(this).val();
+		$parent.removeClass('is-absolute');
+		$parent.removeClass('is-relative');
+		
+		$parent.addClass('is-'+$type);
+		
+	})
+	$('.btn-calenadr_term-type:checked').click();
+});
+
+jQuery(function($){
+	$('body').removeClass('cfc-loading');
+});
