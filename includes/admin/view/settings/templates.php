@@ -4,6 +4,7 @@ if ( ! defined('ABSPATH') ) {
 }
 $templates = $this->settings->get('templates-settings');
 
+
 $calendar_type = empty($templates['calendar-type']) ? 'monthly' : $templates['calendar-type'];
 $column_header = empty($templates['column-header']) ? false : $templates['column-header'];
 $seamless_month = empty($templates['seamless-month']) ? false : $templates['seamless-month'];

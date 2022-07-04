@@ -1,5 +1,6 @@
 <?php
 global $wp_locale;
+
 //table rendar engine
 $titles = array();
 
@@ -25,6 +26,7 @@ for($i=0; $i<7; $i++){
 	}else if(wp_date('w', $init_id) == 0){
 		$weekday = 'sun';
 	}
+
 	$weekname = $wp_locale->get_weekday_abbrev($wp_locale->get_weekday($day_index));
 	
 	cfc_get_template_part('/'.$calendar_type.'/table', 'header', array(
@@ -33,6 +35,7 @@ for($i=0; $i<7; $i++){
 	));
 	
 }; 
+
 $tableheader = ob_get_clean();
 
 $time_id = $min_d;
@@ -42,6 +45,7 @@ $current_month = wp_date('m月', $min_d);
 
 $cells = $this->_get_month_cells();
 $month_cells = array();
+
 
 
 //一列目にCFの項目だけ表示するthがある場合
@@ -64,7 +68,6 @@ if($have_column_header){
 	));
 	$column_header = ob_get_clean();
 }
-
 
 while($time_id <= $max_d_end):
 	
@@ -112,6 +115,7 @@ while($time_id <= $max_d_end):
 		'td_classes' => $td_classes,
 		'values' => $values,
 		'first_dw' => $first_dw,
+
 		'have_column_header' => $have_column_header,
 	));
 	
@@ -123,6 +127,7 @@ while($time_id <= $max_d_end):
 	//1日進める
 	$time_id += $day_length;
 	
+
 	$table_class = 'alignwide';
 	if($have_column_header){
 		$table_class .= ' have_column_header';

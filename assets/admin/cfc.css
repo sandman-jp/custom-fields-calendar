@@ -70,6 +70,7 @@ label {
   font-size: inherit; }
 
 /* line 65, _foundation.scss */
+
 .ui-tooltip, .arrow:after {
   background: #333;
   border: 2px solid #333; }
@@ -87,6 +88,7 @@ label {
           box-shadow: none; }
 
 /* line 80, _foundation.scss */
+
 .single-value {
   width: auto;
   border-top: 1px solid #ddd;
@@ -94,11 +96,15 @@ label {
   width: auto;
   position: relative; }
 
+
 /* line 87, _foundation.scss */
 .single-value:first-child {
   border: none; }
 
-/* line 90, _foundation.scss */
+/* line 84, _foundation.scss */
+.single-value:first-child {
+  border: none; }
+  
 .arrow {
   width: 70px;
   height: 16px;
@@ -116,8 +122,6 @@ label {
 /* line 103, _foundation.scss */
 .arrow.left {
   left: 20%; }
-
-/* line 106, _foundation.scss */
 .arrow:after {
   content: "";
   position: absolute;

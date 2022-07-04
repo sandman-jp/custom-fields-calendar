@@ -484,12 +484,13 @@ jQuery(function($){
 		let count = parseInt($('.field-condition-list > .c-fieldset', $elm).length);
 		
 		let html = $('#field-condition-template').text();
-		
+
 		html = html.replaceAll('%id%', fid);
 		html = html.replaceAll('%cid%', count);
 		
 		let $html = $(html);
 		
+
 		$('.cfc-calendar-year', $html).change(function(e){
 			e.preventDefault();
 			console.log($(this));
@@ -771,3 +772,4 @@ jQuery(function($){
 jQuery(function($){
 	$('body').removeClass('cfc-loading');
 });
+

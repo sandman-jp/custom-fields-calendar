@@ -13,6 +13,8 @@ $general = $this->settings->get('general-settings');
 $start_week = isset($general['first-week']) ? $general['first-week'] : 1;
 
 
+$start_week = isset($general['start-week']) ? $general['start-week'] : 1;
+
 $start_date_type = empty($general['calendar-term']['start']['type']) ? 'relative' : $general['calendar-term']['start']['type'];
 
 $start_date_absolute_year = empty($general['calendar-term']['start']['absolute']['year']) ? wp_date('Y') : $general['calendar-term']['start']['absolute']['year'];
@@ -34,6 +36,7 @@ $end_date_relative = empty($general['calendar-term']['end']['relative']) ? '1' :
 	
 	
 	<div class="c-field start-week">
+
 		<div class="c-field_label"><?php _e('First Week', CFC_TEXTDOMAIN); ?></div>
 		
 		<div class="c-field_input"">
@@ -42,6 +45,7 @@ $end_date_relative = empty($general['calendar-term']['end']['relative']) ? '1' :
 				<option value="<?php echo $i; ?>" <?php selected($i, $start_week); ?>> <?php echo $wp_locale->get_weekday_abbrev($wp_locale->get_weekday($i)); ?></option>
 			<?php endfor; ?>
 				<option value="current" <?php selected('current', $start_week); ?>><?php _e('Current day of the week', CFC_TEXTDOMAIN); ?></option>
+
 			</select>
 		</div>
 	</div>

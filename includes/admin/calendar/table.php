@@ -51,8 +51,8 @@ class table {
 		
 		$today = strtotime($y.'/'.$m.'/'.$d.' '.wp_timezone_string());
 		//曜日を月曜日から始めるようにする
+
 		$first_dw = $general['first-week'] == 'current' ? wp_date('w') : $general['first-week'];//月曜日
-		
 		
 		//最終表日（開始が月曜(1)なら最終は日(0)、水曜(3)なら最終は火(2)）;
 		//$end_dw = $first_dw - 1;
