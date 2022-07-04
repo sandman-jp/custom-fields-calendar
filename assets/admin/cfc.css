@@ -867,5 +867,8 @@ label {
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 0; }
+/* line 245, project/_settings.scss */
+#cf-calendar .p-front-view_tab .cfc-monthly .only-weekly {
+  display: none; }
 
 /*# sourceMappingURL=cfc.css.map */

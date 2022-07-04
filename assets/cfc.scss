@@ -1,4 +1,6 @@
 
+$brawn: #9e9889;
+
 .cfc-table {
 	
 	
@@ -29,12 +31,12 @@
 		top: 0;
 		right: 0;
 		color: #fff;
-		background: #dcd7ca;
+		background: $brawn;
 	}
 	
 	.cfc-item {
 		font-weight: bold;
-		color: #dcd7ca;
+		color: $brawn;
 	}
 	.cfc-data, .cfc-item {
 		margin: 0;

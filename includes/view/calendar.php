@@ -129,29 +129,48 @@ while($time_id <= $max_d_end):
 	}
 	
 	//月が変わったら出力
-	if(wp_date('m月', $time_id) != $current_month){
+	if($is_seamless_month){
 		
-		$month_cells[] = $column_header.implode('', $cells);
-		
-		cfc_get_template_part('/'.$calendar_type.'/table', array(
-			'th' => $tableheader,
-			'td' => $month_cells,
-			'monthname' => $current_month,
-			'time_id' => $time_id,
-			'table_class' => $table_class,
-		));
-		
-		//echo $tableheader.'<tr>'.implode('</tr><tr>', $month_cells).'</tr>';
-		
-		$cells = $this->_get_month_cells();
-		$current_month = wp_date('m月', $time_id);
-		$month_cells = array();
-
-	}elseif($dw ==  6) {
-		//週の終わり
-		$month_cells[] = $column_header.implode('', $cells);
-		$cells = $this->_get_month_cells();
-	};
+		if($dw ==  6) {
+			$month_cells[] = $column_header.implode('', $cells);
+			
+			cfc_get_template_part('/'.$calendar_type.'/table', array(
+				'th' => $tableheader,
+				'td' => $month_cells,
+				'monthname' => $current_month,
+				'time_id' => $time_id,
+				'table_class' => $table_class,
+			));
+			
+			$cells = $this->_get_month_cells();
+			$current_month = wp_date('m月', $time_id);
+			$month_cells = array();
+		}
+	}else{
+		if(wp_date('m月', $time_id) != $current_month){
+			
+			$month_cells[] = $column_header.implode('', $cells);
+			
+			cfc_get_template_part('/'.$calendar_type.'/table', array(
+				'th' => $tableheader,
+				'td' => $month_cells,
+				'monthname' => $current_month,
+				'time_id' => $time_id,
+				'table_class' => $table_class,
+			));
+			
+			//echo $tableheader.'<tr>'.implode('</tr><tr>', $month_cells).'</tr>';
+			
+			$cells = $this->_get_month_cells();
+			$current_month = wp_date('m月', $time_id);
+			$month_cells = array();
+	
+		}elseif($dw ==  6) {
+			//週の終わり
+			$month_cells[] = $column_header.implode('', $cells);
+			$cells = $this->_get_month_cells();
+		};
+	}
 	
 	$i++;
 	
