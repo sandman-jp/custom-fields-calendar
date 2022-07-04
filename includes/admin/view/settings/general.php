@@ -1,15 +1,18 @@
 <?php
-
 if ( ! defined('ABSPATH') ) {
 	exit; // Exit if accessed directly
 }
 ?>
 
 <?php
+global $wp_locale;
+
 $general = $this->settings->get('general-settings');
 
 
 $calendar_type = empty($general['calendar-type']) ? 'monthly' : $general['calendar-type'];
+
+$start_week = isset($general['start-week']) ? $general['start-week'] : 1;
 
 $start_date_type = empty($general['calendar-term']['start']['type']) ? 'relative' : $general['calendar-term']['start']['type'];
 
@@ -30,21 +33,23 @@ $end_date_relative = empty($general['calendar-term']['end']['relative']) ? '1' :
 <div class="p-calender-term_tab">
 <div class="c-fieldset">
 	
-	<div class="c-field calendar-type">
-		<div class="c-field_label"><?php _e('Calendar Type', CFC_TEXTDOMAIN); ?></div>
+	
+	<div class="c-field start-week">
+		<div class="c-field_label"><?php _e('Start Week', CFC_TEXTDOMAIN); ?></div>
 		
 		<div class="c-field_input"">
-			<label>
-				<input type="radio" name="general-settings[calendar-type]" value="monthly" <?php checked( $calendar_type, 'monthly'); ?>> <?php _e('Monthly Type', CFC_TEXTDOMAIN); ?>
-			</label>
-			<label>
-				<input type="radio" name="general-settings[calendar-type]" value="weekly" <?php checked( $calendar_type, 'weekly'); ?>> <?php _e('Weekly Type', CFC_TEXTDOMAIN); ?>
-			</label>
+			<select name="general-settings[start-week]">
+			<?php for($i=0; $i<=6; $i++): ?>
+				<option value="<?php echo $i; ?>" <?php selected($i, $start_week); ?>> <?php echo $wp_locale->get_weekday_abbrev($wp_locale->get_weekday($i)); ?></option>
+			<?php endfor; ?>
+				<option value="current"><?php _e('Current day of the week', CFC_TEXTDOMAIN); ?></option>
+			</select>
 		</div>
 	</div>
+	
 </div>
-<h4><?php _e('Display Period', CFC_TEXTDOMAIN); ?></h4>
 
+<h4><?php _e('Display Period for editting', CFC_TEXTDOMAIN); ?></h4>
 <div class="c-fieldset">
 	<div class="c-field cfc-calendar-term">
 		<div class="c-field_label"><?php _e('The beginning of the period', CFC_TEXTDOMAIN); ?></div>
@@ -114,4 +119,5 @@ $end_date_relative = empty($general['calendar-term']['end']['relative']) ? '1' :
 	</div>
 	
 </div>
+
 </div>

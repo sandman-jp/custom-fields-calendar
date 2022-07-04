@@ -9,12 +9,11 @@ if ( ! defined('ABSPATH') ) {
 	exit; // Exit if accessed directly
 }
 
-require_once CFC_DIR_INCLUDES.'/settings/custom-fields.php';
-require_once CFC_DIR_INCLUDES.'/settings/general.php';
 
 class settings{
 	
 	private $_settings_data;
+	private $_panels = array('custom-fields', 'general', 'templates');
 	
 	function __construct($post_id){
 		
@@ -25,12 +24,20 @@ class settings{
 		}
 		
 		$this->post_id = $post_id;
-		
+		/*
 		$this->settings = array(
 			'custom-fields-settings' => new CFC\settings\custom_fields(),
 			'general-settings' => new CFC\settings\general(),
+			'templates-settings' => new CFC\settings\templates(),
 		);
-		
+		*/
+		foreach($this->_panels as $panelname){
+			require_once CFC_DIR_INCLUDES.'/settings/'.$panelname.'.php';
+			
+			$classkey = 'CFC\settings\\'.str_replace('-', '_', $panelname);
+			
+			$this->settings[$panelname.'-settings'] = new $classkey();
+		}
 		$this->_load();
 		
 	}
@@ -80,5 +87,14 @@ class settings{
 		
 	}
 	
+	function get_panels(){
+		$panels = array();
+		
+		foreach($this->_panels as $panelname){
+			$panels[] = $panelname.'-settings';
+		}
+		
+		return $panels;
+	}
 }
 

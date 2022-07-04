@@ -56,6 +56,7 @@ class radio extends CFC\fields\field{
 						<?php if($required): ?>required<?php endif; ?> 
 						class="<?php echo $this->get_field_class($additional_class); ?>" 
 						%%checked:<?php echo urlencode($this->get('field-name')); ?>_<?php echo trim($value); ?>%%
+						title="<?php echo $this->get('field-title'); ?>"
 						> <?php echo $label; ?></label>
 				<?php endforeach; ?>
 			</span>

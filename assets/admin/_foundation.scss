@@ -2,6 +2,13 @@
 	box-sizing: border-box;
 }
 
+.cfc-loading {
+	.button {
+		opacity: .2;
+		pointer-events: none;
+	}
+}
+
 input::placeholder {
 	color: #ddd !important;
 }
@@ -44,6 +51,9 @@ label {
 	background: #fff none repeat scroll 0% 0%;
 }
 
+.ui-tabs-nav {
+	margin: 0;
+}
 .ui-tabs-tab.ui-tab,
 .ui-tabs-nav.ui-tabs,
 .ui-corner-all {
@@ -118,3 +128,4 @@ label {
 	position: absolute;
 	right: -10px;
 }
+

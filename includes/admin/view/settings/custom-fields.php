@@ -1,5 +1,4 @@
 <?php
-
 if ( ! defined('ABSPATH') ) {
 	exit; // Exit if accessed directly
 }
@@ -25,7 +24,9 @@ $fields_position = isset($fields_position['fields-position']) ? $fields_position
 	<div class="c-fieldset">
 		
 		<div class="c-field">
-			<div class="c-field_label" for="cf-position"><?php _e( 'Custom Field Position', CFC_TEXTDOMAIN ) ?> <span class="required">*</span></div>
+			<div class="c-field_label" for="cf-position"><?php _e( 'Custom Field\'s Position for editting', CFC_TEXTDOMAIN ) ?> <span class="required">*</span>
+			</div>
+			
 			<div class="c-field_input" data-type="textfield">
 				<label>
 					<input type="radio" id="cf-position" name="custom-fields-settings[fields-position]" value="inside" <?php checked('inside', $fields_position) ?>>
@@ -44,7 +45,6 @@ $fields_position = isset($fields_position['fields-position']) ? $fields_position
 <script type="text/html" id="field-template">
 	<?php cfc_get_template_part('/admin/custom-fields'); ?>
 </script>
-
-<script>
-	
+<script type="text/html" id="field-condition-template">
+	<?php cfc_get_template_part('/admin/custom-fields/supports/conditions', 'block'); ?>
 </script>

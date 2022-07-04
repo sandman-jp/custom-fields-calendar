@@ -57,7 +57,7 @@ while($time_id <= $max_d_end):
 	
 	$td_classes = array('cfc-cell', 'week-'.$dw, strtolower(wp_date('D', $time_id)));
 	
-	if($time_id == strtotime('today')){
+	if($time_id == $today){
 		$td_classes[] = 'today';
 	}
 	
