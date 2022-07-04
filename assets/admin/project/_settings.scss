@@ -236,3 +236,14 @@
 	
 }
 
+.p-front-view_tab {
+	
+	.only-weekly {
+		
+	}
+	.cfc-monthly {
+		.only-weekly {
+			display: none;
+		}
+	}
+}

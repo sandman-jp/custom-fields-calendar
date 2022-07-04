@@ -484,12 +484,13 @@ jQuery(function($){
 		let count = parseInt($('.field-condition-list > .c-fieldset', $elm).length);
 		
 		let html = $('#field-condition-template').text();
-		
+
 		html = html.replaceAll('%id%', fid);
 		html = html.replaceAll('%cid%', count);
 		
 		let $html = $(html);
 		
+
 		$('.cfc-calendar-year', $html).change(function(e){
 			e.preventDefault();
 			console.log($(this));
@@ -756,6 +757,19 @@ jQuery(function($){
 	$('.btn-calenadr_term-type:checked').click();
 });
 
+
+//front view settings
+jQuery(function($){
+	$('[name="templates-settings[calendar-type]"]').click(function(){
+		if($(this).is(':checked')){
+			let $parent = $(this).parents('.c-fieldset:first');
+			$parent.attr('class', 'c-fieldset');
+			$parent.addClass('cfc-'+$(this).val());
+		}
+	});
+});
+
 jQuery(function($){
 	$('body').removeClass('cfc-loading');
 });
+

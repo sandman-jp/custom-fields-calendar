@@ -13,6 +13,8 @@ class cf_calendar {
 		
 		add_action('init', array($this, 'register_post_type'));
 		
+		add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 11);
+		
 	}
 	
 	function init(){
@@ -66,6 +68,14 @@ class cf_calendar {
 		
 	}
 	
+	function enqueue_scripts(){
+		
+		if(!is_admin()){
+			wp_enqueue_style('cf-alendar', CFC_ASSETS_URL.'/cfc.css', array(), CFC_VIRSION);
+		}
+		
+	}
+
 	private function _get_month_cells(){
 		$td = array();
 		for($i=0; $i<7; $i++){
@@ -112,8 +122,8 @@ class cf_calendar {
 		
 		$today = strtotime($y.'/'.$m.'/'.$d.' '.wp_timezone_string());
 		//曜日を月曜日から始めるようにする
-		$first_dw = $general['start-week'] == 'current' ? wp_date('w') : $general['start-week'];//月曜日
-		
+		$first_dw = $general['first-week'] == 'current' ? wp_date('w') : $general['first-week'];//月曜日
+
 		//最終表日（開始が月曜(1)なら最終は日(0)、水曜(3)なら最終は火(2)）;
 		//$end_dw = $first_dw - 1;
 		//$end_dw = $end_dw < 0 ? 6 : $end_dw;
@@ -145,6 +155,9 @@ class cf_calendar {
 			$max_d_end = $max_d;
 		}
 		
+		$have_column_header = !empty($templates['column-header']);
+		$is_seamless_month = $calendar_type == 'weekly' && !empty($templates['seamless-month']);
+
 		include CFC_DIR_INCLUDES.'/view/calendar.php';
 		
 	}

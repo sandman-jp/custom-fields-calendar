@@ -1,0 +1,66 @@
+
+$brawn: #9e9889;
+
+.cfc-table {
+	
+	
+	th,td {
+		font-size: 14px;
+		width: calc(100% / 7);
+	}
+	&.have_column_header{
+		th,td {
+			width: calc(100% / 8);
+		}
+	}
+	td{
+		position: relative;
+		vertical-align: top;
+	}
+	
+	
+	time {
+		display: flex;
+		width: 30px;
+		height: 30px;
+		font-size: 12px;
+		font-weight: bold;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 0;
+		right: 0;
+		color: #fff;
+		background: $brawn;
+	}
+	
+	.cfc-item {
+		font-weight: bold;
+		color: $brawn;
+	}
+	.cfc-data, .cfc-item {
+		margin: 0;
+		padding: 5px;
+		font-size: 14px;
+		border-bottom: 1px solid #dcd7ca;
+		
+		&:last-of-type {
+			border: none;
+		}
+		&:first-of-type {
+			border-bottom: 1px solid #dcd7ca;
+		}
+	}
+}
+
+.cfc-table-weekly {
+	td {
+		padding-top: 32px;
+	}
+	time {
+		width: 100%;
+	}
+	.cfc-items {
+		padding-top: 32px;
+	}
+}

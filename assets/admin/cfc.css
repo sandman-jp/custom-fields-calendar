@@ -58,6 +58,10 @@ label {
   background: #fff none repeat scroll 0% 0%; }
 
 /* line 54, _foundation.scss */
+.ui-tabs-nav {
+  margin: 0; }
+
+/* line 57, _foundation.scss */
 .ui-tabs-tab.ui-tab,
 .ui-tabs-nav.ui-tabs,
 .ui-corner-all {
@@ -65,12 +69,13 @@ label {
   border-radius: 0;
   font-size: inherit; }
 
-/* line 62, _foundation.scss */
+/* line 65, _foundation.scss */
+
 .ui-tooltip, .arrow:after {
   background: #333;
   border: 2px solid #333; }
 
-/* line 67, _foundation.scss */
+/* line 70, _foundation.scss */
 .ui-tooltip {
   width: auto;
   max-width: 380px;
@@ -82,7 +87,8 @@ label {
   -webkit-box-shadow: none;
           box-shadow: none; }
 
-/* line 77, _foundation.scss */
+/* line 80, _foundation.scss */
+
 .single-value {
   width: auto;
   border-top: 1px solid #ddd;
@@ -90,11 +96,15 @@ label {
   width: auto;
   position: relative; }
 
-/* line 84, _foundation.scss */
+
+/* line 87, _foundation.scss */
 .single-value:first-child {
   border: none; }
 
-/* line 87, _foundation.scss */
+/* line 84, _foundation.scss */
+.single-value:first-child {
+  border: none; }
+  
 .arrow {
   width: 70px;
   height: 16px;
@@ -104,16 +114,14 @@ label {
   margin-left: -35px;
   bottom: -16px; }
 
-/* line 96, _foundation.scss */
+/* line 99, _foundation.scss */
 .arrow.top {
   top: -16px;
   bottom: auto; }
 
-/* line 100, _foundation.scss */
+/* line 103, _foundation.scss */
 .arrow.left {
   left: 20%; }
-
-/* line 103, _foundation.scss */
 .arrow:after {
   content: "";
   position: absolute;
@@ -128,12 +136,12 @@ label {
   transform: rotate(45deg);
   */ }
 
-/* line 117, _foundation.scss */
+/* line 120, _foundation.scss */
 .arrow.top:after {
   bottom: -20px;
   top: auto; }
 
-/* line 122, _foundation.scss */
+/* line 125, _foundation.scss */
 .datepicker:after {
   content: "\f508";
   font-family: 'Dashicon';
@@ -863,5 +871,8 @@ label {
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 0; }
+/* line 245, project/_settings.scss */
+#cf-calendar .p-front-view_tab .cfc-monthly .only-weekly {
+  display: none; }
 
 /*# sourceMappingURL=cfc.css.map */

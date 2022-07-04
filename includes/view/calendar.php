@@ -1,4 +1,6 @@
 <?php
+global $wp_locale;
+
 //table rendar engine
 $titles = array();
 
@@ -8,7 +10,12 @@ $i = 0;
 
 
 ob_start();
-for($i=0; $i<7; $i++): 
+
+if($have_column_header){
+	echo '<th></th>';
+}
+
+for($i=0; $i<7; $i++){
 
 	$day_index = ($i + $first_dw) % 7;
 	
@@ -19,13 +26,16 @@ for($i=0; $i<7; $i++):
 	}else if(wp_date('w', $init_id) == 0){
 		$weekday = 'sun';
 	}
+
+	$weekname = $wp_locale->get_weekday_abbrev($wp_locale->get_weekday($day_index));
 	
-	cfc_get_template_part('/'.$calendar_type.'/table', 'heder', array(
-		'weekday' => $weekday,
-		'day_index' => $day_index,
+	cfc_get_template_part('/'.$calendar_type.'/table', 'header', array(
+		'th_class' => $weekday,
+		'conten_namet' => $weekname,
 	));
 	
-endfor; 
+}; 
+
 $tableheader = ob_get_clean();
 
 $time_id = $min_d;
@@ -36,6 +46,28 @@ $current_month = wp_date('m月', $min_d);
 $cells = $this->_get_month_cells();
 $month_cells = array();
 
+
+
+//一列目にCFの項目だけ表示するthがある場合
+$column_header = '';
+
+if($have_column_header){
+	
+	$cf_items = cfc_get_field_items();
+	$cf_keys = array();
+	
+	if($cf_items){
+		foreach($cf_items as $item){
+			$cf_keys[] = '<div class="cfc-item">'.$item['field-label'].'</div>';
+		}
+	}
+	ob_start();
+	cfc_get_template_part('/'.$calendar_type.'/table', 'header', array(
+		'th_class' => 'cfc-items',
+		'conten_namet' => implode('', $cf_keys) ,
+	));
+	$column_header = ob_get_clean();
+}
 
 while($time_id <= $max_d_end):
 	
@@ -83,39 +115,67 @@ while($time_id <= $max_d_end):
 		'td_classes' => $td_classes,
 		'values' => $values,
 		'first_dw' => $first_dw,
+
+		'have_column_header' => $have_column_header,
 	));
 	
 	$cells[$dw] = ob_get_clean();
+	
 	//finished table cell including
 	
 	
 	//1日進める
 	$time_id += $day_length;
 	
-	//月が変わったら出力
-	if(wp_date('m月', $time_id) != $current_month){
-		//var_dump($cells);
-		
-		$month_cells[] = implode('', $cells);
-		
-		echo cfc_get_template_part('/'.$calendar_type.'/table', array(
-			'th' => $tableheader,
-			'td' => '<tr>'.implode('</tr><tr>', $month_cells).'</tr>',
-			'monthname' => $current_month,
-			'time_id' => $time_id,
-		));
-		
-		//echo $tableheader.'<tr>'.implode('</tr><tr>', $month_cells).'</tr>';
-		
-		$cells = $this->_get_month_cells();
-		$current_month = wp_date('m月', $time_id);
-		$month_cells = array();
 
-	}elseif($dw ==  6) {
-		//週の終わり
-		$month_cells[] = implode('', $cells);
-		$cells = $this->_get_month_cells();
-	};
+	$table_class = 'alignwide';
+	if($have_column_header){
+		$table_class .= ' have_column_header';
+	}
+	
+	//月が変わったら出力
+	if($is_seamless_month){
+		
+		if($dw ==  6) {
+			$month_cells[] = $column_header.implode('', $cells);
+			
+			cfc_get_template_part('/'.$calendar_type.'/table', array(
+				'th' => $tableheader,
+				'td' => $month_cells,
+				'monthname' => $current_month,
+				'time_id' => $time_id,
+				'table_class' => $table_class,
+			));
+			
+			$cells = $this->_get_month_cells();
+			$current_month = wp_date('m月', $time_id);
+			$month_cells = array();
+		}
+	}else{
+		if(wp_date('m月', $time_id) != $current_month){
+			
+			$month_cells[] = $column_header.implode('', $cells);
+			
+			cfc_get_template_part('/'.$calendar_type.'/table', array(
+				'th' => $tableheader,
+				'td' => $month_cells,
+				'monthname' => $current_month,
+				'time_id' => $time_id,
+				'table_class' => $table_class,
+			));
+			
+			//echo $tableheader.'<tr>'.implode('</tr><tr>', $month_cells).'</tr>';
+			
+			$cells = $this->_get_month_cells();
+			$current_month = wp_date('m月', $time_id);
+			$month_cells = array();
+	
+		}elseif($dw ==  6) {
+			//週の終わり
+			$month_cells[] = $column_header.implode('', $cells);
+			$cells = $this->_get_month_cells();
+		};
+	}
 	
 	$i++;
 	
