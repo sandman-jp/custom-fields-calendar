@@ -4,7 +4,8 @@ if ( ! defined('ABSPATH') ) {
 }
 $templates = $this->settings->get('templates-settings');
 
-$calendar_type = empty($templates['calendar_type']) ? 'monthly' : $templates['calendar_type'];
+$calendar_type = empty($templates['calendar-type']) ? 'monthly' : $templates['calendar-type'];
+$column_header = empty($templates['column-header']) ? false : $templates['column-header'];
 ?>
 
 <h4><?php _e('Front View Settings', CFC_TEXTDOMAIN); ?></h4>
@@ -21,6 +22,17 @@ $calendar_type = empty($templates['calendar_type']) ? 'monthly' : $templates['ca
 			<input type="radio" name="templates-settings[calendar-type]" value="weekly" <?php checked( $calendar_type, 'weekly'); ?>> <?php _e('Weekly Type', CFC_TEXTDOMAIN); ?>
 		</label>
 	</div>
+</div>
+
+<div class="c-field column-header">
+	<div class="c-field_label"><?php _e('Column Header', CFC_TEXTDOMAIN); ?></div>
+	
+	<div class="c-field_input"">
+		<label>
+			<input type="checkbox" name="templates-settings[column-header]" value="1" <?php checked( $column_header, 1); ?>> <?php _e('Show column header.', CFC_TEXTDOMAIN); ?>
+		</label>
+	</div>
+	
 </div>
 
 </div>

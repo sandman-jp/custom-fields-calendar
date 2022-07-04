@@ -9,7 +9,7 @@ $day_index = cfc_get_start_week($time_id, $first_dw);
 <?php if($is_in_term): ?>
 
   <!-- Custom Field area -->
-	  <time datetime="<?php echo wp_date('c', $time_id); ?>"><?php echo wp_date('d', $time_id); ?></time>
+	  <time datetime="<?php echo wp_date('c', $time_id); ?>"><?php echo wp_date('m/d', $time_id) ?>(<?php echo $wp_locale->get_weekday_abbrev($wp_locale->get_weekday(wp_date('w', $time_id)));?>)</time>
 		
 		<?php 
 		 if(!empty($values)){
@@ -18,18 +18,10 @@ $day_index = cfc_get_start_week($time_id, $first_dw);
 				 
 				$v = is_array($v) ? implode(',', $v) : (string)$v;
 					 
-				$vv = $v;
-				/*
-				$vv = mb_substr($v, 0, 20);
-				 
-				if($vv != $v){
-					$vv .= '...';
-				}
-				*/
 				if($have_column_header){
-					$arr[] = '<div class="cfc-data">'.$vv.'</div>';
+					$arr[] = '<div class="cfc-data">'.$v.'</div>';
 				}else{
-					$arr[] = '<div class="cfc-item">'.$k.'</div><div class="cfc-data">'.$vv.'</div>';
+					$arr[] = '<div class="cfc-item">'.$k.'</div><div class="cfc-data">'.$v.'</div>';
 				}
 				
 			 }

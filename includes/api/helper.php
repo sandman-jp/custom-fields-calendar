@@ -137,6 +137,19 @@ function cfc_get_customs($key){
 	
 }
 
+function cfc_get_field_items(){
+	//$fields = CFC()->get_instance('CFC\fields');
+	
+	$items = cfc_get_instance('CFC\settings');
+	
+	$cf_setting = $items->get('custom-fields-settings');
+	
+	if(!empty($cf_setting['fields'])){
+		return $cf_setting['fields'];
+	}else{
+		return false;
+	}
+}
 
 function cfc_get_regex($pattern){
 	$validation = CFC()->get_instance('CFC\validatoin');

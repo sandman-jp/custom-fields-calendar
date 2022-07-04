@@ -13,6 +13,8 @@ class cf_calendar {
 		
 		add_action('init', array($this, 'register_post_type'));
 		
+		add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'), 11);
+		
 	}
 	
 	function init(){
@@ -63,6 +65,14 @@ class cf_calendar {
 				'query_var' => false,
 			)
 		);
+		
+	}
+	
+	function enqueue_scripts(){
+		
+		if(!is_admin()){
+			wp_enqueue_style('cf-alendar', CFC_ASSETS_URL.'/cfc.css', array(), CFC_VIRSION);
+		}
 		
 	}
 	
@@ -144,6 +154,8 @@ class cf_calendar {
 		}else{
 			$max_d_end = $max_d;
 		}
+		
+		$have_column_header = !empty($templates['column-header']);
 		
 		include CFC_DIR_INCLUDES.'/view/calendar.php';
 		
