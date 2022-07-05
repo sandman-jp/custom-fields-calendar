@@ -96,5 +96,11 @@ class settings{
 		
 		return $panels;
 	}
+	
+	function get_stylesheet(){
+		$add_css = $this->_settings_data['templates-settings']['add-css'];
+		
+		return $add_css;
+	}
 }
 
