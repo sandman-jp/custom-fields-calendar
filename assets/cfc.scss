@@ -1,12 +1,15 @@
-
+/*
 $brawn: #9e9889;
 
 .cfc-table {
-	
+	width:100%;
+	border: 1px solid $brawn;
+	border-collapse: collapse;
 	
 	th,td {
 		font-size: 14px;
 		width: calc(100% / 7);
+		border-left: 1px solid #dcd7ca;
 	}
 	&.have_column_header{
 		th,td {
@@ -64,3 +67,4 @@ $brawn: #9e9889;
 		padding-top: 32px;
 	}
 }
+*/
