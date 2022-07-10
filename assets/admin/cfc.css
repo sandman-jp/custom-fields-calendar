@@ -783,6 +783,7 @@ label {
             align-items: center;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
+
             justify-content: center; }
   /* line 86, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_order {
@@ -952,5 +953,6 @@ label {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center; }
+
 
 /*# sourceMappingURL=cfc.css.map */
