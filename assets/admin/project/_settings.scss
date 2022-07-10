@@ -56,203 +56,231 @@
 			font-weight: bold;
 		}
 	}
-}
-
-.p-custom-fields_tab {
 	
-	.o-headline {
+	.p-custom-fields_tab {
 		
-		.c-field {
-			flex-direction: column;
-			width: 100%;
-			
-		}
-		
-		.c-field_label {
-			border-right: none;
-			border-bottom: 1px solid $bo-gray;
-			display: block;
-			padding: 12px;
-			width: 100%;
-		}
-	}
-	
-	.c-field_order, .c-field__action {
-		display: flex;
-		align-content: center;
-		align-items: center;
-		justify-content: center;
-	}
-	
-	.c-field_order {
-		background: #2271b1;
-		color: #fff;
-		font-weight: bold;
-		width: 55px !important;
-		min-width: 55px !important;
-		
-		span {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: 24px;
-			height: 24px;
-			border: 2px solid #fff;
-			border-radius: 50%;
-			line-height: 24px;
-			font-size: 16px;
-		}
-		
-		
-	}
-	
-	.c-field_action {
-		display: flex;
-		flex-direction: column;
-		justify-content: end;
-		border: 1px solid #ddd;
-		border-left: none;
-		position: relative;
-		top: 0;
-		min-width: 38px;
-		
-		.remove-item {
-			position: absolute;
-			top: 8px;
-		}
-		
-		button {
-			margin: 0 3px;
-			width: 28px;
-			height: 28px;
-			border: none;
-			border-radius: 50%;
-			background: none;
-			color: #2271b1;
-			cursor: pointer;
-			font-family: dashicons;
-			font-size: 18px;
-			font-style: normal;
-		}
-	}
-
-	.c-fieldset:first-of-type {
 		.o-headline {
-			.remove-item {
-				display: none;	
-			}
-		}
-	}
-	
-	.remove-item{
-		&:before {
-			content: "\f14f";
-		}
-	}
-	//トグルボタン
-	.toggle-details {
 			
-			&:before {
-				content: "\f347";
+			.c-field {
+				flex-direction: column;
+				width: 100%;
+				
 			}
-			
-			&.active:before {
-				content: "\f343";
-			}
-	}
-	
-	.o-wrap_details {
-		display: none;
-		.u-disabled {
-			display: none;
-		}
-	}
-
-	.c-field_conditions {
-		//display: block;
-		
-		.c-fieldset{
-			display: flex !important;
-			border: 0 !important;
-			margin: 0 !important;
-		}
-		
-		.c-field_label {
-			width: 100%;
-			text-align: center;
-			border-right: 0;
-			border-bottom: 1px solid $bo-gray;
-		}
-		
-		.c-field_input {
-			width: 100%;
-			text-align: center;
-			padding-left: 8px;
-			padding-right: 8px;
 			
 			.c-field_label {
-				padding: 8px;
-				background: none;
+				border-right: none;
+				border-bottom: 1px solid $bo-gray;
+				display: block;
+				padding: 12px;
+				width: 100%;
 			}
 		}
 		
-		.c-field_add_condition {
-			text-align: center;
-			padding-bottom: 20px;
+		.c-field_order, .c-field__action {
+			display: flex;
+			align-content: center;
+			align-items: center;
+			justify-content: center;
 		}
+
+		
+		.c-field_order {
+			background: #2271b1;
+			color: #fff;
+			font-weight: bold;
+			width: 55px !important;
+			min-width: 55px !important;
+			
+			span {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 24px;
+				height: 24px;
+				border: 2px solid #fff;
+				border-radius: 50%;
+				line-height: 24px;
+				font-size: 16px;
+			}
+		}
+		
+		.c-field_action {
+			display: flex;
+			flex-direction: column;
+			justify-content: end;
+			border: 1px solid #ddd;
+			border-left: none;
+			position: relative;
+			top: 0;
+			min-width: 38px;
+			
+			.remove-item {
+				position: absolute;
+				top: 8px;
+			}
+			
+			button {
+				margin: 0 3px;
+				width: 28px;
+				height: 28px;
+				border: none;
+				border-radius: 50%;
+				background: none;
+				color: #2271b1;
+				cursor: pointer;
+				font-family: dashicons;
+				font-size: 18px;
+				font-style: normal;
+			}
+		}
+	
+	
+		.remove-item{
+			&:before {
+				content: "\f14f";
+			}
+		}
+		//トグルボタン
+		.toggle-details {
+				
+				&:before {
+					content: "\f347";
+				}
+				
+				&.active:before {
+					content: "\f343";
+				}
+		}
+		
+		.o-wrap_details {
+			display: none;
+			.u-disabled {
+				display: none;
+			}
+		}
+	
+		.c-field_conditions {
+			//display: block;
+			
+			.c-fieldset{
+				display: flex !important;
+				border: 0;
+				margin: 0;
+			}
+			
+			.c-field_label {
+				width: 100%;
+				text-align: center;
+				border-right: 0;
+				border-bottom: 1px solid $bo-gray;
+			}
+			
+			.c-field_input {
+				width: 100%;
+				text-align: center;
+				padding-left: 8px;
+				padding-right: 8px;
+				
+				.c-fieldset {
+					margin-top: 15px;
+					border-top: none;
+				}
+				
+				.c-field_label {
+					padding: 3px initial8px;
+					background: none;
+				}
+				
+				.c-field_input {
+					padding: 0 8px;
+					.c-field_label {
+						min-height: auto;
+					}
+				}
+				.c-field_action {
+					border: none;
+				}
+			}
+			
+			.c-field_add_condition {
+				text-align: center;
+				padding-bottom: 20px;
+			}
+		}
+		
 	}
 	
-}
-
-.p-calender-term_tab {
-	
-	.cfc-calendar-term {
+	.p-calender-term_tab {
 		
-		.cfc-terms-absolute {
-			display: none;
-		}
-		.cfc-terms-relative {
-			display: block;
-		}
-		
-		.is-absolute {
+		.cfc-calendar-term {
+			
 			.cfc-terms-absolute {
-				display: block;
+				display: none;
 			}
 			.cfc-terms-relative {
 				display: none;
 			}
+			
+			.is-absolute {
+				.cfc-terms-absolute {
+					display: block;
+				}
+				.cfc-terms-relative {
+					display: none;
+				}
+			}
+			
+			.is-relative {
+				.cfc-terms-absolute {
+					display: none;
+				}
+				.cfc-terms-relative {
+					display: block;
+				}
+			}
+			
+			dl {
+				width: 100%;
+				display: flex;
+				align-items: center;
+			}
+			dt {
+				padding-right: 10px;
+				border-right: 1px solid $bo-gray;
+			}
+			dd {
+				padding-left: 10px;
+				//display: flex;
+				align-items: center;
+				//border-top: 1px solid $bo-gray;
+				//padding: 8px 0 0 0;
+				//margin-top: 8px;
+				margin-bottom: 0;
+			}
 		}
-		dl {
-			width: 100%;
-			display: flex;
-			align-items: center;
-		}
-		dt {
-			padding-right: 10px;
-			border-right: 1px solid $bo-gray;
-		}
-		dd {
-			padding-left: 10px;
-			//display: flex;
-			align-items: center;
-			//border-top: 1px solid $bo-gray;
-			//padding: 8px 0 0 0;
-			//margin-top: 8px;
-			margin-bottom: 0;
-		}
-	}
-	
-}
-
-.p-front-view_tab {
-	
-	.only-weekly {
 		
 	}
-	.cfc-monthly {
+	
+	.p-front-view_tab {
+		
 		.only-weekly {
-			display: none;
+			
+		}
+		.cfc-monthly {
+			.only-weekly {
+				display: none;
+			}
+		}
+	}
+	
+	.p-schedule_tab {
+		.c-field_order {
+			background: $blue;
+			color: #fff;
+			font-weight: bold;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 		}
 	}
 }

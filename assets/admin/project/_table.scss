@@ -112,11 +112,15 @@
 					position: absolute;
 					top: 5px;
 					right: 5px;
-					z-index: 10;
+					z-index: 1;
 				}
 			
 				//background: $lite-yellow;
 			}
+		}
+		
+		.cfc-holiday {
+			color: #e96c6c;
 		}
 		
 	}

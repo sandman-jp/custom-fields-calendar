@@ -10,18 +10,18 @@
 
 			<div class="c-field">
 				<label class="c-field_label" for="field-label_%id%"><?php _e('Label', CFC_TEXTDOMAIN); ?> <span class="required">*</span></label>
-				<div class="c-field_input" data-type="textfield"><input id="field-label_%id%" name="custom-fields-settings[fields][%id%][field-label]" value="" type="text" required></div>
+				<div class="c-field_input" data-type="textfield"><input id="field-label_%id%" name="custom-field-settings[fields][%id%][field-label]" value="" type="text" required></div>
 			</div>
 			
 			<div class="c-field">
 				<label class="c-field_label" for="field-name_%id%"><?php _e('Field Name', CFC_TEXTDOMAIN); ?> <span class="required">*</span></label>
-				<div class="c-field_input" data-type="textfield"><input id="field-name_%id%" name="custom-fields-settings[fields][%id%][field-name]" value="" type="text" required></div>
+				<div class="c-field_input" data-type="textfield"><input id="field-name_%id%" name="custom-field-settings[fields][%id%][field-name]" value="" type="text" required></div>
 			</div>
 			
 			<div class="c-field field-type">
 				<label class="c-field_label" for="field-type_%id%"><?php _e('Field Type', CFC_TEXTDOMAIN); ?></label>
 				<div class="c-field_input" data-type="select">
-					<select id="field-type_%id%" name="custom-fields-settings[fields][%id%][field-type]">
+					<select id="field-type_%id%" name="custom-field-settings[fields][%id%][field-type]">
 						<option value="textfield">Text</option>
 						<option value="textarea">TextArea</option>
 						<option value="select" data-choices="1">Select</option>

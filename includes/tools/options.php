@@ -13,8 +13,6 @@ class options {
 	
 	function __construct(){
 		
-		
-		
 		$this->front = get_option('cfc_options');
 		$this->admin = get_option('cfc_admin_options');
 		

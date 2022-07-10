@@ -1,4 +1,4 @@
-jQuery('body').addClass('cfc-loading');
+
 //ページ全体
 jQuery(function($){
 	$('#edit-slug-box, #preview-action').remove();
@@ -7,7 +7,7 @@ jQuery(function($){
 	const original_form = $('#post').serialize();
 	
 	//未設定でも空でもない、つまりデータがあるかどうか
-	let have_data = (typeof(fields_settings['custom-fields-settings']['fields']) != 'undefined') && fields_settings['custom-fields-settings']['fields'].length;
+	let have_data = (typeof(fields_settings['custom-field-settings']['fields']) != 'undefined') && fields_settings['custom-field-settings']['fields'].length;
 	
 	//console.log(have_data)
 	//カレンダーと設定画面の切り替えボタン
@@ -31,7 +31,10 @@ jQuery(function($){
 	 * 保存
 	 */
 	//記事内容が送信される前各セルの内容をまとめて、送信するinput数を減らす
-	$('[type="submit"][name="save"],[type="submit"][name="publish"]').click(function(e){
+	//$('[type="submit"][name="save"],[type="submit"][name="publish"]').click(function(e){
+	$('#post').submit(function(e){
+		
+		//e.preventDefault();
 		
 		if(!$('#post').get(0).checkValidity()){
 			//e.preventDefault();
@@ -48,7 +51,6 @@ jQuery(function($){
 			}
 		});
 		*/
-		
 		
 		cfc_data = $('.cfc-data').serialize();
 		
@@ -129,8 +131,8 @@ jQuery(function($){
 	
 	var cell = $('.cfc-cell', '#cf-calendar');
 	
-	if(typeof(fields_settings['custom-fields-settings']['fields-position']) != 'undefined' 
-			&& fields_settings['custom-fields-settings']['fields-position'] == 'outside'){
+	if(typeof(fields_settings['custom-field-settings']['fields-position']) != 'undefined' 
+			&& fields_settings['custom-field-settings']['fields-position'] == 'outside'){
 			
 		//テーブルをクリックすると、右にフォームが出てくる
 		cell.click(function(e){
@@ -222,7 +224,7 @@ jQuery(function($){
 		content: function(){
 			let content = $('.tooltip-content', this).html();
 			
-			if(content != '') {
+			if(typeof(content) != 'undefined' && content != '') {
 				return '<div class="single-value">'+content.split(' ; ').join('</div><div class="single-value">')+'</div>';
 			}
 			return '<div class="single-value" style="text-align:center">no data</div>';
@@ -260,9 +262,9 @@ jQuery(function($){
 	var cf_data = false;
 	
 	//init
-	if(typeof(fields_settings['custom-fields-settings']['fields']) != 'undefined'){
+	if(typeof(fields_settings['custom-field-settings']['fields']) != 'undefined'){
 		
-		cf_data = fields_settings['custom-fields-settings']['fields'];
+		cf_data = fields_settings['custom-field-settings']['fields'];
 		
 		//initialize
 		if(cf_data.length){
@@ -294,7 +296,7 @@ jQuery(function($){
 							for(let h=0; h < conds.length; h++){
 								add_condition_field($item);
 								
-								let posname =  'custom-fields-settings[fields]['+i+'][field-conditions]['+h+']';
+								let posname =  'custom-field-settings[fields]['+i+'][field-conditions]['+h+']';
 								if(typeof(conds[h]['start']['year']) != 'undefined'){
 									//startがセットされていたら
 									$('[name="'+posname+'[start][year]"]').val(conds[h]['start']['year']);
@@ -315,16 +317,23 @@ jQuery(function($){
 								let j;
 								if(typeof(conds[h]['cond1']) != 'undefined' && $.isArray(conds[h]['cond1'])){
 									//週番号
+									$('[name="'+posname+'[cond1][]"]').prop('checked', false);
 									for(j=0; j < conds[h]['cond1'].length; j++){
 										$('[name="'+posname+'[cond1][]"][value="'+conds[h]['cond1'][j]+'"]').prop('checked', true);
 									}
 								}
 								
 								if(typeof(conds[h]['cond2']) != 'undefined' && $.isArray(conds[h]['cond2'])){
-									//週番号
+									//曜日番号
+									$('[name="'+posname+'[cond2][]"]').prop('checked', false);
 									for(j=0; j < conds[h]['cond2'].length; j++){
 										$('[name="'+posname+'[cond2][]"][value="'+conds[h]['cond2'][j]+'"]').prop('checked', true);
 									}
+								}
+								
+								if(typeof(conds[h]['holiday']) != 'undefined'){
+									//休日設定
+									$('[name="'+posname+'[holiday]"][value="'+conds[h]['holiday']+'"]').prop('checked', true);
 								}
 								
 							}
@@ -375,16 +384,9 @@ jQuery(function($){
 		
 	});
 	
-	$('#btn_add-condition').click(function(e){
-		e.preventDefault();
-		let $fieldset = $(this).parents('.c-fieldset');
-		
-		add_condition_field($fieldset);
-	});
-	
 	$('[type="checkbox"][required]', '#cfc-table').click(switch_required_checkbox_group);
 	$('[type="checkbox"][required]', '#cfc-table').each(switch_required_checkbox_group);
-
+	
 	//ここから下は関数
 	
 	function switch_required_checkbox_group(e){
@@ -474,6 +476,16 @@ jQuery(function($){
 		
 		$html = init_field($html);
 		
+		
+		$('.btn_add-condition', $html).click(function(e){
+			e.preventDefault();
+			let $fieldset = $(this).parents('.c-fieldset');
+			
+			add_condition_field($fieldset);
+		});
+		
+
+		
 		$('#fields-list').append($html);
 	}
 	
@@ -531,6 +543,14 @@ jQuery(function($){
 			if($('[name$="[field-name]"]', $parent).val() == ''){
 				$('[name$="[field-name]"]', $parent).val($(this).val());
 			}
+		});
+		//半角スペースは-に
+		$('[name$="[field-name]"]', $html).bind('blur change focus', function(e){
+			let val = $(this).val().trim();
+			
+			val = val.replace(/[\s\\\_]/, '-');
+			
+			$(this).val(val);
 		});
 		
 		//default value should be nessesary if required checked.
@@ -718,24 +738,38 @@ jQuery(function($){
 			$(this).attr('data-field-id', i);
 			
 			//アクションボタン
-			$('[data-target]', this).attr('data-target', 'field_'+i);
+			//CF
+			$('.o-headline [data-target]', this).attr('data-target', 'field_'+i);
+			
+			
 			
 			$('input, textarea, select', this).each(function(n){
 				this.name = $(this).attr('name').replace(/\[fields\]\[(\d+?)\]/, '[fields]['+i+']');
 				
 				if(typeof($(this).attr('id')) != 'undefined'){
-					this.id = $(this).attr('id').replace(/_(\d+)$/, '_'+String(i));
+					$(this).attr('id', 'field_'+i);
 				}
-				
 			});
 			
 			$('.c-field_label[for]', this).each(function(n){
-				let val = $(this).attr('for').replace(/_(\d+)$/, '_'+String(i));
+				let val = $(this).attr('for', 'field_'+i);
 				$(this).attr('for', val);
 			});
 			
-				
+			
 			$('.c-field_order span', this).text(i + 1);
+			
+			//condition
+			
+			let $cond = $('.c-field_conditions', this);
+			$('.c-fieldset', $cond).each(function(h){
+				$(this).attr('id', 'condition_'+i+'_'+h);
+			});
+			
+			$('[data-target]', $cond).each(function(h){
+				$(this).attr('data-target', 'condition_'+i+'_'+h);
+			});
+			
 			
 		});
 	}
@@ -760,7 +794,7 @@ jQuery(function($){
 
 //front view settings
 jQuery(function($){
-	$('[name="templates-settings[calendar-type]"]').click(function(){
+	$('[name="template-settings[calendar-type]"]').click(function(){
 		if($(this).is(':checked')){
 			let $parent = $(this).parents('.c-fieldset:first');
 			$parent.attr('class', 'c-fieldset');
@@ -769,7 +803,62 @@ jQuery(function($){
 	});
 });
 
+//Schedule settings
 jQuery(function($){
-	$('body').removeClass('cfc-loading');
+	
+	if(typeof(fields_settings['schedule-settings']) != 'undefined'){
+	
+		var _sdata = fields_settings['schedule-settings'];
+	
+		//initialize
+		
+		for(let p in _sdata){
+			let datedata = _sdata[p];
+			
+			for(let i=0; i<datedata.length; i++){
+				
+				add_schedule();
+				let $schedule = $('.c-fieldset:last', '#schedule-list');
+				$('[name$="[date]"]', $schedule).val(datedata[i]['date']);
+				$('[name$="[label]"]', $schedule).val(datedata[i]['label']);
+				
+				if(typeof(datedata[i]['holiday']) != 'undefined' && datedata[i]['holiday'] == 1){
+					$('[name$="[holiday]"]', $schedule).prop('checked', true);
+				}
+			}
+			
+		}
+	}
+	//Add Field
+	$('#btn_add-schedule').click(function(e){
+		e.preventDefault();
+		add_schedule();
+	});
+	
+	
+	
+	function add_schedule(){
+		let count = parseInt($('#schedule-list > .c-fieldset').length);
+		let html = $('#schedule-template').text();
+		
+		html = html.replaceAll('%id%', count);
+		html = html.replaceAll('%num%', count + 1);
+		
+		let $html = $(html);
+		
+		$('.datepicker', $html).datepicker({
+			showOn: 'both',
+			buttonText: '',
+			dateFormat: 'yy-mm-dd',
+		});
+		
+		$('#schedule-list').append($html);
+	}
+});
+
+
+
+jQuery(function($){
+	$('html').removeClass('cfc-loading');
 });
 

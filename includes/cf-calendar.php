@@ -46,6 +46,9 @@ class cf_calendar {
 				'hierarchical' => false,
 				'show_ui' => true,
 				'show_in_menu' => true,
+				'show_in_nav_menus' => false,
+				'show_in_admin_bar' => false,
+				'show_in_rest' => false,
 				'_builtin' => false,
 				'capability_type' => 'post',
 				'capabilities' => array(
@@ -69,7 +72,6 @@ class cf_calendar {
 	}
 	
 	function enqueue_scripts(){
-		
 		if(!is_admin()){
 			wp_enqueue_style('cf-alendar', CFC_ASSETS_URL.'/cfc.css', array(), CFC_VIRSION);
 		}
@@ -104,7 +106,7 @@ class cf_calendar {
 		
 		
 		$general = $this->settings->get('general-settings');
-		$templates = $this->settings->get('templates-settings');
+		$templates = $this->settings->get('template-settings');
 		
 		//ローカルタイム変更後
 		$min_d = $general['calendar-term']['start']['datetime'];

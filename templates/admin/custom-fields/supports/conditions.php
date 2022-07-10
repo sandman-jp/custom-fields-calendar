@@ -5,7 +5,7 @@
 		<div class="field-condition-list u-w100per"></div>
 	</div>
 	<div class="c-field_add_condition" data-type="button">
-		<button id="btn_add-condition" class="button">Add Condition</button>
+		<button class="btn_add-condition button">Add Condition</button>
 	</div>
 	
 </div>

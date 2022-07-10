@@ -12,6 +12,7 @@ $day_index = cfc_get_start_week($time_id, $first_dw);
 
 		
 		<?php 
+		
 		 if(!empty($values)){
 			 $arr = array();
 			 foreach($values as $k=>$v){
@@ -20,13 +21,7 @@ $day_index = cfc_get_start_week($time_id, $first_dw);
 				$v = is_array($v) ? implode(',', $v) : (string)$v;
 					 
 				$vv = $v;
-				/*
-				$vv = mb_substr($v, 0, 20);
-				 
-				if($vv != $v){
-					$vv .= '...';
-				}
-				*/
+				
 				if($have_column_header){
 					$arr[] = '<div class="cfc-data">'.$vv.'</div>';
 				}else{
@@ -38,9 +33,9 @@ $day_index = cfc_get_start_week($time_id, $first_dw);
 			 echo !empty($arr) ? implode('', $arr) : '';
 		 }
 		?>
-
+		
 <?php else: ?>
-  <span class="nodata">-</span>
+  <span class="nodata"></span>
 <?php endif; ?>
   
 </td>
