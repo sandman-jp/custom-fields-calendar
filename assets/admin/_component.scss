@@ -155,11 +155,27 @@
 			}
 		}
 	}
+	
 }
 
 .c-fieldset_wrap {
 	.c-fieldset {
 		border-left: 3px solid $blue;
+	}
+}
+
+.c-field__inline {
+	
+	.c-field_input {
+		display: block;
+		text-align: left;
+		
+		label {
+			text-align: left;
+			display: block;
+			padding-top: 4px;
+			padding-bottom: 4px;
+		}
 	}
 }
 

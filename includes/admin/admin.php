@@ -55,11 +55,16 @@ class admin{
 		
 		if(get_current_screen()->id == CF_CALENDAR){
 			
+			wp_register_style('jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
+			wp_enqueue_style( 'jquery-ui' );
 			wp_enqueue_style('cfc-admin', CFC_ASSETS_URL.'/admin/cfc.css', array(), CFC_VIRSION);
 			wp_enqueue_script('cfc-admin', CFC_ASSETS_URL.'/admin/cfc.js', array('jquery', 'jquery-ui-sortable', 'jquery-ui-tooltip', 'jquery-ui-datepicker'), CFC_VIRSION, true);
 			
 			wp_enqueue_script('jquery-validate', '//cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js',  array('jquery'), CFC_VIRSION, true);
 			
+			wp_register_script('cfc-admin-header', false);
+			wp_enqueue_script('cfc-admin-header');
+			wp_add_inline_script('cfc-admin-header', 'document.getElementsByTagName("html")[0].classList.add("cfc-loading")', array());
 		}
 	}
 	

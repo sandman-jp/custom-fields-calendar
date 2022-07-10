@@ -76,6 +76,8 @@ label {
 	text-transform: uppercase;
 	position: absolute;
 	box-shadow: none;
+	z-index: 10;
+	opacity: 1;
 }
 .single-value {
 	width: auto;
@@ -121,11 +123,27 @@ label {
 	bottom: -20px;
 	top: auto;
 }
-
+/*
 .datepicker:after {
 	content: "\f508";
 	font-family: 'Dashicon';
 	position: absolute;
 	right: -10px;
 }
-
+*/
+.ui-datepicker-trigger {
+	height: 1.5rem;
+	width: 1.5rem;
+	appearance: none;
+	border: none;
+	background: none;
+	padding: 0;
+	margin-left: 3px;
+	
+	&:before {
+		font-family: dashicons !important;
+		content: "\f508";
+		font-size: 21px;
+		color: $blue;
+	} 
+}

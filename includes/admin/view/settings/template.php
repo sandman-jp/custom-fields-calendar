@@ -2,7 +2,7 @@
 if ( ! defined('ABSPATH') ) {
 	exit; // Exit if accessed directly
 }
-$templates = $this->settings->get('templates-settings');
+$templates = $this->settings->get('template-settings');
 
 
 $calendar_type = empty($templates['calendar-type']) ? 'monthly' : $templates['calendar-type'];
@@ -21,6 +21,7 @@ ob_start();
 	.cfc-table.have_column_header th, .cfc-table.have_column_header td {
 		width: calc(100% / 8); }
 	.cfc-table td {
+		border-bottom: 1px solid #9e9889;
 		position: relative;
 		vertical-align: top; }
 	.cfc-table time {
@@ -65,7 +66,6 @@ ob_start();
 $add_css = ob_get_clean();
 $add_css = !empty($templates['add-css']) ? $templates['add-css'] : $add_css;
 ?>
-<div class="p-front-view_tab">
 <div class="c-fieldset cfc-<?php echo $calendar_type ?>">
 
 	<div class="c-field calendar-type">
@@ -73,10 +73,10 @@ $add_css = !empty($templates['add-css']) ? $templates['add-css'] : $add_css;
 		
 		<div class="c-field_input"">
 			<label>
-				<input type="radio" name="templates-settings[calendar-type]" value="monthly" <?php checked( $calendar_type, 'monthly'); ?>> <?php _e('Monthly Type', CFC_TEXTDOMAIN); ?>
+				<input type="radio" name="template-settings[calendar-type]" value="monthly" <?php checked( $calendar_type, 'monthly'); ?>> <?php _e('Monthly Type', CFC_TEXTDOMAIN); ?>
 			</label>
 			<label>
-				<input type="radio" name="templates-settings[calendar-type]" value="weekly" <?php checked( $calendar_type, 'weekly'); ?>> <?php _e('Weekly Type', CFC_TEXTDOMAIN); ?>
+				<input type="radio" name="template-settings[calendar-type]" value="weekly" <?php checked( $calendar_type, 'weekly'); ?>> <?php _e('Weekly Type', CFC_TEXTDOMAIN); ?>
 			</label>
 		</div>
 	</div>
@@ -86,7 +86,7 @@ $add_css = !empty($templates['add-css']) ? $templates['add-css'] : $add_css;
 		
 		<div class="c-field_input"">
 			<label>
-				<input type="checkbox" name="templates-settings[seamless-month]" value="1" <?php checked( $seamless_month, 1); ?>> <?php _e('Seamless', CFC_TEXTDOMAIN); ?>
+				<input type="checkbox" name="template-settings[seamless-month]" value="1" <?php checked( $seamless_month, 1); ?>> <?php _e('Seamless', CFC_TEXTDOMAIN); ?>
 			</label>
 		</div>
 		
@@ -97,7 +97,7 @@ $add_css = !empty($templates['add-css']) ? $templates['add-css'] : $add_css;
 		
 		<div class="c-field_input"">
 			<label>
-				<input type="checkbox" name="templates-settings[column-header]" value="1" <?php checked( $column_header, 1); ?>> <?php _e('Show column header', CFC_TEXTDOMAIN); ?>
+				<input type="checkbox" name="template-settings[column-header]" value="1" <?php checked( $column_header, 1); ?>> <?php _e('Show column header', CFC_TEXTDOMAIN); ?>
 			</label>
 		</div>
 		
@@ -107,10 +107,9 @@ $add_css = !empty($templates['add-css']) ? $templates['add-css'] : $add_css;
 		<div class="c-field_label"><?php _e('Additional Stylesheet', CFC_TEXTDOMAIN); ?></div>
 		
 		<div class="c-field_input"">
-			<textarea name="templates-settings[add-css]" rows="10"><?php echo $add_css; ?></textarea>
+			<textarea name="template-settings[add-css]" rows="10"><?php echo $add_css; ?></textarea>
 		</div>
 		
 	</div>
 
-</div>
 </div>
