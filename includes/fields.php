@@ -37,31 +37,63 @@ class fields{
 	
 	function update($_data){
 		
-		global $wpdb;
-		
-		$sql = sprintf("SELECT * FROM %s WHERE post_id=%d AND meta_key LIKE '%s%%'", $wpdb->postmeta, $this->post_id, 'cfc_field_');
-		
-		$old_meta = $wpdb->get_results($sql);
-		
-		if(!empty($old_meta)){
-			//一回全消ししてから再登録
-			/*
-			foreach($old_meta as $meta){
-				delete_post_meta( $meta->post_id, $meta->meta_key);
-			}
-			*/
-		}
+		$res = true;
+		//保存前に全消し
+		$this->_clean_data();
 		
 		foreach($_data as $k => $v){
-			update_post_meta($this->post_id, 'cfc_field_'.$k, $v);
+			if(is_array($v)){
+				foreach($v as $kk => $vv){
+					update_post_meta($this->post_id, 'cfc_'.$k.'_'.$kk, $vv);
+				}
+			}else{
+				update_post_meta($this->post_id, 'cfc_'.$k, $v);
+			}
+			
 		}
-		
 		
 	}
 	
+	private function _clean_data(){
+		global $wpdb;
+		
+		//設定の除外
+		$sql = sprintf("SELECT meta_key FROM %s WHERE post_id=%d AND meta_key LIKE '%s%%' AND meta_key != 'cfc_settings'", $wpdb->postmeta, $this->post_id, 'cfc_');
+		
+		$old_meta = $wpdb->get_col($sql);
+		
+		if(!empty($old_meta)){
+			/*
+			$sql = sprintf("DELETE FROM %s WHERE meta_id IN (%s)", $wpdb->postmeta, implode(',', $old_meta));
+			return $wpdb->query($sql);
+			*/
+			foreach($old_meta as $k){
+				delete_post_meta($this->post_id, $k);
+			}
+			
+		}
+		
+	}
+	
+	private function _get_post_meta($key){
+		global $wpdb;
+		$sql = sprintf("SELECT * FROM %s WHERE post_id=%d AND meta_key LIKE '%s%%'", $wpdb->postmeta, $this->post_id, 'cfc_'.$key.'_');
+		
+		$metas = $wpdb->get_results($sql);
+		$value = array();
+		if($metas){
+			foreach($metas as $meta){
+				$cf_key = str_replace('cfc_'.$key.'_', '', $meta->meta_key);
+				$value[$cf_key] = $meta->meta_value;
+			}
+		}
+		
+		return $value;
+	} 
 	
 	//CFグループの表示
 	function render($key){
+		
 		
 		$this->settings = cfc_get_instance('CFC\settings');
 		
@@ -69,23 +101,32 @@ class fields{
 			return '';
 		}
 		
-		$cf_setting = $this->settings->get('custom-fields-settings');
+		$cf_setting = $this->settings->get('custom-field-settings');
 		
 		$default_value = array();
 		
-		foreach($cf_setting['fields'] as $k=>$d){
-			// var_dump($k);
-			// var_dump($d);
-			if(isset($d['field-default-value'])){
-				$default_value[$d['field-name']] = $d['field-default-value'];
+		if(!empty($cf_setting['fields'] )){
+			foreach($cf_setting['fields'] as $k=>$d){
+				// var_dump($k);
+				// var_dump($d);
+				if(isset($d['field-default-value'])){
+					$default_value[$d['field-name']] = $d['field-default-value'];
+				}
+				
 			}
-			
+		}else{
+			$cf_setting['fields'] = array();
 		}
 		
-		$value = get_post_meta($this->post_id, 'cfc_field_'.$key, true);
+		$value = $this->_get_post_meta($key);
+		
+		//var_dump($metas);
+		//$value = get_post_meta($this->post_id, 'cfc_field_'.$key, true);
+		//$value = array();
+		
+		
 		
 		$value = wp_parse_args($value, $default_value);
-		
 		/*
 		if(!empty($this->_field_inputs_template)){
 			return $this->_make_template($key, $value);
@@ -105,6 +146,7 @@ class fields{
 			$type = $field['field-type'];
 			
 			if(!empty($field['field-conditions']) && !$this->_check_conditions($key, $field['field-conditions'])){
+				$this->_field_inputs_template .= '<input type="hidden" class="cfc-data" name="calendar['.$key.']['.$field['field-name'].']" value="">';
 				continue;
 				//return;
 			}
@@ -124,13 +166,19 @@ class fields{
 			
 		}
 		
-		
-		return $this->_make_template($key, $value);
+		$template = $this->_make_template($key, $value);
+		/*
+		if(empty($template)){
+			$template = '<input type="hidden" name="calendar['.$key.']" value="">';
+		}
+		*/
+		return $template;
 	}
 	
 	//値の配列を返す
 	function values($key){
-		$metas = get_post_meta($this->post_id, 'cfc_field_'.$key, true);
+		//$metas = get_post_meta($this->post_id, 'cfc_field_'.$key, true);
+		$metas = $this->_get_post_meta($key);
 		
 		if($metas){
 			return array_values($metas);
@@ -140,7 +188,8 @@ class fields{
 	
 	//キー:値の配列を返す
 	function customs($key){
-		$metas = get_post_meta($this->post_id, 'cfc_field_'.$key, true);
+		//$metas = get_post_meta($this->post_id, 'cfc_field_'.$key, true);
+		$metas = $this->_get_post_meta($key);
 		
 		if($metas){
 			
@@ -220,6 +269,15 @@ class fields{
 			}
 		}
 		
+		//休日設定
+		if(cfc_is_holiday($key) && !empty($condition['holiday'])){
+			if($condition['holiday'] == 'hide'){
+				return false;
+			}else if($condition['holiday'] == 'show'){
+				return true;
+			}
+		}
+		
 		//週数が正しいかどうか
 		$weec_count = ceil(wp_date('j', $key) / 7);
 		if(!in_array($weec_count, $condition['cond1'])){
@@ -230,6 +288,7 @@ class fields{
 		if(!in_array(wp_date('w', $key), $condition['cond2'])){
 			return false;
 		}
+		
 		
 		return true;
 	}

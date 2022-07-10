@@ -13,7 +13,7 @@ $general = $this->settings->get('general-settings');
 $start_week = isset($general['first-week']) ? $general['first-week'] : 1;
 
 
-$start_week = isset($general['start-week']) ? $general['start-week'] : 1;
+//$start_week = isset($general['start-week']) ? $general['start-week'] : 1;
 
 $start_date_type = empty($general['calendar-term']['start']['type']) ? 'relative' : $general['calendar-term']['start']['type'];
 
@@ -62,6 +62,7 @@ $end_date_relative = empty($general['calendar-term']['end']['relative']) ? '1' :
 				<dt>
 					<label><input class="btn-calenadr_term-type" type="radio" name="general-settings[calendar-term][start][type]" value="absolute" <?php checked($start_date_type, 'absolute'); ?>> <?php _e('Absolute', CFC_TEXTDOMAIN); ?></label>
 					<label><input class="btn-calenadr_term-type" type="radio" name="general-settings[calendar-term][start][type]" value="relative" <?php checked($start_date_type, 'relative'); ?>> <?php _e('Relative', CFC_TEXTDOMAIN); ?></label>
+					<label><input class="btn-calenadr_term-type" type="radio" name="general-settings[calendar-term][start][type]" value="today" <?php checked($start_date_type, 'today'); ?>> <?php _e('Today', CFC_TEXTDOMAIN); ?></label>
 				</dt>
 				
 				<dd class="cfc-terms-absolute">
@@ -96,6 +97,7 @@ $end_date_relative = empty($general['calendar-term']['end']['relative']) ? '1' :
 				<dt>
 					<label><input class="btn-calenadr_term-type" type="radio" name="general-settings[calendar-term][end][type]" value="absolute" <?php checked($end_date_type, 'absolute'); ?>> <?php _e('Absolute', CFC_TEXTDOMAIN); ?></label>
 					<label><input class="btn-calenadr_term-type" type="radio" name="general-settings[calendar-term][end][type]" value="relative" <?php checked($end_date_type, 'relative'); ?>> <?php _e('Relative', CFC_TEXTDOMAIN); ?></label>
+					<label><input class="btn-calenadr_term-type" type="radio" name="general-settings[calendar-term][end][type]" value="today" <?php checked($start_date_type, 'today'); ?>> <?php _e('Today', CFC_TEXTDOMAIN); ?></label>
 				</dt>
 				<dd class="cfc-terms-absolute">
 					<span> <?php _e('Finish until', CFC_TEXTDOMAIN); ?> </span>

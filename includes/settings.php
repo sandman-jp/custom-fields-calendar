@@ -9,11 +9,12 @@ if ( ! defined('ABSPATH') ) {
 	exit; // Exit if accessed directly
 }
 
+require_once CFC_DIR_INCLUDES.'/settings/setting.php';
 
 class settings{
 	
 	private $_settings_data;
-	private $_panels = array('custom-fields', 'general', 'templates');
+	private $_panels = array('custom-field', 'general', 'template', 'schedule');
 	
 	function __construct($post_id){
 		
@@ -26,18 +27,18 @@ class settings{
 		$this->post_id = $post_id;
 		/*
 		$this->settings = array(
-			'custom-fields-settings' => new CFC\settings\custom_fields(),
+			'custom-field-settings' => new CFC\settings\custom_fields(),
 			'general-settings' => new CFC\settings\general(),
-			'templates-settings' => new CFC\settings\templates(),
+			'template-settings' => new CFC\settings\templates(),
 		);
 		*/
 		foreach($this->_panels as $panelname){
 			require_once CFC_DIR_INCLUDES.'/settings/'.$panelname.'.php';
 			
 			$classkey = 'CFC\settings\\'.str_replace('-', '_', $panelname);
-			
 			$this->settings[$panelname.'-settings'] = new $classkey();
 		}
+		
 		$this->_load();
 		
 	}
@@ -81,7 +82,8 @@ class settings{
 	//
 	function update($key, $_data){
 		
-		$this->_settings_data[$key] = $_data;
+		$this->_settings_data[$key] = $this->settings[$key]->format($_data);
+		
 		
 		update_post_meta($this->post_id, 'cfc_settings', $this->_settings_data);
 		
@@ -95,6 +97,16 @@ class settings{
 		}
 		
 		return $panels;
+	}
+	
+	function get_stylesheet(){
+		
+		if(empty($this->_settings_data['template-settings']['add-css'])){
+			return '';
+		}
+		$add_css = $this->_settings_data['template-settings']['add-css'];
+		
+		return $add_css;
 	}
 }
 

@@ -4,7 +4,7 @@ if ( ! defined('ABSPATH') ) {
 }
 ?>
 <?php 
-$fields_position = $this->settings->get('custom-fields-settings');
+$fields_position = $this->settings->get('custom-field-settings');
 $fields_position = isset($fields_position['fields-position']) ? $fields_position['fields-position'] : 'inside';
 
 ?>
@@ -29,11 +29,11 @@ $fields_position = isset($fields_position['fields-position']) ? $fields_position
 			
 			<div class="c-field_input" data-type="textfield">
 				<label>
-					<input type="radio" id="cf-position" name="custom-fields-settings[fields-position]" value="inside" <?php checked('inside', $fields_position) ?>>
+					<input type="radio" id="cf-position" name="custom-field-settings[fields-position]" value="inside" <?php checked('inside', $fields_position) ?>>
 					<?php _e( 'Inside', CFC_TEXTDOMAIN ) ?> 
 				</label>
 				<label>
-					<input type="radio" id="cf-position" name="custom-fields-settings[fields-position]" value="outside" <?php checked('outside', $fields_position) ?>>
+					<input type="radio" id="cf-position" name="custom-field-settings[fields-position]" value="outside" <?php checked('outside', $fields_position) ?>>
 					<?php _e( 'Outside', CFC_TEXTDOMAIN ) ?> 
 				</label>
 			</div>

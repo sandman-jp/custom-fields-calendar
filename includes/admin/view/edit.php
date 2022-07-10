@@ -9,7 +9,7 @@ if ( ! defined('ABSPATH') ) {
 }
 ?>
 <?php
-$custom_field_setting_data = $this->settings->get('custom-fields-settings');
+$custom_field_setting_data = $this->settings->get('custom-field-settings');
 $has_cap = current_user_can('manage_options');
 
 ?>
@@ -49,30 +49,30 @@ $has_cap = current_user_can('manage_options');
 	
 	<div id="setting-tabs">
 		<ul>
-    	<li><a href="#custom-fields-settings"><?php _e( 'Custom Fields', CFC_TEXTDOMAIN ) ?></a></li>
-    	<li><a href="#holidays-settings"><?php _e( 'Holidays', CFC_TEXTDOMAIN ) ?></a></li>
+    	<li><a href="#custom-field-settings"><?php _e( 'Custom Fields', CFC_TEXTDOMAIN ) ?></a></li>
     	<li><a href="#general-settings"><?php _e( 'General', CFC_TEXTDOMAIN ) ?></a></li>
-    	<li><a href="#templates-settings"><?php _e( 'Front View', CFC_TEXTDOMAIN ) ?></a></li>
+    	<li><a href="#template-settings"><?php _e( 'Front View', CFC_TEXTDOMAIN ) ?></a></li>
+			<li><a href="#schedule-settings"><?php _e( 'Schedule', CFC_TEXTDOMAIN ) ?></a></li>
   	</ul>
 	</div>
 	
-  <div id="custom-fields-settings" class="c-panel p-custom-fields_tab">
+  <div id="custom-field-settings" class="c-panel p-custom-fields_tab">
 	  <h3><?php _e( 'Custom Fields Settings', CFC_TEXTDOMAIN ) ?></h3>
-	  <?php include CFC_DIR_INCLUDES.'/admin/view/settings/custom-fields.php'; ?>
+	  <?php include CFC_DIR_INCLUDES.'/admin/view/settings/custom-field.php'; ?>
 	</div>
-	
-  <div id="holidays-settings" class="c-panel  p-holidays_tab">
-	  <h3><?php _e( 'Holiday Settings', CFC_TEXTDOMAIN ) ?></h3>
-	  <?php //include CFC_DIR_INCLUDES.'/admin/view/settings/holidays.php'; ?>
-	</div>
-  <div id="general-settings" class="c-panel">
+  <div id="general-settings" class="c-panel p-general_tab">
 		<h3><?php _e( 'General Settings', CFC_TEXTDOMAIN ) ?></h3>
 		<?php include CFC_DIR_INCLUDES.'/admin/view/settings/general.php'; ?>
 	</div>
 	
-  <div id="templates-settings" class="c-panel">
+  <div id="template-settings" class="c-panel p-front-view_tab">
 		<h3><?php _e( 'Front View Settings', CFC_TEXTDOMAIN ) ?></h3>
-		<?php include CFC_DIR_INCLUDES.'/admin/view/settings/templates.php'; ?>
+		<?php include CFC_DIR_INCLUDES.'/admin/view/settings/template.php'; ?>
+	</div>
+	
+	<div id="schedule-settings" class="c-panel  p-schedule_tab">
+		<h3><?php _e( 'Schedule Settings', CFC_TEXTDOMAIN ) ?></h3>
+		<?php include CFC_DIR_INCLUDES.'/admin/view/settings/schedule.php'; ?>
 	</div>
   
 </div>

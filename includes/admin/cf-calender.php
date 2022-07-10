@@ -146,7 +146,7 @@ class cf_calendar{
 		//設定パネルの保存
 		
 		$panels = $this->settings->get_panels();
-		//$settings = array('custom-fields-settings', 'general-settings');
+		//$settings = array('custom-field-settings', 'general-settings');
 		
 		foreach($panels as $setting_name){
 			$postdata = empty($_POST[$setting_name]) ? array() : $_POST[$setting_name];

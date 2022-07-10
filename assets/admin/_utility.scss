@@ -21,7 +21,11 @@
 .u-w100 {width: 100px !important;}
 .u-w150 {width: 150px !important;}
 .u-w200 {width: 200px !important;}
+.u-w300 {width: 300px !important;}
 
+.u-w25per {width: 25% !important;}
+.u-w30per {width: 50% !important;}
+.u-w50per {width: 50% !important;}
 .u-w100per {width: 100% !important;}
 .u-wauto {width: auto !important;}
 
@@ -42,3 +46,4 @@
 .u-bo_l {	border-left: 1px solid $bo-gray !important;}
 .u-bo_r {	border-right: 1px solid $bo-gray !important;}
 .u-bo_b {	border-bottom: 1px solid $bo-gray !important;}
+.u-bo_t {	border-top: 1px solid $bo-gray !important;}

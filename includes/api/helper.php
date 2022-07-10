@@ -103,7 +103,6 @@ function cfc_get_values($key){
 	
 	$fields = CFC()->get_instance('CFC\fields');
 	
-	
 	if(empty($fields)){
 		return ;
 	}
@@ -121,7 +120,6 @@ function cfc_get_values($key){
 function cfc_get_customs($key){
 	
 	$fields = CFC()->get_instance('CFC\fields');
-	
 	
 	if(empty($fields)){
 		return ;
@@ -142,7 +140,7 @@ function cfc_get_field_items(){
 	
 	$items = cfc_get_instance('CFC\settings');
 	
-	$cf_setting = $items->get('custom-fields-settings');
+	$cf_setting = $items->get('custom-field-settings');
 	
 	if(!empty($cf_setting['fields'])){
 		return $cf_setting['fields'];
@@ -155,4 +153,34 @@ function cfc_get_regex($pattern){
 	$validation = CFC()->get_instance('CFC\validatoin');
 	
 	return isset($validation[$pattern]) ? $validation[$pattern] : false;
+}
+
+function cfc_is_holiday($key, $post_id=null){
+	$is_holiday = false;
+	$schedules = CFC()->get_instance('CFC\settings')->get('schedule-settings');
+	//var_dump($schedules);
+	if(isset($schedules[$key]) && is_array($schedules[$key])){
+		
+		foreach($schedules[$key] as $colum){
+			if(!empty($colum['holiday'])){
+				$is_holiday = true;
+			}
+		}
+	}
+	
+	return $is_holiday;
+}
+
+function cfc_get_date_schedule_labels($key, $post_id=null){
+	$labels = array();
+	$schedules = CFC()->get_instance('CFC\settings')->get('schedule-settings');
+	
+	if(isset($schedules[$key]) && is_array($schedules[$key])){
+		
+		foreach($schedules[$key] as $colum){
+			$labels[] = $colum['label'];
+		}
+	}
+	
+	return $labels;
 }

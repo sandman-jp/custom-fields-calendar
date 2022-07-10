@@ -4,6 +4,7 @@ namespace CFC\settings;
 
 use CFC;
 use CFC\settings;
+use CFC\settings\setting;
 use CFC\settings\general;
 
 if ( ! defined('ABSPATH') ) {
@@ -11,27 +12,25 @@ if ( ! defined('ABSPATH') ) {
 }
 
 
-class general{
+class general extends setting{
 	
-	private $_data;
-	
-	function __construct (){
-		
-	}
+	public $name = 'general';
 	
 	function parse($settings ,$meta_data){
 		
-		if(empty($meta_data['general-settings'])){
-			$settings['general-settings'] = null;
+		$pane_name = $this->name.'-settings';
+		
+		if(empty($meta_data[$pane_name])){
+			$settings[$pane_name] = null;
 			return $settings;
 		}
 		
-		$this->_data = $meta_data['general-settings'];
+		$this->_data = $meta_data[$pane_name];
 		
 		$this->get_datetime('start');
 		$this->get_datetime('end');
 		
-		$settings['general-settings'] = $this->_data;
+		$settings[$pane_name] = $this->_data;
 		
 		return $settings;
 	}
@@ -39,14 +38,14 @@ class general{
 	function get_datetime($period){
 		
 		$type = $this->_data['calendar-term'][$period]['type'];
-		$date_str = $this->_data['calendar-term'][$period][$type];
+		$date_str = isset($this->_data['calendar-term'][$period][$type]) ? $this->_data['calendar-term'][$period][$type] : '';
 		
 		if($type == 'absolute'){
 			
 			$day = $period == 'start' ? 'first day of' : 'last day of';
 			$date = strtotime($day.' '.$date_str['year'].'-'.$date_str['month']);
 			$date -= wp_date('Z');
-		}else{
+		}elseif($type == 'relative'){
 			if($period == 'end'){
 				$start = $this->_data['calendar-term']['start']['datetime'];
 				//var_dump(wp_date('Y-m-d', $start));
@@ -58,6 +57,17 @@ class general{
 			}
 			
 		}
+		/*
+		else{
+			$str = $type;
+			if($period == 'end'){
+				$date = strtotime('tomorrow '.wp_timezone_string());
+			}else{
+				$date = strtotime($str.' '.wp_timezone_string());
+			}
+			
+		}
+		*/
 		
 		
 		$this->_data['calendar-term'][$period]['datetime'] = $date;
