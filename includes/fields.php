@@ -187,14 +187,34 @@ class fields{
 	}
 	
 	//キー:値の配列を返す
-	function customs($key){
+	function customs($key, $show_nodata_key){
 		//$metas = get_post_meta($this->post_id, 'cfc_field_'.$key, true);
+		
 		$metas = $this->_get_post_meta($key);
 		
-		if($metas){
+		if($show_nodata_key){
 			
+			$this->settings = cfc_get_instance('CFC\settings');
+			
+			if(empty($this->settings)){
+				return '';
+			}
+			$cf_setting = $this->settings->get('custom-field-settings');
+			
+			$default = array();
+			
+			foreach($cf_setting['fields'] as $field){
+				$default[$field['field-name']] = isset($field['field-default']) ?  $field['field-default'] : '';
+			}
+			
+			$metas = wp_parse_args($metas, $default);
+		}
+		
+		
+		if($metas){
 			return $metas;
 		}
+		
 		return false;
 	}
 	
