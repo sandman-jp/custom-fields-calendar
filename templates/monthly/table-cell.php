@@ -1,6 +1,4 @@
 <?php 
-global $wp_locale;
-
 $day_index = cfc_get_start_week($time_id, $first_dw);
 ?>
 <td <?php if($is_in_term): ?>id="cell_<?php echo $time_id; ?>"<?php endif; ?> class="<?php echo implode(' ', $td_classes); ?>" data-time="<?php echo $time_id; ?>" title="acd">
@@ -9,8 +7,8 @@ $day_index = cfc_get_start_week($time_id, $first_dw);
 
   <!-- Custom Field area -->
 	  <time datetime="<?php echo wp_date('c', $time_id); ?>"><?php echo wp_date('d', $time_id); ?></time>
-
 		
+		<p><?php echo implode(',', cfc_get_date_schedule_labels($time_id)); ?></p>
 		<?php 
 		
 		 if(!empty($values)){
@@ -20,7 +18,8 @@ $day_index = cfc_get_start_week($time_id, $first_dw);
 
 				$v = is_array($v) ? implode(',', $v) : (string)$v;
 					 
-				$vv = $v;
+				$vv = $v == '' ? '-' : $v;
+				
 				
 				if($have_column_header){
 					$arr[] = '<div class="cfc-data">'.$vv.'</div>';

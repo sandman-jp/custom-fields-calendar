@@ -783,16 +783,15 @@ label {
             align-items: center;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
-
             justify-content: center; }
-  /* line 86, project/_settings.scss */
+  /* line 87, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_order {
     background: #2271b1;
     color: #fff;
     font-weight: bold;
     width: 55px !important;
     min-width: 55px !important; }
-    /* line 93, project/_settings.scss */
+    /* line 94, project/_settings.scss */
     #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_order span {
       display: -webkit-box;
       display: -ms-flexbox;
@@ -809,7 +808,7 @@ label {
       border-radius: 50%;
       line-height: 24px;
       font-size: 16px; }
-  /* line 106, project/_settings.scss */
+  /* line 107, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_action {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -826,11 +825,11 @@ label {
     position: relative;
     top: 0;
     min-width: 38px; }
-    /* line 116, project/_settings.scss */
+    /* line 117, project/_settings.scss */
     #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_action .remove-item {
       position: absolute;
       top: 8px; }
-    /* line 121, project/_settings.scss */
+    /* line 122, project/_settings.scss */
     #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_action button {
       margin: 0 3px;
       width: 28px;
@@ -843,80 +842,80 @@ label {
       font-family: dashicons;
       font-size: 18px;
       font-style: normal; }
-  /* line 138, project/_settings.scss */
+  /* line 139, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .remove-item:before {
     content: "\f14f"; }
-  /* line 145, project/_settings.scss */
+  /* line 146, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .toggle-details:before {
     content: "\f347"; }
-  /* line 149, project/_settings.scss */
+  /* line 150, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .toggle-details.active:before {
     content: "\f343"; }
-  /* line 154, project/_settings.scss */
+  /* line 155, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .o-wrap_details {
     display: none; }
-    /* line 156, project/_settings.scss */
+    /* line 157, project/_settings.scss */
     #cf-calendar #cfc-settings .p-custom-fields_tab .o-wrap_details .u-disabled {
       display: none; }
-  /* line 164, project/_settings.scss */
+  /* line 165, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_conditions .c-fieldset {
     display: -webkit-box !important;
     display: -ms-flexbox !important;
     display: flex !important;
     border: 0;
     margin: 0; }
-  /* line 170, project/_settings.scss */
+  /* line 171, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_conditions .c-field_label {
     width: 100%;
     text-align: center;
     border-right: 0;
     border-bottom: 1px solid #ccc; }
-  /* line 177, project/_settings.scss */
+  /* line 178, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_conditions .c-field_input {
     width: 100%;
     text-align: center;
     padding-left: 8px;
     padding-right: 8px; }
-    /* line 183, project/_settings.scss */
+    /* line 184, project/_settings.scss */
     #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_conditions .c-field_input .c-fieldset {
       margin-top: 15px;
       border-top: none; }
-    /* line 188, project/_settings.scss */
+    /* line 189, project/_settings.scss */
     #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_conditions .c-field_input .c-field_label {
       padding: 3px initial8px;
       background: none; }
-    /* line 193, project/_settings.scss */
+    /* line 194, project/_settings.scss */
     #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_conditions .c-field_input .c-field_input {
       padding: 0 8px; }
-      /* line 195, project/_settings.scss */
+      /* line 196, project/_settings.scss */
       #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_conditions .c-field_input .c-field_input .c-field_label {
         min-height: auto; }
-    /* line 199, project/_settings.scss */
+    /* line 200, project/_settings.scss */
     #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_conditions .c-field_input .c-field_action {
       border: none; }
-  /* line 204, project/_settings.scss */
+  /* line 205, project/_settings.scss */
   #cf-calendar #cfc-settings .p-custom-fields_tab .c-field_conditions .c-field_add_condition {
     text-align: center;
     padding-bottom: 20px; }
-  /* line 216, project/_settings.scss */
+  /* line 217, project/_settings.scss */
   #cf-calendar #cfc-settings .p-calender-term_tab .cfc-calendar-term .cfc-terms-absolute {
     display: none; }
-  /* line 219, project/_settings.scss */
+  /* line 220, project/_settings.scss */
   #cf-calendar #cfc-settings .p-calender-term_tab .cfc-calendar-term .cfc-terms-relative {
     display: none; }
-  /* line 224, project/_settings.scss */
+  /* line 225, project/_settings.scss */
   #cf-calendar #cfc-settings .p-calender-term_tab .cfc-calendar-term .is-absolute .cfc-terms-absolute {
     display: block; }
-  /* line 227, project/_settings.scss */
+  /* line 228, project/_settings.scss */
   #cf-calendar #cfc-settings .p-calender-term_tab .cfc-calendar-term .is-absolute .cfc-terms-relative {
     display: none; }
-  /* line 233, project/_settings.scss */
+  /* line 234, project/_settings.scss */
   #cf-calendar #cfc-settings .p-calender-term_tab .cfc-calendar-term .is-relative .cfc-terms-absolute {
     display: none; }
-  /* line 236, project/_settings.scss */
+  /* line 237, project/_settings.scss */
   #cf-calendar #cfc-settings .p-calender-term_tab .cfc-calendar-term .is-relative .cfc-terms-relative {
     display: block; }
-  /* line 241, project/_settings.scss */
+  /* line 242, project/_settings.scss */
   #cf-calendar #cfc-settings .p-calender-term_tab .cfc-calendar-term dl {
     width: 100%;
     display: -webkit-box;
@@ -925,21 +924,21 @@ label {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center; }
-  /* line 246, project/_settings.scss */
+  /* line 247, project/_settings.scss */
   #cf-calendar #cfc-settings .p-calender-term_tab .cfc-calendar-term dt {
     padding-right: 10px;
     border-right: 1px solid #ccc; }
-  /* line 250, project/_settings.scss */
+  /* line 251, project/_settings.scss */
   #cf-calendar #cfc-settings .p-calender-term_tab .cfc-calendar-term dd {
     padding-left: 10px;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
     margin-bottom: 0; }
-  /* line 269, project/_settings.scss */
+  /* line 270, project/_settings.scss */
   #cf-calendar #cfc-settings .p-front-view_tab .cfc-monthly .only-weekly {
     display: none; }
-  /* line 276, project/_settings.scss */
+  /* line 277, project/_settings.scss */
   #cf-calendar #cfc-settings .p-schedule_tab .c-field_order {
     background: #2271b1;
     color: #fff;
@@ -953,6 +952,4 @@ label {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center; }
-
-
 /*# sourceMappingURL=cfc.css.map */
