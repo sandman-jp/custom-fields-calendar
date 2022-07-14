@@ -47,6 +47,7 @@ ob_start();
 		font-weight: bold;
 		color: #9e9889; }
 	.cfc-table .cfc-data, .cfc-table .cfc-item {
+		height: 3.5em;
 		margin: 0;
 		padding: 5px;
 		font-size: 14px;
