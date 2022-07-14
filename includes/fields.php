@@ -254,7 +254,7 @@ class fields{
 		
 		//開始が設定されている場合
 		if(!empty($condition['start']['year']) && $condition['start']['year'] != 'all'){
-			$limit = strtotime($condition['start']['year'].'-'.$condition['start']['month'].'-01 '.wp_timezone_string());
+			$limit = strtotime($condition['start']['year'].'-'.$condition['start']['month'].'-01');
 			
 			if($key <= $limit){
 				return false;
@@ -263,7 +263,7 @@ class fields{
 		
 		//終了が設定されている場合
 		if(!empty($condition['end']['year']) && $condition['end']['year'] != 'all'){
-			$limit = strtotime('last day of '.$condition['end']['year'].'-'.$condition['end']['month'].' '.wp_timezone_string());
+			$limit = strtotime('last day of '.$condition['end']['year'].'-'.$condition['end']['month']);
 			if($key > $limit){
 				return false;
 			}

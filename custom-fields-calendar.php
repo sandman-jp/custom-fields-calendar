@@ -6,7 +6,7 @@ Description: Calendar with custom fields.
 Version: 1.0.3-alpha
 Author: 地空 Chhkuw Design
 Author URI: 
-Text Domain: CFC
+Text Domain: cf_calendar
 Domain Path: /lang
 License: GPLv2 or later
 */
@@ -25,7 +25,8 @@ define('CFC_DIR', dirname(__FILE__));
 define('CFC_DIR_INCLUDES', CFC_DIR.'/includes');
 define('CFC_DIR_ASSETS', CFC_DIR.'/assets');
 define('CFC_DIR_TEMPLATES', CFC_DIR.'/templates');
-define('CFC_TEXTDOMAIN', 'CFC');
+define('CFC_DIR_LANG', CFC_DIR.'/lang');
+define('CFC_TEXTDOMAIN', 'cf_calendar');
 
 //post type
 define('CF_CALENDAR', 'cf-calendar');
@@ -48,8 +49,10 @@ class CustomFieldsCalendar {
    * Load plugin
    */
   function load(){
+		$res = load_plugin_textdomain('cf_calendar', false, plugin_basename( CFC_DIR_LANG ));
 		
 		//if(CFC_activate::is_acf_active()){
+		require_once CFC_DIR_INCLUDES.'/tools/timezone.php';
 		require_once CFC_DIR_INCLUDES.'/tools/options.php';
 		require_once CFC_DIR_INCLUDES.'/api/helper.php';
 		require_once CFC_DIR_INCLUDES.'/cf-calendar.php';
