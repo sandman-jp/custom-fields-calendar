@@ -592,6 +592,10 @@ jQuery(function($){
 			}
 			
 			input_val = $default.val();
+			if(input_val == null){
+				input_val = '';
+				$default.val('');
+			}
 			
 			//チェックボックス用を汎用に
 			input_name = $default.attr('name').replace('[]', '');
@@ -618,6 +622,7 @@ jQuery(function($){
 				choices = $('.field-choices textarea', this).val();
 				
 			case 'truefalse':
+				
 				input_val = input_val.split(',');
 				
 				//真偽は1かどうかだけ
@@ -674,11 +679,11 @@ jQuery(function($){
 					
 					break;
 			case 'textarea':
-				input_val = $default.val();
+				//input_val = $default.val();
 				field_html = '<textarea id="'+input_id+'" name="'+input_name+'">'+input_val+'</textarea>';
 				break;
 			default:
-				input_val = $default.val();
+				//input_val = $default.val();
 				field_html = '<input id="'+input_id+'" type="text" name="'+input_name+'" value="'+input_val+'">';
 			}
 			

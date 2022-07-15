@@ -75,35 +75,35 @@ $end_date_month = '';
 						name="custom-field-settings[fields][%id%][field-conditions][%cid%][cond1][]" 
 						value="1"
 						checked
-						> <?php _e('First', CFC_TEXTDOMAIN); ?></label>
+						> <?php _ex('First', 'week', CFC_TEXTDOMAIN); ?></label>
 				<label>
 					<input 
 						type="checkbox" 
 						name="custom-field-settings[fields][%id%][field-conditions][%cid%][cond1][]" 
 						value="2"
 						checked
-						> <?php _e('Second', CFC_TEXTDOMAIN); ?></label>
+						> <?php _ex('Second', 'week', CFC_TEXTDOMAIN); ?></label>
 				<label>
 					<input 
 						type="checkbox" 
 						name="custom-field-settings[fields][%id%][field-conditions][%cid%][cond1][]" 
 						value="3"
 						checked
-						> <?php _e('Third', CFC_TEXTDOMAIN); ?></label>
+						> <?php _ex('Third', 'week', CFC_TEXTDOMAIN); ?></label>
 				<label>
 					<input 
 						type="checkbox" 
 						name="custom-field-settings[fields][%id%][field-conditions][%cid%][cond1][]" 
 						value="4"
 						checked
-						> <?php _e('Fourth', CFC_TEXTDOMAIN); ?></label>
+						> <?php _ex('Fourth','week',  CFC_TEXTDOMAIN); ?></label>
 				<label>
 					<input 
 						type="checkbox" 
 						name="custom-field-settings[fields][%id%][field-conditions][%cid%][cond1][]" 
 						value="5"
 						checked
-						> <?php _e('Fifth', CFC_TEXTDOMAIN); ?></label>
+						> <?php _ex('Fifth', 'week', CFC_TEXTDOMAIN); ?></label>
 			</div>
 		</div>
 	</div>
