@@ -19,6 +19,12 @@ WP6.0以上にて動作確認済み
 
 GPLv2 or later
 
+## Roadmap
+今後の予定は、
+・共通設定でスケジュールやバリデーションを管理する予定
+・フィルター/アクション フックをつける（今はまったくないので）
+・データの入出力に対応予定
+
 ## Author
 
 [TOMIZAWA Kan / chhkuw design](https://github.com/sandman-jp)
