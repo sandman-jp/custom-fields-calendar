@@ -2,7 +2,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Custom Fields Calendar\n"
 "POT-Creation-Date: 2022-07-15 00:01+0900\n"
+<<<<<<< HEAD
 "PO-Revision-Date: 2022-07-15 00:09+0900\n"
+=======
+"PO-Revision-Date: 2022-07-15 16:06+0900\n"
+>>>>>>> main
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -103,16 +107,28 @@ msgstr "現在の曜日"
 
 #: includes/admin/view/settings/general.php:55
 msgid "Display Period for editting"
+<<<<<<< HEAD
 msgstr "編集用の表示期間"
 
 #: includes/admin/view/settings/general.php:58
 msgid "The beginning of the period"
 msgstr "期間の表示開始"
+=======
+msgstr "編集用の表示月"
+
+#: includes/admin/view/settings/general.php:58
+msgid "The beginning of the period"
+msgstr "表示開始月"
+>>>>>>> main
 
 #: includes/admin/view/settings/general.php:63
 #: includes/admin/view/settings/general.php:98
 msgid "Absolute"
+<<<<<<< HEAD
 msgstr "絶対的な"
+=======
+msgstr "年月指定"
+>>>>>>> main
 
 #: includes/admin/view/settings/general.php:64
 #: includes/admin/view/settings/general.php:99
@@ -130,6 +146,7 @@ msgstr "から始める"
 
 #: includes/admin/view/settings/general.php:84
 msgid "From"
+<<<<<<< HEAD
 msgstr "から"
 
 #: includes/admin/view/settings/general.php:86
@@ -141,6 +158,17 @@ msgstr "今から数ヶ月後"
 #, fuzzy
 msgid "The end of the period"
 msgstr "期間の終了"
+=======
+msgstr ""
+
+#: includes/admin/view/settings/general.php:86
+msgid "months from now"
+msgstr ""
+
+#: includes/admin/view/settings/general.php:93
+msgid "The end of the period"
+msgstr "表示終了月"
+>>>>>>> main
 
 #: includes/admin/view/settings/general.php:103
 msgid "Finish until"
@@ -148,12 +176,20 @@ msgstr "終了まで"
 
 #: includes/admin/view/settings/general.php:117
 msgid "Until"
+<<<<<<< HEAD
 msgstr "まで"
 
 #: includes/admin/view/settings/general.php:119
 #, fuzzy
 msgid "months later from beginning."
 msgstr "初めから数ヶ月後。"
+=======
+msgstr ""
+
+#: includes/admin/view/settings/general.php:119
+msgid "months later from beginning."
+msgstr ""
+>>>>>>> main
 
 #: includes/admin/view/settings/schedule.php:4
 msgid "Date"
@@ -181,9 +217,14 @@ msgid "Weekly Type"
 msgstr "週間タイプ"
 
 #: includes/admin/view/settings/template.php:85
+<<<<<<< HEAD
 #, fuzzy
 msgid "Continuity of Month"
 msgstr "月の連続性"
+=======
+msgid "Continuity of Month"
+msgstr "月のつなぎ目"
+>>>>>>> main
 
 #: includes/admin/view/settings/template.php:89
 msgid "Seamless"
@@ -358,6 +399,9 @@ msgid "Calendar with custom fields."
 msgstr "カスタムフィールドを使用したカレンダー."
 
 #. Author of the plugin/theme
+<<<<<<< HEAD
 #, fuzzy
+=======
+>>>>>>> main
 msgid "地空 Chhkuw Design"
 msgstr "地空 Chhkuw Design"
