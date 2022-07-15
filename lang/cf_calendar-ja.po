@@ -1,35 +1,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Custom Fields Calendar\n"
-"POT-Creation-Date: 2022-07-15 00:01+0900\n"
-<<<<<<< HEAD
-"PO-Revision-Date: 2022-07-15 00:09+0900\n"
-=======
-"PO-Revision-Date: 2022-07-15 16:06+0900\n"
->>>>>>> main
+"POT-Creation-Date: 2022-07-15 20:43+0900\n"
+"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.1.1\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: custom-fields-calendar.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.min.js\n"
 
 #: includes/admin/admin.php:76
 msgid "Custom Fields Calendar Common Settings"
 msgstr "カスタムフィールズカレンダー共通設定"
 
-#: includes/admin/admin.php:77
+#: includes/admin/admin.php:77 templates/admin/common-settings.php:1
 msgid "Common Settings"
 msgstr "共通の設定"
 
@@ -63,7 +49,7 @@ msgstr "スケジュール"
 
 #: includes/admin/view/edit.php:60
 msgid "Custom Fields Settings"
-msgstr "ユーザー設定フィールドの設定"
+msgstr "カスタムフィールドの設定"
 
 #: includes/admin/view/edit.php:64
 msgid "General Settings"
@@ -107,89 +93,49 @@ msgstr "現在の曜日"
 
 #: includes/admin/view/settings/general.php:55
 msgid "Display Period for editting"
-<<<<<<< HEAD
 msgstr "編集用の表示期間"
 
 #: includes/admin/view/settings/general.php:58
 msgid "The beginning of the period"
-msgstr "期間の表示開始"
-=======
-msgstr "編集用の表示月"
-
-#: includes/admin/view/settings/general.php:58
-msgid "The beginning of the period"
 msgstr "表示開始月"
->>>>>>> main
 
 #: includes/admin/view/settings/general.php:63
-#: includes/admin/view/settings/general.php:98
+#: includes/admin/view/settings/general.php:100
 msgid "Absolute"
-<<<<<<< HEAD
 msgstr "絶対的な"
-=======
-msgstr "年月指定"
->>>>>>> main
 
 #: includes/admin/view/settings/general.php:64
-#: includes/admin/view/settings/general.php:99
+#: includes/admin/view/settings/general.php:101
 msgid "Relative"
 msgstr "相対的"
 
-#: includes/admin/view/settings/general.php:65
-#: includes/admin/view/settings/general.php:100
-msgid "Today"
-msgstr "今日"
-
-#: includes/admin/view/settings/general.php:69
+#: includes/admin/view/settings/general.php:71
 msgid "Start from"
 msgstr "から始める"
 
-#: includes/admin/view/settings/general.php:84
+#: includes/admin/view/settings/general.php:86
 msgid "From"
-<<<<<<< HEAD
 msgstr "から"
 
-#: includes/admin/view/settings/general.php:86
-#, fuzzy
-msgid "months from now"
-msgstr "今から数ヶ月後"
-
-#: includes/admin/view/settings/general.php:93
-#, fuzzy
-msgid "The end of the period"
-msgstr "期間の終了"
-=======
-msgstr ""
-
-#: includes/admin/view/settings/general.php:86
+#: includes/admin/view/settings/general.php:88
 msgid "months from now"
 msgstr ""
 
-#: includes/admin/view/settings/general.php:93
+#: includes/admin/view/settings/general.php:95
 msgid "The end of the period"
 msgstr "表示終了月"
->>>>>>> main
 
-#: includes/admin/view/settings/general.php:103
+#: includes/admin/view/settings/general.php:107
 msgid "Finish until"
 msgstr "終了まで"
 
-#: includes/admin/view/settings/general.php:117
+#: includes/admin/view/settings/general.php:121
 msgid "Until"
-<<<<<<< HEAD
 msgstr "まで"
 
-#: includes/admin/view/settings/general.php:119
-#, fuzzy
-msgid "months later from beginning."
-msgstr "初めから数ヶ月後。"
-=======
-msgstr ""
-
-#: includes/admin/view/settings/general.php:119
+#: includes/admin/view/settings/general.php:123
 msgid "months later from beginning."
 msgstr ""
->>>>>>> main
 
 #: includes/admin/view/settings/schedule.php:4
 msgid "Date"
@@ -204,41 +150,35 @@ msgstr "ラベル"
 msgid "Holiday"
 msgstr "休日"
 
-#: includes/admin/view/settings/template.php:72
+#: includes/admin/view/settings/template.php:73
 msgid "Calendar Type"
 msgstr "カレンダーの種類"
 
-#: includes/admin/view/settings/template.php:76
+#: includes/admin/view/settings/template.php:77
 msgid "Monthly Type"
 msgstr "月間タイプ"
 
-#: includes/admin/view/settings/template.php:79
+#: includes/admin/view/settings/template.php:80
 msgid "Weekly Type"
 msgstr "週間タイプ"
 
-#: includes/admin/view/settings/template.php:85
-<<<<<<< HEAD
-#, fuzzy
-msgid "Continuity of Month"
-msgstr "月の連続性"
-=======
+#: includes/admin/view/settings/template.php:86
 msgid "Continuity of Month"
 msgstr "月のつなぎ目"
->>>>>>> main
 
-#: includes/admin/view/settings/template.php:89
+#: includes/admin/view/settings/template.php:90
 msgid "Seamless"
 msgstr "シームレス"
 
-#: includes/admin/view/settings/template.php:96
+#: includes/admin/view/settings/template.php:97
 msgid "Column Header"
 msgstr "カラムヘッダー"
 
-#: includes/admin/view/settings/template.php:100
+#: includes/admin/view/settings/template.php:101
 msgid "Show column header"
 msgstr "列ヘッダーを追加"
 
-#: includes/admin/view/settings/template.php:107
+#: includes/admin/view/settings/template.php:108
 msgid "Additional Stylesheet"
 msgstr "追加スタイルシート"
 
@@ -282,6 +222,22 @@ msgstr "カレンダーが見つかりません"
 msgid "No Calendars found in Trash"
 msgstr "ごみ箱にカレンダーが見つかりません"
 
+#: templates/admin/common-settings.php:5
+msgid "Schedule & Holiday Settings"
+msgstr "スケジュールと休日設定"
+
+#: templates/admin/common-settings.php:5 templates/admin/common-settings.php:6
+msgid "Not Available"
+msgstr ""
+
+#: templates/admin/common-settings.php:6
+msgid "Validation Rule Settings"
+msgstr "バリデーション設定"
+
+#: templates/admin/common-settings.php:7
+msgid "Other Settings"
+msgstr "その他設定"
+
 #: templates/admin/custom-fields.php:17
 msgid "Field Name"
 msgstr "フィールド名"
@@ -315,24 +271,29 @@ msgid "Week"
 msgstr "週"
 
 #: templates/admin/custom-fields/supports/conditions-block.php:78
+msgctxt "week"
 msgid "First"
-msgstr "最初へ"
+msgstr "第一"
 
 #: templates/admin/custom-fields/supports/conditions-block.php:85
+msgctxt "week"
 msgid "Second"
-msgstr "秒"
+msgstr "第二"
 
 #: templates/admin/custom-fields/supports/conditions-block.php:92
+msgctxt "week"
 msgid "Third"
-msgstr "第3"
+msgstr "第三"
 
 #: templates/admin/custom-fields/supports/conditions-block.php:99
+msgctxt "week"
 msgid "Fourth"
-msgstr "第4"
+msgstr "第四"
 
 #: templates/admin/custom-fields/supports/conditions-block.php:106
+msgctxt "week"
 msgid "Fifth"
-msgstr "第５"
+msgstr "第五"
 
 #: templates/admin/custom-fields/supports/conditions-block.php:113
 msgid "Weekday"
@@ -388,7 +349,7 @@ msgstr "タイトルテキスト"
 
 #: templates/admin/custom-fields/supports/validation.php:3
 msgid "Validation"
-msgstr "検証"
+msgstr "バリデーション"
 
 #. Plugin Name of the plugin/theme
 msgid "Custom Fields Calendar"
@@ -399,9 +360,8 @@ msgid "Calendar with custom fields."
 msgstr "カスタムフィールドを使用したカレンダー."
 
 #. Author of the plugin/theme
-<<<<<<< HEAD
-#, fuzzy
-=======
->>>>>>> main
 msgid "地空 Chhkuw Design"
 msgstr "地空 Chhkuw Design"
+
+#~ msgid "Today"
+#~ msgstr "今日"
