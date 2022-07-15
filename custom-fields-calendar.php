@@ -3,7 +3,7 @@
 Plugin Name: Custom Fields Calendar
 Plugin URI: 
 Description: Calendar with custom fields.
-Version: 1.2.0-alpha
+Version: 1.2.1-alpha
 Author: 地空 Chhkuw Design
 Author URI: 
 Text Domain: CFC
