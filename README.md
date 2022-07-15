@@ -13,7 +13,7 @@ WP6.0以上にて動作確認済み
 
 ## How to use
 
-[CF カレンダー(Custom Field Calendar α version)公開]https://editor.note.com/notes/nf549f5ce4998/edit/
+[CF カレンダー(Custom Field Calendar α version)公開](https://editor.note.com/notes/nf549f5ce4998/edit/)
 
 ## Licence
 
