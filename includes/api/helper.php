@@ -61,6 +61,25 @@ function cfc_get_start_week($time, $start=0){
 }
 
 /* system */
+function cfc_get_template_file_path($path){
+	
+	$roots = array(
+		get_stylesheet_directory().'/cfc',
+		get_template_directory().'/cfc',
+		CFC_DIR_TEMPLATES,
+	);
+	
+	$fullpath = '';
+	foreach($roots as $root){
+		$fullpath = $root.$path.'.php';
+		
+		if(file_exists($fullpath)){
+			return $fullpath;
+		}
+	}
+	return false;
+}
+
 function cfc_get_template_part($path, $sub=null, $args=array()){
 	
 	if(!is_null($sub) ){
@@ -72,9 +91,9 @@ function cfc_get_template_part($path, $sub=null, $args=array()){
 		}
 	}
 	
-	$fullpath = CFC_DIR_TEMPLATES.$path.'.php';
+	$fullpath = cfc_get_template_file_path($path);
 	
-	if(file_exists($fullpath)){
+	if($fullpath){
 		
 		if(!empty($args)){
 			extract($args);
@@ -117,7 +136,7 @@ function cfc_get_values($key){
 	
 }
 
-function cfc_get_customs($key){
+function cfc_get_customs($key, $show_nodata_key=false){
 	
 	$fields = CFC()->get_instance('CFC\fields');
 	
@@ -125,7 +144,7 @@ function cfc_get_customs($key){
 		return ;
 	}
 	
-	$values = $fields->customs($key);
+	$values = $fields->customs($key, $show_nodata_key);
 	
 	if($values) {
 		return $values;
