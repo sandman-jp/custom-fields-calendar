@@ -14,7 +14,7 @@ $fields_position = isset($fields_position['fields-position']) ? $fields_position
 </div>
 
 <div class="btn-wrap btn-add-field">
-	<button id="btn_add-field" class="button button-primary button-large">Add Field</button>
+	<button id="btn_add-field" class="button button-primary button-large"><?php _e('Add Field', CFC_TEXTDOMAIN); ?></button>
 </div>
 
 

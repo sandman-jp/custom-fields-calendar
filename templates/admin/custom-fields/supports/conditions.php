@@ -5,7 +5,7 @@
 		<div class="field-condition-list u-w100per"></div>
 	</div>
 	<div class="c-field_add_condition" data-type="button">
-		<button class="btn_add-condition button">Add Condition</button>
+		<button class="btn_add-condition button"><?php _e('Add Condition', CFC_TEXTDOMAIN); ?></button>
 	</div>
 	
 </div>

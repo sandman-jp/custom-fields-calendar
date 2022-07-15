@@ -13,16 +13,14 @@ This plugin is STILL ALPHA version. Please use at your own risk
 ## Requirement
 WP6.0以上にて動作確認済み
 
-## Usage
-
 ## Install
 
 ## Contribution
 
 ## Licence
 
-[MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
+GPLv2 or later
 
 ## Author
 
-[tcnksm](https://github.com/tcnksm)
+[TOMIZAWA Kan / chhkuw design](https://github.com/sandman-jp)

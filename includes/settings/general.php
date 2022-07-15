@@ -37,6 +37,10 @@ class general extends setting{
 	
 	function get_datetime($period){
 		
+		
+		CFC\tools\timezone::set_timezone();
+		
+		
 		$type = $this->_data['calendar-term'][$period]['type'];
 		$date_str = isset($this->_data['calendar-term'][$period][$type]) ? $this->_data['calendar-term'][$period][$type] : '';
 		
@@ -44,16 +48,15 @@ class general extends setting{
 			
 			$day = $period == 'start' ? 'first day of' : 'last day of';
 			$date = strtotime($day.' '.$date_str['year'].'-'.$date_str['month']);
-			$date -= wp_date('Z');
+			
 		}elseif($type == 'relative'){
 			if($period == 'end'){
 				$start = $this->_data['calendar-term']['start']['datetime'];
 				//var_dump(wp_date('Y-m-d', $start));
-				$date = strtotime(wp_date('Y-m-d', $start).' + '.$date_str.' months');
+				$date = strtotime(wp_date('Y-m-d', $start).' + '.$date_str.' months')-1;
 			}else{
 				//start
 				$date = strtotime('first day of '.$date_str.' months 00:00:00');
-				$date -= wp_date('Z');
 			}
 			
 		}
@@ -72,5 +75,6 @@ class general extends setting{
 		
 		$this->_data['calendar-term'][$period]['datetime'] = $date;
 		
+		CFC\tools\timezone::reset_timezone();
 	}
 }

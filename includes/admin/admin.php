@@ -76,10 +76,14 @@ class admin{
 			__( 'Custom Fields Calendar Common Settings', CFC_TEXTDOMAIN), 
 			__( 'Common Settings', CFC_TEXTDOMAIN),
 			$this->capability,
-      'edit.php?post_type='.CF_CALENDAR.'?common-settings',
-      null
+      'common-settings',
+      array($this, 'common_settings_page'),
 		);
 		
+	}
+	
+	function common_settings_page(){
+		include CFC_DIR_INCLUDES.'/admin/view/common-settings.php';
 	}
 	/*
 	function render_my_meta_box(){
@@ -97,9 +101,6 @@ class admin{
 	    );
 	}
 	*/
-	function option_page(){
-		//do_action('CFC/load/field_groups');
-	}
 	
 }
 
