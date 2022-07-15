@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Custom Fields Calendar\n"
-"POT-Creation-Date: 2022-07-15 00:01+0900\n"
+"POT-Creation-Date: 2022-07-15 20:45+0900\n"
 "PO-Revision-Date: 2022-07-14 23:30+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Custom Fields Calendar Common Settings"
 msgstr ""
 
-#: includes/admin/admin.php:77
+#: includes/admin/admin.php:77 templates/admin/common-settings.php:1
 msgid "Common Settings"
 msgstr ""
 
@@ -110,45 +110,40 @@ msgid "The beginning of the period"
 msgstr ""
 
 #: includes/admin/view/settings/general.php:63
-#: includes/admin/view/settings/general.php:98
+#: includes/admin/view/settings/general.php:100
 msgid "Absolute"
 msgstr ""
 
 #: includes/admin/view/settings/general.php:64
-#: includes/admin/view/settings/general.php:99
+#: includes/admin/view/settings/general.php:101
 msgid "Relative"
 msgstr ""
 
-#: includes/admin/view/settings/general.php:65
-#: includes/admin/view/settings/general.php:100
-msgid "Today"
-msgstr ""
-
-#: includes/admin/view/settings/general.php:69
+#: includes/admin/view/settings/general.php:71
 msgid "Start from"
 msgstr ""
 
-#: includes/admin/view/settings/general.php:84
+#: includes/admin/view/settings/general.php:86
 msgid "From"
 msgstr ""
 
-#: includes/admin/view/settings/general.php:86
+#: includes/admin/view/settings/general.php:88
 msgid "months from now"
 msgstr ""
 
-#: includes/admin/view/settings/general.php:93
+#: includes/admin/view/settings/general.php:95
 msgid "The end of the period"
 msgstr ""
 
-#: includes/admin/view/settings/general.php:103
+#: includes/admin/view/settings/general.php:107
 msgid "Finish until"
 msgstr ""
 
-#: includes/admin/view/settings/general.php:117
+#: includes/admin/view/settings/general.php:121
 msgid "Until"
 msgstr ""
 
-#: includes/admin/view/settings/general.php:119
+#: includes/admin/view/settings/general.php:123
 msgid "months later from beginning."
 msgstr ""
 
@@ -165,35 +160,35 @@ msgstr ""
 msgid "Holiday"
 msgstr ""
 
-#: includes/admin/view/settings/template.php:72
+#: includes/admin/view/settings/template.php:73
 msgid "Calendar Type"
 msgstr ""
 
-#: includes/admin/view/settings/template.php:76
+#: includes/admin/view/settings/template.php:77
 msgid "Monthly Type"
 msgstr ""
 
-#: includes/admin/view/settings/template.php:79
+#: includes/admin/view/settings/template.php:80
 msgid "Weekly Type"
 msgstr ""
 
-#: includes/admin/view/settings/template.php:85
+#: includes/admin/view/settings/template.php:86
 msgid "Continuity of Month"
 msgstr ""
 
-#: includes/admin/view/settings/template.php:89
+#: includes/admin/view/settings/template.php:90
 msgid "Seamless"
 msgstr ""
 
-#: includes/admin/view/settings/template.php:96
+#: includes/admin/view/settings/template.php:97
 msgid "Column Header"
 msgstr ""
 
-#: includes/admin/view/settings/template.php:100
+#: includes/admin/view/settings/template.php:101
 msgid "Show column header"
 msgstr ""
 
-#: includes/admin/view/settings/template.php:107
+#: includes/admin/view/settings/template.php:108
 msgid "Additional Stylesheet"
 msgstr ""
 
@@ -237,6 +232,23 @@ msgstr ""
 msgid "No Calendars found in Trash"
 msgstr ""
 
+#: templates/admin/common-settings.php:5
+msgid "Schedule & Holiday Settings"
+msgstr ""
+
+#: templates/admin/common-settings.php:5
+#: templates/admin/common-settings.php:6
+msgid "Not Available"
+msgstr ""
+
+#: templates/admin/common-settings.php:6
+msgid "Validation Rule Settings"
+msgstr ""
+
+#: templates/admin/common-settings.php:7
+msgid "Other Settings"
+msgstr ""
+
 #: templates/admin/custom-fields.php:17
 msgid "Field Name"
 msgstr ""
@@ -270,22 +282,27 @@ msgid "Week"
 msgstr ""
 
 #: templates/admin/custom-fields/supports/conditions-block.php:78
+msgctxt "week"
 msgid "First"
 msgstr ""
 
 #: templates/admin/custom-fields/supports/conditions-block.php:85
+msgctxt "week"
 msgid "Second"
 msgstr ""
 
 #: templates/admin/custom-fields/supports/conditions-block.php:92
+msgctxt "week"
 msgid "Third"
 msgstr ""
 
 #: templates/admin/custom-fields/supports/conditions-block.php:99
+msgctxt "week"
 msgid "Fourth"
 msgstr ""
 
 #: templates/admin/custom-fields/supports/conditions-block.php:106
+msgctxt "week"
 msgid "Fifth"
 msgstr ""
 
