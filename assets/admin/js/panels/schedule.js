@@ -73,7 +73,7 @@ jQuery(function($){
 			dateFormat: 'yy-mm-dd',
 		});
 		
-		$('.remove-item').click(function(e){
+		$('.remove-item', $html).click(function(e){
 			e.preventDefault();
 			let tgt = $(this).data('target');
 			$('#'+tgt).remove();

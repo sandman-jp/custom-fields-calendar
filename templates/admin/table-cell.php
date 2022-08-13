@@ -15,7 +15,7 @@ $day_index = cfc_get_start_week($time_id, $first_dw);
 		if(cfc_is_holiday($time_id)){
 			echo 'cfc-holiday';
 		}
-		?>"><?php echo implode(',', cfc_get_date_schedule_labels($time_id));?></div>
+		?> cfc-schedule-label"><?php echo implode(',', cfc_get_date_schedule_labels($time_id));?></div>
 	  <div class="c-fieldset" id="fieldset_<?php echo $time_id; ?>" data-id="<?php echo $time_id; ?>">
 		
 		  <h3 class="sortable-handle">

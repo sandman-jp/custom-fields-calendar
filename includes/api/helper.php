@@ -197,7 +197,7 @@ function cfc_get_date_schedule_labels($key, $post_id=null){
 	if(isset($schedules[$key]) && is_array($schedules[$key])){
 		
 		foreach($schedules[$key] as $colum){
-			$labels[] = $colum['label'];
+			$labels[] = esc_html($colum['label']);
 		}
 	}
 	

@@ -118,13 +118,7 @@
 				//background: $lite-yellow;
 			}
 		}
-		
-		.cfc-holiday {
-			color: #e96c6c;
-		}
-		
 	}
-	
 	
 	.tooltip-content {
 		display: none;
@@ -267,4 +261,14 @@
 
 .btn-add-field {
 	text-align: right;
+}
+
+
+
+.cfc-holiday {
+	color: #e96c6c;
+}
+
+.cfc-schedule-label {
+	min-height: 1.2rem;
 }
