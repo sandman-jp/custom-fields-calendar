@@ -1,13 +1,15 @@
 <div class="c-fieldset">
 	<div class="c-field">
-		<div class="c-field_input u-w50"></div>
+		<div class="c-field_input u-w50 c-field_input-short"></div>
+		<div class="c-field_input u-w80 u-bo_l c-field_input-short"><?php _e('Post ID', CFC_TEXTDOMAIN); ?></div>
 		<div class="c-field_label u-w300"><?php _e('Date', CFC_TEXTDOMAIN); ?></div>
 		<div class="c-field_input"><?php _e('Label', CFC_TEXTDOMAIN); ?></div>
-		<div class="c-field_input u-w100"><?php _e('Holiday', CFC_TEXTDOMAIN); ?></div>
+		<div class="c-field_input u-w50 u-bo_l c-field_input-short"><?php _e('Holiday', CFC_TEXTDOMAIN); ?></div>
+		<div class="c-field_input u-w50 u-bo_l c-field_input-short"></div>
 	</div>
 </div>
 
-<div id="schedule-list">
+<div id="schedule-list" class="edit-post">
 
 
 

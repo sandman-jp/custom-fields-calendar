@@ -47,11 +47,12 @@ class settings{
 		
 		$this->_settings_data = array();
 		
-		$meta_data = get_post_meta($this->post_id, 'cfc_settings', true);
 		
 		///
-		foreach($this->settings as $setting){
-			$this->_settings_data = $setting->parse($this->_settings_data, $meta_data);
+		foreach($this->settings as $key => $val){
+			$meta_data = get_post_meta($this->post_id, 'cfc_'.$key, true);
+			
+			$this->_settings_data = $val->parse($this->_settings_data, $meta_data);
 		}
 		
 	}
@@ -82,10 +83,10 @@ class settings{
 	//
 	function update($key, $_data){
 		
-		$this->_settings_data[$key] = $this->settings[$key]->format($_data);
+		//$this->_settings_data[$key] = $this->settings[$key]->format($_data);
 		
 		
-		update_post_meta($this->post_id, 'cfc_settings', $this->_settings_data);
+		update_post_meta($this->post_id, 'cfc_'.$key, $this->settings[$key]->format($_data));
 		
 	}
 	

@@ -157,19 +157,7 @@ class cf_calendar{
 		
 		
 	}
-	/*
-	private function _update_all_cell_data($post_id, $cfc_data){
-		
-		if(!is_array($cfc_data)){
-			return ;
-		}
-		
-		foreach($cfc_data as $key=>$data){
-			update_post_meta($this->post_id, 'cfc-'.$key, $data);
-		}
-		
-	}
-	*/
+	
 }
 
 CFC()->register_instance('CFC\admin\cf_calendar');

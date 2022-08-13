@@ -19,23 +19,25 @@ class custom_field extends setting{
 	function parse($settings ,$meta_data){
 		
 		$pane_name = $this->name.'-settings';
-		
-		if(empty($meta_data[$pane_name])){
+		/*
+		if(empty($meta_data)){
 			$settings[$pane_name] = null;
 			return $settings;
 		}
-		
-		foreach($meta_data[$pane_name] as $kk => $vv){
-			
-			if($kk == 'fields' && !empty($meta_data[$pane_name]['fields'])){
+		*/
+		if($meta_data){
+			foreach($meta_data as $kk => $vv){
 				
-				foreach($meta_data[$pane_name]['fields'] as $k=>$v){
+				if($kk == 'fields' && !empty($meta_data['fields'])){
 					
-					$settings[$pane_name]['fields'][(int)$k] = $v;
+					foreach($meta_data['fields'] as $k=>$v){
+						
+						$settings[$pane_name]['fields'][(int)$k] = $v;
+					}
+					
+				}else{
+					$settings[$pane_name][$kk] = $vv;
 				}
-				
-			}else{
-				$settings[$pane_name][$kk] = $vv;
 			}
 		}
 		

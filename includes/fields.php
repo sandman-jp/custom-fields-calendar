@@ -15,6 +15,7 @@ require_once CFC_DIR_INCLUDES.'/fields/field.php';
 class fields{
 	
 	private $_field_inputs_template; //使い回し用
+	public $prefix = 'cfc_field_';
 	
 	function __construct($post_id){
 		
@@ -44,10 +45,10 @@ class fields{
 		foreach($_data as $k => $v){
 			if(is_array($v)){
 				foreach($v as $kk => $vv){
-					update_post_meta($this->post_id, 'cfc_'.$k.'_'.$kk, $vv);
+					update_post_meta($this->post_id, $this->prefix.$k.'_'.$kk, $vv);
 				}
 			}else{
-				update_post_meta($this->post_id, 'cfc_'.$k, $v);
+				update_post_meta($this->post_id, $this->prefix.$k, $v);
 			}
 			
 		}
@@ -58,7 +59,7 @@ class fields{
 		global $wpdb;
 		
 		//設定の除外
-		$sql = sprintf("SELECT meta_key FROM %s WHERE post_id=%d AND meta_key LIKE '%s%%' AND meta_key != 'cfc_settings'", $wpdb->postmeta, $this->post_id, 'cfc_');
+		$sql = sprintf("SELECT meta_key FROM %s WHERE post_id=%d AND meta_key LIKE '%s%%' AND meta_key != 'cfc_settings'", $wpdb->postmeta, $this->post_id, $this->prefix);
 		
 		$old_meta = $wpdb->get_col($sql);
 		
@@ -77,13 +78,13 @@ class fields{
 	
 	private function _get_post_meta($key){
 		global $wpdb;
-		$sql = sprintf("SELECT * FROM %s WHERE post_id=%d AND meta_key LIKE '%s%%'", $wpdb->postmeta, $this->post_id, 'cfc_'.$key.'_');
+		$sql = sprintf("SELECT * FROM %s WHERE post_id=%d AND meta_key LIKE '%s%%'", $wpdb->postmeta, $this->post_id, $this->prefix.$key.'_');
 		
 		$metas = $wpdb->get_results($sql);
 		$value = array();
 		if($metas){
 			foreach($metas as $meta){
-				$cf_key = str_replace('cfc_'.$key.'_', '', $meta->meta_key);
+				$cf_key = str_replace($this->prefix.$key.'_', '', $meta->meta_key);
 				$value[$cf_key] = $meta->meta_value;
 			}
 		}

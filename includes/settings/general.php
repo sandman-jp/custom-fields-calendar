@@ -19,13 +19,13 @@ class general extends setting{
 	function parse($settings ,$meta_data){
 		
 		$pane_name = $this->name.'-settings';
-		
-		if(empty($meta_data[$pane_name])){
-			$settings[$pane_name] = null;
-			return $settings;
-		}
-		
-		$this->_data = $meta_data[$pane_name];
+		// 
+		// if(empty($meta_data)){
+		// 	$settings[$pane_name] = null;
+		// 	return $settings;
+		// }
+		// 
+		$this->_data = $meta_data;
 		
 		$this->get_datetime('start');
 		$this->get_datetime('end');

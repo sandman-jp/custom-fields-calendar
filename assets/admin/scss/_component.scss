@@ -103,6 +103,42 @@
 		font-style: normal;
 		background: none;
 	}
+	
+	
+	
+	button {
+		margin: 0 3px;
+		width: 28px;
+		height: 28px;
+		border: none;
+		border-radius: 50%;
+		background: none;
+		color: #2271b1;
+		cursor: pointer;
+		font-family: dashicons;
+		font-size: 18px;
+		font-style: normal;
+	}
+	
+	.remove-item{
+		&:before {
+			content: "\f14f";
+		}
+		&[disabled] {
+			visibility: hidden;
+		}
+	}
+	//トグルボタン
+	.toggle-details {
+			
+			&:before {
+				content: "\f347";
+			}
+			
+			&.active:before {
+				content: "\f343";
+			}
+	}
 }
 
 .c-field {
@@ -129,6 +165,13 @@
 		display: flex;
 		align-items: center;
 		min-height: 50px;
+		
+		&.c-field_input-short {
+			padding: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 		
 		span {
 			white-space: nowrap;

@@ -41,8 +41,8 @@ class CustomFieldsCalendar {
 		add_action('plugins_loaded', array($this, 'load'));
 		
 		
-		define('CFC_URL', plugins_url('/', __FILE__));
-		define('CFC_ASSETS_URL', CFC_URL.'assets');
+		define('CFC_URL', plugins_url('', __FILE__));
+		define('CFC_ASSETS_URL', CFC_URL.'/assets');
 	}
 	
 	/*

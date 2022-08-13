@@ -93,7 +93,6 @@ function cfc_get_template_part($path, $sub=null, $args=array()){
 	
 	$fullpath = cfc_get_template_file_path($path);
 	
-	
 	if($fullpath){
 		
 		if(!empty($args)){

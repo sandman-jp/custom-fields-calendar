@@ -1,7 +1,14 @@
+.post-type-cf-calendar {
+	#cfc-settings {
+		padding: 0 12px 12px;
+		border: 1px solid #c3c4c7;
+		background: #fff;
+	}
+}
+
 #cfc-settings {
-	padding: 0 12px 12px;
-	border: 1px solid #c3c4c7;
-	background: #fff;
+	
+	padding: 0;
 	
 	.c-fieldset {
 		border-top: 2px solid $bo-gray;
@@ -10,9 +17,10 @@
 	}
 	
 	#setting-tabs {
-		margin: 0 -12px;
+		margin: 0;
 		background: #999;
 		padding: 0;
+		
 		ul{
 			display: flex;
 			width: 100%;
@@ -118,39 +126,8 @@
 				position: absolute;
 				top: 8px;
 			}
-			
-			button {
-				margin: 0 3px;
-				width: 28px;
-				height: 28px;
-				border: none;
-				border-radius: 50%;
-				background: none;
-				color: #2271b1;
-				cursor: pointer;
-				font-family: dashicons;
-				font-size: 18px;
-				font-style: normal;
-			}
 		}
 	
-	
-		.remove-item{
-			&:before {
-				content: "\f14f";
-			}
-		}
-		//トグルボタン
-		.toggle-details {
-				
-				&:before {
-					content: "\f347";
-				}
-				
-				&.active:before {
-					content: "\f343";
-				}
-		}
 		
 		.o-wrap_details {
 			display: none;
@@ -193,6 +170,7 @@
 				
 				.c-field_input {
 					padding: 0 8px;
+					
 					.c-field_label {
 						min-height: auto;
 					}
@@ -282,5 +260,28 @@
 			align-items: center;
 			justify-content: center;
 		}
+		
+		.c-field_postid {
+			display: flex;
+			// font-weight: bold;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+	
+	#schedule-settings {
+		.c-field_label {
+			padding: 10px 15px;
+		}
+		/*
+		.edit-post {
+			.c-field_postid {
+				display: none;
+			}
+		}
+		*/
 	}
 }
+
+
